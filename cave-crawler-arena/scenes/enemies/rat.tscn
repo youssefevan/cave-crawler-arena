@@ -1,0 +1,201 @@
+[gd_scene load_steps=17 format=3 uid="uid://buqli3ldmuxdc"]
+
+[ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_fxid1"]
+[ext_resource type="Script" uid="uid://bfv4qi40rdhw4" path="res://scripts/enemies/rat.gd" id="1_t1pi2"]
+[ext_resource type="Texture2D" uid="uid://c0cvjva7m7n51" path="res://sprites/rat.png" id="2_ohayx"]
+[ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="3_ac66d"]
+[ext_resource type="Script" uid="uid://djgi4m2wp65bs" path="res://scripts/enemies/states/enemy_idle.gd" id="4_hajvu"]
+[ext_resource type="Script" uid="uid://0wryy3yypl5d" path="res://scripts/enemies/states/enemy_aggro.gd" id="5_ujef0"]
+[ext_resource type="Script" uid="uid://1doy4qylvp2m" path="res://scripts/enemies/states/enemy_lunge.gd" id="6_h50a5"]
+[ext_resource type="Script" uid="uid://ddffw6ehk1gpy" path="res://scripts/enemy_cooldown.gd" id="7_1spx8"]
+[ext_resource type="Script" uid="uid://cs5kyil28amr3" path="res://scripts/enemies/states/enemy_melee.gd" id="9_t1pi2"]
+
+[sub_resource type="Animation" id="Animation_rl5i1"]
+resource_name = "lunge"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.40000004, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 4, 3]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateManager/Lunge")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.40000004),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox/Collider:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_t1pi2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/Collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_fffwg"]
+resource_name = "melee"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 4, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/Collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.24999997, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateManager/Melee")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fffwg"]
+_data = {
+&"RESET": SubResource("Animation_t1pi2"),
+&"lunge": SubResource("Animation_rl5i1"),
+&"melee": SubResource("Animation_fffwg")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rl5i1"]
+radius = 4.5
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rl5i1"]
+radius = 4.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1pi2"]
+radius = 4.5
+height = 13.0
+
+[node name="Rat" instance=ExtResource("1_fxid1")]
+script = ExtResource("1_t1pi2")
+speed = 20.0
+health = 2
+min_xp_drop = 2
+max_xp_drop = 5
+max_xp_value = 2
+
+[node name="Animator" type="AnimationPlayer" parent="." index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_fffwg")
+}
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2(-1.3113022e-06, -3.9999998)
+texture = ExtResource("2_ohayx")
+hframes = 3
+vframes = 2
+frame = 3
+
+[node name="Collider" parent="." index="2"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_rl5i1")
+
+[node name="Collider" parent="Hitbox" index="0"]
+position = Vector2(0, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rl5i1")
+disabled = true
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2(0, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_t1pi2")
+
+[node name="StateManager" type="Node" parent="." index="5" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_ac66d")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateManager" index="0"]
+script = ExtResource("4_hajvu")
+
+[node name="Aggro" type="Node" parent="StateManager" index="1"]
+script = ExtResource("5_ujef0")
+
+[node name="Lunge" type="Node" parent="StateManager" index="2"]
+script = ExtResource("6_h50a5")
+
+[node name="Cooldown" type="Node" parent="StateManager" index="3"]
+script = ExtResource("7_1spx8")
+
+[node name="Melee" type="Node" parent="StateManager" index="4"]
+script = ExtResource("9_t1pi2")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

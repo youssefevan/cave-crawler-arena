@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c6pba287ajugl"]
+
+[node name="Hitbox" type="Area2D"]
+collision_layer = 8
+collision_mask = 16
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+debug_color = Color(1, 0, 0, 0.18039216)

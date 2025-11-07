@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmh81k5mkdbbu"]
+
+[ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_0s1mp"]
+[ext_resource type="Texture2D" uid="uid://btotk7wq8j2mh" path="res://sprites/crab.png" id="2_jpe3k"]
+[ext_resource type="Script" uid="uid://bf6e048pqwm4f" path="res://scripts/enemies/crab.gd" id="2_sqms0"]
+
+[sub_resource type="Animation" id="Animation_sqms0"]
+resource_name = "move"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_teqeg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwctj"]
+_data = {
+&"RESET": SubResource("Animation_teqeg"),
+&"move": SubResource("Animation_sqms0")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sqms0"]
+radius = 4.1231055
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_teqeg"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jwctj"]
+radius = 3.0
+height = 16.0
+
+[node name="Crab" instance=ExtResource("1_0s1mp")]
+script = ExtResource("2_sqms0")
+
+[node name="Animator" type="AnimationPlayer" parent="." index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_jwctj")
+}
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2(0, 0)
+texture = ExtResource("2_jpe3k")
+hframes = 3
+
+[node name="Collider" parent="." index="2"]
+shape = SubResource("CircleShape2D_sqms0")
+
+[node name="Collider" parent="Hitbox" index="0"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_teqeg")
+
+[node name="Collider" parent="Hurtbox" index="0"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jwctj")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

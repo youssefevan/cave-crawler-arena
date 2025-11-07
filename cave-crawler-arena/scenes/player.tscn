@@ -1,0 +1,161 @@
+[gd_scene load_steps=19 format=3 uid="uid://c1ewrypht14m3"]
+
+[ext_resource type="Texture2D" uid="uid://ckmm2f1msxl40" path="res://sprites/player.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://ba2cmdu7bqut" path="res://scripts/player/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://cnipddijq7jdd" path="res://scenes/bullet.tscn" id="2_smehm"]
+[ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://slckoptth4rc" path="res://scripts/player/states/player_idle.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://d0susrju8ody7" path="res://scripts/player/states/player_move.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://172ju7537g5q" path="res://scripts/player/states/die.gd" id="6_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://ddppn7j1c4cgt" path="res://sprites/gun.png" id="7_smehm"]
+[ext_resource type="PackedScene" uid="uid://csiu8nc7o6j0a" path="res://scenes/hurtbox.tscn" id="8_smehm"]
+
+[sub_resource type="Animation" id="Animation_ur7pv"]
+resource_name = "idle"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_y4r1p"]
+resource_name = "move"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_d2wvv"]
+resource_name = "die"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_3v2ag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jej6c"]
+_data = {
+&"RESET": SubResource("Animation_3v2ag"),
+&"die": SubResource("Animation_d2wvv"),
+&"idle": SubResource("Animation_ur7pv"),
+&"move": SubResource("Animation_y4r1p")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjrip"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ur7pv"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
+radius = 3.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+script = ExtResource("1_g2els")
+bullet = ExtResource("2_smehm")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jej6c")
+}
+
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_qhqgy")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource("4_dqkch")
+
+[node name="Move" type="Node" parent="StateManager"]
+script = ExtResource("5_qlg0r")
+
+[node name="Die" type="Node" parent="StateManager"]
+script = ExtResource("6_ur7pv")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g2els")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_3vyb7")
+hframes = 3
+
+[node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="Collider" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_fjrip")
+debug_color = Color(0.5019608, 0.57254905, 0.29411766, 0.21960784)
+
+[node name="PickupRange" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 32
+
+[node name="Collider" type="CollisionShape2D" parent="PickupRange"]
+shape = SubResource("CircleShape2D_ur7pv")
+debug_color = Color(1, 1, 1, 0.14)
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="Muzzle" type="Node2D" parent="Weapon"]
+position = Vector2(9, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Weapon"]
+position = Vector2(7, 0)
+texture = ExtResource("7_smehm")
+
+[node name="Hurtbox" parent="." groups=["Player"] instance=ExtResource("8_smehm")]
+
+[node name="Collider" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_smehm")
+
+[connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

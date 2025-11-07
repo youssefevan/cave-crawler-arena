@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1ewrypht14m3"]
+
+[ext_resource type="Texture2D" uid="uid://ckmm2f1msxl40" path="res://sprites/player.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://ba2cmdu7bqut" path="res://scripts/player/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://slckoptth4rc" path="res://scripts/player/states/player_idle.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://d0susrju8ody7" path="res://scripts/player/states/player_move.gd" id="5_qlg0r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 4.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_g2els")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_g2els")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_3vyb7")
+
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_qhqgy")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource("4_dqkch")
+
+[node name="Move" type="Node" parent="StateManager"]
+script = ExtResource("5_qlg0r")
