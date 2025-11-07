@@ -10,6 +10,33 @@
 [ext_resource type="Script" uid="uid://ddffw6ehk1gpy" path="res://scripts/enemy_cooldown.gd" id="7_1spx8"]
 [ext_resource type="Script" uid="uid://cs5kyil28amr3" path="res://scripts/enemies/states/enemy_melee.gd" id="9_t1pi2"]
 
+[sub_resource type="Animation" id="Animation_t1pi2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/Collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_rl5i1"]
 resource_name = "lunge"
 length = 0.6
@@ -51,33 +78,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_t1pi2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hitbox/Collider:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_fffwg"]
@@ -148,6 +148,7 @@ health = 2
 min_xp_drop = 2
 max_xp_drop = 5
 max_xp_value = 2
+max_group_size = 2
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {

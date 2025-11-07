@@ -13,6 +13,8 @@ var accel := 5.0
 @export var min_xp_drop := 1
 @export var max_xp_drop := 3
 @export var max_xp_value := 1
+@export var min_group_size := 1
+@export var max_group_size := 5 # gets wave # added to it
 
 func _ready():
 	player = get_parent().get_parent().player
