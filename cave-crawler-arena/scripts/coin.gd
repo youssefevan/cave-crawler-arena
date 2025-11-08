@@ -26,28 +26,25 @@ func _ready():
 func choose_type():
 	# you know it doesn't have to be like this...
 	# this is just how it is, unfortunatly
-	if spawn_type == 1:
-		value = 1
-		$Sprite.frame = 0
-	elif spawn_type == 2:
-		var chance = randf()
-		if chance < 0.8:
-			value = 1
-			$Sprite.frame = 0
-		else:
-			value = 5
-			$Sprite.frame = 1
-	elif spawn_type == 3:
-		var chance = randf()
-		if chance < 0.7:
-			value = 1
-			$Sprite.frame = 0
-		elif chance >= 0.7 and chance < 0.9:
-			value = 5
-			$Sprite.frame = 1
-		else:
-			value = 12
-			$Sprite.frame = 2
+	var values = [1, 5, 12]
+	var frames = [0, 1, 2]
+	var weights = [0.7, 0.2, 0.1]
+	var sliced_weights = weights.slice(0, spawn_type)
+	
+	var weight_sum = 0
+	
+	for j in range(sliced_weights.size()):
+		weight_sum += weights[j]
+		
+	var rng = randf_range(0, weight_sum)
+	var cumulative = 0.0
+	var chosen_type = 0
+	for j in range(sliced_weights.size()):
+		cumulative += weights[j]
+		if rng <= cumulative:
+			value = values[j]
+			$Sprite.frame = frames[j]
+			break
 
 func _physics_process(delta):
 	if player == null:
