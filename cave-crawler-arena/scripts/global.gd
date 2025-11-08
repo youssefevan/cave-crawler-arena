@@ -30,11 +30,11 @@ var player_stat_limits := {
 	"regen_rate": 0.1,
 }
 
-# packedscene, wave unlocked
+# packedscene, wave unlocked, spawn chance
 var enemy_pool = {
-	preload("res://scenes/enemies/crab.tscn"): 1,
-	preload("res://scenes/enemies/rat.tscn"): 5,
-	preload("res://scenes/enemies/roly_poly.tscn"): 10,
+	preload("res://scenes/enemies/crab.tscn"): [1, 0.5],
+	preload("res://scenes/enemies/rat.tscn"): [4, 0.3],
+	preload("res://scenes/enemies/roly_poly.tscn"): [8, 0.2],
 }
 
 var day := 1
