@@ -58,7 +58,7 @@ health = 3
 min_xp_drop = 3
 max_xp_drop = 7
 max_xp_value = 3
-max_group_size = 2
+max_group_size = 1
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {

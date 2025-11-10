@@ -5,6 +5,7 @@ class_name ShopButton
 @export var upgrade_increment := 1.0
 @export var upgrade_scaling_type := "linear"
 @export var scales_up := true
+@export_multiline var description : String
 
 func _ready():
 	connect("pressed", buy)

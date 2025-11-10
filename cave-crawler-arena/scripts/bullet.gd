@@ -3,7 +3,7 @@ extends Area2D
 var expiration_timer := 0.4
 
 func _ready():
-	expiration_timer = Global.player_stats["atktime"]
+	expiration_timer = 1.0
 	await get_tree().create_timer(expiration_timer, false).timeout
 	queue_free()
 

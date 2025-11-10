@@ -14,7 +14,6 @@ extends Node2D
 var spawning_wave := false
 
 var wave := 0
-
 var previous_wave_sizes = []
 
 func _ready():
@@ -63,7 +62,7 @@ func spawn_wave():
 		
 		var rng = randf_range(0, weight_sum)
 		var cumulative = 0.0
-		print(rng)
+		#print(rng)
 		var chosen_enemy = null
 		for j in range(available_enemies.size()):
 			cumulative += weights[j]
@@ -85,6 +84,13 @@ func spawn_wave():
 
 func open_shop():
 	shop.visible = true
+	var options = shop_options.get_children()
+	var selection = options.pick_random()
+	
+	$CanvasLayer/Shop/Panel/Desc.text = selection.description
+	
+	for option in options:
+		option.visible = (option == selection)
 	
 	get_tree().paused = true
 
