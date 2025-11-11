@@ -21,5 +21,5 @@ func physics_update(delta):
 	if entity.input == Vector2.ZERO:
 		return entity.idle
 	
-	if int(Global.player_stats["health"]) <= 0:
+	if int(Global.health) <= 0:
 		return entity.die

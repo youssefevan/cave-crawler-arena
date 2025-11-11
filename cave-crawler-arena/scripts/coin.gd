@@ -56,7 +56,7 @@ func _physics_process(delta):
 		global_position += direction * vel
 
 func despawn():
-	Global.player_stats["xp"] += value
+	Global.xp += value
 	collected.emit()
 	queue_free()
 

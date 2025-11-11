@@ -8,8 +8,10 @@ extends Node2D
 @onready var spawner = %SpawnPositions
 @onready var spawn_path = %SpawnPath
 
-@onready var shop = %Shop
-@onready var shop_options = %OptionContainer
+@onready var level_up = %LevelUp
+
+@onready var stats = %Stats
+@onready var stat_block = %StatBlocks
 
 var spawning_wave := false
 
@@ -17,10 +19,7 @@ var wave := 0
 var previous_wave_sizes = []
 
 func _ready():
-	close_shop()
-	for i in shop_options.get_children():
-		if i is ShopButton:
-			i.connect("pressed", close_shop)
+	level_up.close()
 	start_wave()
 
 func start_wave():
@@ -82,22 +81,6 @@ func spawn_wave():
 		
 	check_for_enemies()
 
-func open_shop():
-	shop.visible = true
-	var options = shop_options.get_children()
-	var selection = options.pick_random()
-	
-	$CanvasLayer/Shop/Panel/Desc.text = selection.description
-	
-	for option in options:
-		option.visible = (option == selection)
-	
-	get_tree().paused = true
-
-func close_shop():
-	shop.visible = false
-	get_tree().paused = false
-
 func enemy_died():
 	await get_tree().create_timer(0.5, true).timeout
 	if spawning_wave == false:
@@ -113,8 +96,7 @@ func connect_coin(coin):
 	coin.connect("collected", coin_collected)
 
 func coin_collected():
-	var level = Global.player_stats["level"]
-	if Global.player_stats["xp"] >= Global.get_xp_to_level():
-		open_shop()
-		Global.player_stats["xp"] -= Global.get_xp_to_level()
-		Global.player_stats["level"] += 1
+	if Global.xp >= Global.get_xp_to_level():
+		level_up.open()
+		Global.xp -= Global.get_xp_to_level()
+		Global.level += 1

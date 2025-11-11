@@ -1,33 +1,5 @@
 extends Node
 
-var player_stats := {
-	"health": 100.0,
-	"xp": 0,
-	"level": 1,
-	"speed": 35.0,
-	"firerate": 1.0,
-	"bullet_speed": 80.0,
-	"atksze": 1.0,
-	"pickup_range": 8.0,
-	"maxhp": 100.0,
-	"regen": 0.1,
-	"regen_rate": 2.0,
-}
-
-var player_stat_limits := {
-	"health": 999,
-	"xp": -1,
-	"level": -1,
-	"speed": 100.0,
-	"firerate": 0.05,
-	"bullet_speed": 400.0,
-	"atksze": 4.0,
-	"pickup_range": -1,
-	"maxhp": -1,
-	"regen": 8.0,
-	"regen_rate": 0.1,
-}
-
 # packedscene, wave unlocked, spawn chance
 var enemy_pool = {
 	preload("res://scenes/enemies/crab.tscn"): [1, 0.5],
@@ -35,9 +7,42 @@ var enemy_pool = {
 	preload("res://scenes/enemies/roly_poly.tscn"): [8, 0.2],
 }
 
-var day := 1
-var wave := 1
+# base value, current level
+var stats := {
+	"speed": [35.0, 0],
+	"firerate": [1.0, 0],
+	"bullet_speed": [100.0, 0],
+	"bullet_size": [1.0, 0],
+	"pickup_range": [8.0, 0],
+	"maxhp": [100.0, 0],
+	"regen_rate": [2.0, 0],
+}
+
+var max_stat_level = 12
+
+var health = 100
+var xp = 0
+var level = 1
 
 func get_xp_to_level():
-	var level = Global.player_stats["level"]
 	return floor(pow(10 * level, 1.1))
+
+func get_stat(stat : String):
+	if stats[stat][1] == 0:
+		return stats[stat][0]
+	
+	match stat:
+		"speed":
+			return stats["speed"][0] * pow(1.1, stats["speed"][1])
+		"firerate":
+			return stats["firerate"][0] * pow(0.8, stats["firerate"][1])
+		"bullet_speed":
+			return stats["bullet_speed"][0] * pow(1.1, stats["bullet_speed"][1])
+		"bullet_size":
+			return stats["bullet_size"][0] + (0.2 * stats["bullet_size"][1])
+		"pickup_range":
+			return stats["pickup_range"][0] * pow(1.3, stats["pickup_range"][1])
+		"maxhp":
+			return (20 * (stats["maxhp"][1])) + 80
+		"regen_rate":
+			return stats["regen_rate"][0] * pow(0.8, stats["regen_rate"][1])

@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://djgi4m2wp65bs" path="res://scripts/enemies/states/enemy_idle.gd" id="4_hajvu"]
 [ext_resource type="Script" uid="uid://0wryy3yypl5d" path="res://scripts/enemies/states/enemy_aggro.gd" id="5_ujef0"]
 [ext_resource type="Script" uid="uid://1doy4qylvp2m" path="res://scripts/enemies/states/enemy_lunge.gd" id="6_h50a5"]
-[ext_resource type="Script" uid="uid://ddffw6ehk1gpy" path="res://scripts/enemy_cooldown.gd" id="7_1spx8"]
+[ext_resource type="Script" uid="uid://ddffw6ehk1gpy" path="res://scripts/enemies/states/enemy_cooldown.gd" id="7_1spx8"]
 [ext_resource type="Script" uid="uid://cs5kyil28amr3" path="res://scripts/enemies/states/enemy_melee.gd" id="9_t1pi2"]
 
 [sub_resource type="Animation" id="Animation_t1pi2"]

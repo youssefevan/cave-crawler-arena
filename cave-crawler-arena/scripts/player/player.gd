@@ -22,16 +22,15 @@ var decel := 20.0
 var can_attack := true
 
 func _ready():
+	Global.health = Global.get_stat("maxhp")
 	state_manager.init(self)
-	
 	regen()
 
 func _physics_process(delta):
 	state_manager.physics_update(delta)
 	
-	speed = Global.player_stats["speed"]
-	#$AttackRange/Collider.shape.radius = Global.player_stats["atkrng"]
-	$PickupRange/Collider.shape.radius = Global.player_stats["pickup_range"]
+	speed = Global.get_stat("speed")
+	$PickupRange/Collider.shape.radius = Global.get_stat("pickup_range")
 	
 	move_and_slide()
 
@@ -59,24 +58,23 @@ func handle_aim():
 func attack():
 	if can_attack:
 		var attack = bullet.instantiate()
-		attack.scale = Vector2(1, 1) * Global.player_stats["firerate"]
 		attack.rotation = $Weapon.global_rotation
 		attack.global_position = $Weapon/Muzzle.global_position
 		get_parent().bullets.add_child(attack)
 		can_attack = false
-		await get_tree().create_timer(Global.player_stats["firerate"], true).timeout
+		await get_tree().create_timer(Global.get_stat("firerate"), true).timeout
 		can_attack = true
 
 func regen():
-	await get_tree().create_timer(Global.player_stats["regen_rate"], false).timeout
+	await get_tree().create_timer(Global.get_stat("regen_rate"), false).timeout
 	if state_manager.current_state != die:
-		if Global.player_stats["health"] < Global.player_stats["maxhp"]:
-			Global.player_stats["health"] += 1.0 * Global.player_stats["regen"]
-			Global.player_stats["health"] = min(Global.player_stats["health"], Global.player_stats["maxhp"])
+		if Global.health < Global.get_stat("maxhp"):
+			Global.health += 0.1
+			Global.health = clamp(Global.health, 0, Global.get_stat("maxhp"))
 		regen()
 
 func get_hit():
-	Global.player_stats["health"] -= 10
+	Global.health = max(0, Global.health - 10)
 
 func _on_pickup_range_area_entered(area):
 	if area is Pickup:
