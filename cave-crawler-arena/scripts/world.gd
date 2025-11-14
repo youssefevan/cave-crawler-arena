@@ -5,13 +5,8 @@ extends Node2D
 @onready var pickups = %Pickups
 @onready var bullets = %Bullets
 @onready var enemies = %Enemies
-@onready var spawner = %SpawnPositions
-@onready var spawn_path = %SpawnPath
 
-@onready var level_up = %LevelUp
-
-@onready var stats = %Stats
-@onready var stat_block = %StatBlocks
+@onready var upgrade_scene = preload("res://scenes/pickups/upgrade.tscn")
 
 var spawning_wave := false
 
@@ -19,7 +14,6 @@ var wave := 0
 var previous_wave_sizes = []
 
 func _ready():
-	level_up.close()
 	start_wave()
 
 func start_wave():
@@ -87,7 +81,7 @@ func enemy_died():
 		check_for_enemies()
 
 func check_for_enemies():
-	if enemies.get_child_count() == 0 and not spawning_wave:
+	if enemies.get_child_count() < wave and not spawning_wave:
 		var waiting_period = randf_range(3, 7)
 		await get_tree().create_timer(waiting_period, true).timeout
 		start_wave()
@@ -97,6 +91,25 @@ func connect_coin(coin):
 
 func coin_collected():
 	if Global.xp >= Global.get_xp_to_level():
-		level_up.open()
+		#level_up.open()
 		Global.xp -= Global.get_xp_to_level()
 		Global.level += 1
+		
+		if Global.level % 2 == 0:
+			spawn_upgrade()
+
+func spawn_upgrade():
+	var good_spot = false
+	var spawn_pos = Vector2.ZERO
+	
+	while not good_spot:
+		var posx = randf_range(64, 1024-64)
+		var posy = randf_range(64, 1024-64)
+		spawn_pos = Vector2(posx, posy)
+		
+		if spawn_pos.distance_to(player.global_position) > 100:
+			good_spot = true
+	
+	var u = upgrade_scene.instantiate()
+	u.global_position = spawn_pos
+	%Pickups.add_child(u)

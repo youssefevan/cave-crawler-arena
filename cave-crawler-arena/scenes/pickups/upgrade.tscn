@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://c71fl0low2pgp"]
+
+[ext_resource type="Texture2D" uid="uid://oyqkt52goqh1" path="res://sprites/upgrades/upgrades.png" id="1_36scw"]
+[ext_resource type="Script" uid="uid://mi8uxpnukxh0" path="res://scripts/pickups/upgrade.gd" id="1_g0ytg"]
+[ext_resource type="Texture2D" uid="uid://cwdprml8rh6ok" path="res://sprites/gui/pointer.png" id="3_0fjvj"]
+[ext_resource type="Script" uid="uid://rcm8a1f84cno" path="res://scripts/gui/marker.gd" id="4_r2idj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wh3l6"]
+
+[node name="Upgrade" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_g0ytg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_36scw")
+hframes = 4
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wh3l6")
+
+[node name="Marker" type="Sprite2D" parent="."]
+z_index = 12
+texture = ExtResource("3_0fjvj")
+script = ExtResource("4_r2idj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

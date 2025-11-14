@@ -11,10 +11,7 @@ var enemy_pool = {
 var stats := {
 	"speed": [35.0, 0],
 	"firerate": [1.0, 0],
-	"bullet_speed": [100.0, 0],
-	"bullet_size": [1.0, 0],
 	"pickup_range": [8.0, 0],
-	"maxhp": [100.0, 0],
 	"regen_rate": [2.0, 0],
 }
 
@@ -33,16 +30,10 @@ func get_stat(stat : String):
 	
 	match stat:
 		"speed":
-			return stats["speed"][0] * pow(1.1, stats["speed"][1])
+			return stats["speed"][0] * pow(1.1, stats["speed"][1]) * (1+(level/100))
 		"firerate":
-			return stats["firerate"][0] * pow(0.8, stats["firerate"][1])
-		"bullet_speed":
-			return stats["bullet_speed"][0] * pow(1.1, stats["bullet_speed"][1])
-		"bullet_size":
-			return stats["bullet_size"][0] + (0.2 * stats["bullet_size"][1])
+			return stats["firerate"][0] * pow(0.8, stats["firerate"][1]) * (1+(level/100))
 		"pickup_range":
-			return stats["pickup_range"][0] * pow(1.3, stats["pickup_range"][1])
-		"maxhp":
-			return (20 * (stats["maxhp"][1])) + 80
+			return stats["pickup_range"][0] * pow(1.3, stats["pickup_range"][1]) * (1+(level/100))
 		"regen_rate":
-			return stats["regen_rate"][0] * pow(0.8, stats["regen_rate"][1])
+			return stats["regen_rate"][0] * pow(0.8, stats["regen_rate"][1]) * (1-(level/100))

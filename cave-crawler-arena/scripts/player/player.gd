@@ -19,10 +19,12 @@ var speed := 35.0
 var accel := 40.0
 var decel := 20.0
 
+var max_health = 100.0
+
 var can_attack := true
 
 func _ready():
-	Global.health = Global.get_stat("maxhp")
+	Global.health = max_health
 	state_manager.init(self)
 	regen()
 
@@ -49,11 +51,6 @@ func handle_aim():
 	
 	$Weapon.look_at(get_global_mouse_position())
 	attack()
-	
-	#if enemies_in_range.size() > 0:
-		#var target_enemy = enemies_in_range.front()
-		#$Weapon.look_at(target_enemy.global_position)
-		#attack()
 
 func attack():
 	if can_attack:
@@ -61,6 +58,8 @@ func attack():
 		attack.rotation = $Weapon.global_rotation
 		attack.global_position = $Weapon/Muzzle.global_position
 		get_parent().bullets.add_child(attack)
+		$Weapon/Animator.stop()
+		$Weapon/Animator.play("fire")
 		can_attack = false
 		await get_tree().create_timer(Global.get_stat("firerate"), true).timeout
 		can_attack = true
@@ -68,9 +67,9 @@ func attack():
 func regen():
 	await get_tree().create_timer(Global.get_stat("regen_rate"), false).timeout
 	if state_manager.current_state != die:
-		if Global.health < Global.get_stat("maxhp"):
-			Global.health += 0.1
-			Global.health = clamp(Global.health, 0, Global.get_stat("maxhp"))
+		if Global.health < max_health:
+			Global.health += 1.0
+			Global.health = clamp(Global.health, 0, max_health)
 		regen()
 
 func get_hit():

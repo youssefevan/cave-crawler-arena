@@ -7,8 +7,8 @@ func close():
 	visible = false
 
 func open():
-	get_tree().paused = true
-	visible = true
+	#get_tree().paused = true
+	#visible = true
 	
 	var available_stats = []
 	for i in Global.stats:

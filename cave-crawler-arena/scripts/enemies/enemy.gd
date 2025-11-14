@@ -3,7 +3,7 @@ class_name Enemy
 
 signal died
 
-@onready var coin : PackedScene = preload("res://scenes/coin.tscn")
+@onready var coin : PackedScene = preload("res://scenes/pickups/coin.tscn")
 
 var player : Player
 

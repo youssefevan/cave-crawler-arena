@@ -55,7 +55,6 @@ height = 16.0
 
 [node name="Crab" instance=ExtResource("1_0s1mp")]
 script = ExtResource("2_sqms0")
-max_group_size = 4
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
