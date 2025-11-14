@@ -28,7 +28,8 @@ func start_wave():
 
 # oh my god oh my god oh my god oh my god oh my god
 func spawn_wave():
-	for i in range(5):
+	var num_groups = randi_range(3+floor(wave/10), 5+floor(wave/10))
+	for i in range(num_groups):
 		var available_enemies = []
 		var weights = []
 		
@@ -82,7 +83,7 @@ func enemy_died():
 
 func check_for_enemies():
 	if enemies.get_child_count() < wave and not spawning_wave:
-		var waiting_period = randf_range(3, 7)
+		var waiting_period = randf_range(3, 6)
 		await get_tree().create_timer(waiting_period, true).timeout
 		start_wave()
 

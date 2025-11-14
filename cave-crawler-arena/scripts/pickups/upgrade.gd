@@ -1,22 +1,33 @@
 extends Pickup
 class_name Upgrade
 
-var stat = 0
+var stat = ""
 
 func choose_type():
-	stat = randi_range(0, 3)
+	var available_stats = []
 	
-	$Sprite.frame = stat
+	for i in Global.stats:
+		if Global.stats[i][1] < 12:
+			available_stats.append(i)
+	
+	if available_stats.is_empty():
+		queue_free()
+	
+	stat = available_stats.pick_random()
+	
+	print(stat)
+	
+	match stat:
+		"speed":
+			$Sprite.frame = 0
+		"firerate":
+			$Sprite.frame = 1
+		"regen_rate":
+			$Sprite.frame = 2
+		"pickup_range":
+			$Sprite.frame = 3
 
 func despawn():
-	match stat:
-		0:
-			Global.stats["speed"][1] += 1
-		1:
-			Global.stats["firerate"][1] += 1
-		2:
-			Global.stats["regen_rate"][1] += 1
-		3:
-			Global.stats["pickup_range"][1] += 1
+	Global.stats[stat][1] += 1
 	
 	super.despawn()
