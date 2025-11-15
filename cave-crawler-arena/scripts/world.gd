@@ -114,3 +114,8 @@ func spawn_upgrade():
 	var u = upgrade_scene.instantiate()
 	u.global_position = spawn_pos
 	%Pickups.add_child(u)
+
+
+func _on_quit_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

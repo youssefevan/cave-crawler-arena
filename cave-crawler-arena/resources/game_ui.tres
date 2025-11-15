@@ -79,11 +79,13 @@ border_color = Color(1, 1, 1, 0)
 [resource]
 default_font = ExtResource("1_qgtvb")
 Button/colors/font_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 8
 Button/styles/disabled = SubResource("StyleBoxFlat_te7ml")
 Button/styles/focus = SubResource("StyleBoxEmpty_qgtvb")
 Button/styles/hover = SubResource("StyleBoxFlat_jhqwo")
 Button/styles/normal = SubResource("StyleBoxFlat_rc2qj")
 Button/styles/pressed = SubResource("StyleBoxFlat_4tfl4")
+Label/constants/line_spacing = 0
 Label/font_sizes/font_size = 8
 Panel/styles/panel = SubResource("StyleBoxFlat_vwa4d")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_qgtvb")

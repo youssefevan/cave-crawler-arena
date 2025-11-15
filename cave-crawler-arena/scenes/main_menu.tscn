@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://csulapwy47orq"]
+
+[ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://bys0mel17fnnl" path="res://scripts/gui/main_menu.gd" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://y3bv7tj3a8r5" path="res://sprites/gui/play.png" id="3_8ln24"]
+[ext_resource type="Texture2D" uid="uid://d4jpic7hkicaq" path="res://sprites/gui/options.png" id="3_wu84c"]
+[ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="4_8ln24"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l6cm7")
+script = ExtResource("2_ekxnf")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -60.0
+offset_right = 112.0
+offset_bottom = -16.0
+grow_vertical = 0
+alignment = 1
+
+[node name="Play" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Play"
+icon = ExtResource("3_8ln24")
+alignment = 0
+
+[node name="Options" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Options"
+icon = ExtResource("3_wu84c")
+alignment = 0
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Quit"
+icon = ExtResource("4_8ln24")
+alignment = 0
+
+[connection signal="pressed" from="Buttons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]
