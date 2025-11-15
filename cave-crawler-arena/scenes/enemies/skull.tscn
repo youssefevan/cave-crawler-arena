@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://mxleet7y6b71"]
+
+[ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/boss.tscn" id="1_1t3j5"]
+[ext_resource type="Script" uid="uid://8n22u0ap6vkh" path="res://scripts/enemies/bosses/skull.gd" id="2_v22qf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v22qf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tg20o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wuwa"]
+
+[node name="Skull" instance=ExtResource("1_1t3j5")]
+script = ExtResource("2_v22qf")
+
+[node name="Collider" parent="." index="1"]
+shape = SubResource("CircleShape2D_v22qf")
+
+[node name="Collider" parent="Hitbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_tg20o")
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_5wuwa")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

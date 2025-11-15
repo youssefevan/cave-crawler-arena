@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvcmygojvi5b0"]
+
+[ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_3uc6t"]
+[ext_resource type="Script" uid="uid://bpeaca8j8u3g2" path="res://scripts/enemies/bosses/boss.gd" id="2_ian0n"]
+[ext_resource type="Texture2D" uid="uid://dqy1gvn4mheux" path="res://sprites/skull.png" id="2_ub7yk"]
+[ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="4_ian0n"]
+
+[node name="Boss" groups=["Enemy"] instance=ExtResource("1_3uc6t")]
+z_index = 1
+script = ExtResource("2_ian0n")
+max_health = 20.0
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2(0, -2)
+texture = ExtResource("2_ub7yk")
+
+[node name="Collider" parent="Hitbox" index="0"]
+position = Vector2(0, 0)
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2(0, 0)
+
+[node name="HealthBar" type="ProgressBar" parent="." index="4"]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -22.0
+offset_right = 16.0
+offset_bottom = -18.0
+theme = ExtResource("4_ian0n")
+value = 100.0
+show_percentage = false
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

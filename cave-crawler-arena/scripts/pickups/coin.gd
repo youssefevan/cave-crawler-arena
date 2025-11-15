@@ -7,7 +7,7 @@ var spawn_type := 1
 func _ready():
 	super._ready()
 	
-	await get_tree().create_timer(15.0, false).timeout
+	await get_tree().create_timer(60.0, false).timeout
 	if player == null:
 		queue_free()
 

@@ -7,6 +7,10 @@ var enemy_pool = {
 	preload("res://scenes/enemies/roly_poly.tscn"): [8, 0.2],
 }
 
+var mini_boss_pool = [
+	preload("res://scenes/enemies/skull.tscn"),
+]
+
 # base value, current level
 var stats := {
 	"speed": [35.0, 0],
@@ -20,6 +24,7 @@ var max_stat_level = 12
 var health = 100
 var xp = 0
 var level = 1
+var bullet_damage = 1
 
 func get_xp_to_level():
 	return floor(pow(10 * level, 1.1))

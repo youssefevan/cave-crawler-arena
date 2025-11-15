@@ -20,7 +20,7 @@ func _ready():
 	player = get_parent().get_parent().player
 
 func get_hit():
-	health -= 1
+	health -= Global.bullet_damage
 	
 	if health <= 0:
 		die()

@@ -38,17 +38,7 @@ func spawn_wave():
 				available_enemies.append(j)
 				weights.append(Global.enemy_pool[j][1])
 		
-		var good_spot = false
-		var spawn_pos = Vector2.ZERO
-		
-		while not good_spot:
-			var posx = randf_range(64, 1024-64)
-			var posy = randf_range(64, 1024-64)
-			
-			if abs(posx-player.global_position.x) > 160 and abs(posy-player.global_position.y) > 90:
-				if abs(posx-player.global_position.x) < 320 and abs(posy-player.global_position.y) < 180:
-					spawn_pos = Vector2(posx, posy)
-					good_spot = true
+		var spawn_pos = get_good_spot("enemy")
 		
 		var weight_sum = 0
 		for j in weights:
@@ -98,23 +88,50 @@ func coin_collected():
 		
 		if Global.level % 2 == 0:
 			spawn_upgrade()
+		
+		if Global.level % 10 == 0:
+			spawn_mini_boss()
+
+func spawn_mini_boss():
+	var choice = Global.mini_boss_pool.pick_random()
+	var mini = choice.instantiate()
+	
+	mini.global_position = get_good_spot("enemy")
+	%Enemies.call_deferred("add_child", mini)
 
 func spawn_upgrade():
+	var spawn_pos = get_good_spot("upgrade")
+	var u = upgrade_scene.instantiate()
+	u.global_position = spawn_pos
+	%Pickups.call_deferred("add_child", u)
+
+func get_good_spot(type : String):
 	var good_spot = false
 	var spawn_pos = Vector2.ZERO
 	
-	while not good_spot:
-		var posx = randf_range(64, 1024-64)
-		var posy = randf_range(64, 1024-64)
-		spawn_pos = Vector2(posx, posy)
+	if type == "enemy":
+		while not good_spot:
+			var posx = randf_range(64, 1024-64)
+			var posy = randf_range(64, 1024-64)
+			
+			if abs(posx-player.global_position.x) > 160 and abs(posy-player.global_position.y) > 90:
+				if abs(posx-player.global_position.x) < 320 and abs(posy-player.global_position.y) < 180:
+					spawn_pos = Vector2(posx, posy)
+					good_spot = true
 		
-		if spawn_pos.distance_to(player.global_position) > 100:
-			good_spot = true
+	elif type == "upgrade":
+		while not good_spot:
+			var posx = randf_range(64, 1024-64)
+			var posy = randf_range(64, 1024-64)
+			var chosen_pos = Vector2(posx, posy)
+			
+			if chosen_pos.distance_to(player.global_position) > 128:
+				spawn_pos = chosen_pos
+				good_spot = true
+	else:
+		print(type, " type not supported")
 	
-	var u = upgrade_scene.instantiate()
-	u.global_position = spawn_pos
-	%Pickups.add_child(u)
-
+	return spawn_pos
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
