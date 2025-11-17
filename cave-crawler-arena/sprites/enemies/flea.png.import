@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btotk7wq8j2mh"
-path="res://.godot/imported/crab.png-b5eb5169169cd31b7c6d682c11946700.ctex"
+uid="uid://ufum0kat22c"
+path="res://.godot/imported/flea.png-deb8ee198f846d22b67623c52f0195c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/crab.png"
-dest_files=["res://.godot/imported/crab.png-b5eb5169169cd31b7c6d682c11946700.ctex"]
+source_file="res://sprites/enemies/flea.png"
+dest_files=["res://.godot/imported/flea.png-deb8ee198f846d22b67623c52f0195c2.ctex"]
 
 [params]
 

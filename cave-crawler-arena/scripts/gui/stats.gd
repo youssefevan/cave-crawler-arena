@@ -1,4 +1,4 @@
-extends Panel
+extends VBoxContainer
 
 func _ready():
 	close()
@@ -21,27 +21,8 @@ func close():
 	get_tree().paused = false
 
 func update_stats():
-	$Stats/Level.text = str("Level: ", int(Global.level))
-	$Stats/Multi.text = str("+", int(Global.level), "% on base stats")
+	%Level.text = str("Level: ", int(Global.level))
+	%Multi.text = str("+", int(Global.level), "% on base stats")
 	
-	$Stats/StatIcons/Speed/Counter.text = ""
-	for i in range(int(Global.stats["speed"][1])):
-		$Stats/StatIcons/Speed/Counter.text += "+"
-	
-	$Stats/StatIcons/Firerate/Counter.text = ""
-	for i in range(int(Global.stats["firerate"][1])):
-		$Stats/StatIcons/Firerate/Counter.text += "+"
-	
-	$Stats/StatIcons/Regen/Counter.text = ""
-	for i in range(int(Global.stats["regen_rate"][1])):
-		$Stats/StatIcons/Regen/Counter.text += "+"
-	
-	$Stats/StatIcons/Reach/Counter.text = ""
-	for i in range(int(Global.stats["pickup_range"][1])):
-		$Stats/StatIcons/Reach/Counter.text += "+"
-	#
-	#$StatLevels/Firerate.text = str(int(Global.stats["firerate"][1]))
-	#
-	#$StatLevels/Regen.text = str(int(Global.stats["regen_rate"][1]))
-	#
-	#$StatLevels/PickupRange.text = str(int(Global.stats["pickup_range"][1]))
+	for i in %StatIcons.get_children():
+		i.update_stat()

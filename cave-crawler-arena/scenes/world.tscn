@@ -1,23 +1,27 @@
-[gd_scene load_steps=20 format=4 uid="uid://bu2lq4vaorqye"]
+[gd_scene load_steps=23 format=4 uid="uid://bu2lq4vaorqye"]
 
 [ext_resource type="Script" uid="uid://gk7ouh35fc1e" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://c1ewrypht14m3" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://csocpola5mk3u" path="res://scripts/gui/health.gd" id="2_71j4m"]
+[ext_resource type="PackedScene" uid="uid://mxleet7y6b71" path="res://scenes/enemies/skull.tscn" id="2_dss4m"]
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="2_i7141"]
 [ext_resource type="Texture2D" uid="uid://cgodtknkmupww" path="res://sprites/tiles.png" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://cdd4r5317ovjd" path="res://scripts/gui/xp.gd" id="3_qfnet"]
 [ext_resource type="Texture2D" uid="uid://bfg5kdnq5esxp" path="res://sprites/gui/health_overlay.png" id="4_4mrxx"]
 [ext_resource type="Script" uid="uid://bwwrkq4gbcped" path="res://scripts/gui/stats.gd" id="7_7r4gi"]
+[ext_resource type="Script" uid="uid://dnn12kp4uxns8" path="res://scripts/gui/stat_tracker.gd" id="8_7t5mc"]
+[ext_resource type="Script" uid="uid://c3hsrsc2gxlom" path="res://scripts/gui/item_display.gd" id="8_lakw3"]
 [ext_resource type="Texture2D" uid="uid://nwf0ltlyugv8" path="res://sprites/upgrades/speed.png" id="8_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://dpjb6kbh8fnwc" path="res://sprites/upgrades/firerate.png" id="9_jhx03"]
 [ext_resource type="Texture2D" uid="uid://bv2l1asbw5uq0" path="res://sprites/upgrades/regen.png" id="10_o8fc1"]
 [ext_resource type="Texture2D" uid="uid://co643kf063okn" path="res://sprites/upgrades/reach.png" id="11_xo05s"]
-[ext_resource type="Texture2D" uid="uid://b1edyj55ouv88" path="res://sprites/items/lightning.png" id="12_o8fc1"]
+[ext_resource type="Texture2D" uid="uid://dypyu4was3lj" path="res://sprites/items/empty.png" id="13_7t5mc"]
 [ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="13_dss4m"]
 [ext_resource type="Texture2D" uid="uid://d4jpic7hkicaq" path="res://sprites/gui/options.png" id="14_7t5mc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mrxx"]
 bg_color = Color(1, 1, 1, 1)
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7r4gi"]
 bg_color = Color(0, 0, 0, 1)
@@ -44,8 +48,13 @@ sources/0 = SubResource("TileSetAtlasSource_71j4m")
 y_sort_enabled = true
 script = ExtResource("1_k0juu")
 player = NodePath("Player")
+boss = ExtResource("2_dss4m")
+
+[node name="RunTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 process_mode = 3
@@ -155,178 +164,183 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Info" type="Panel" parent="CanvasLayer/HUD"]
-unique_name_in_owner = true
-process_mode = 3
+[node name="Timer" type="Label" parent="CanvasLayer/HUD/XP/Stats"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "00:00"
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/XP/Stats/Timer"]
+z_index = -1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -92.0
-offset_top = -65.0
-offset_right = 92.0
-offset_bottom = 67.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7r4gi")
+color = Color(0, 0, 0, 1)
+
+[node name="Info" type="VBoxContainer" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 102.0
+offset_right = 217.0
+offset_bottom = 180.0
+alignment = 1
 script = ExtResource("7_7r4gi")
 
-[node name="Stats" type="VBoxContainer" parent="CanvasLayer/HUD/Info"]
+[node name="Item" type="HBoxContainer" parent="CanvasLayer/HUD/Info"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("8_lakw3")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Item"]
+layout_mode = 2
+texture = ExtResource("13_7t5mc")
+stretch_mode = 2
+
+[node name="Desc" type="Label" parent="CanvasLayer/HUD/Info/Item"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "test test test test test test test test"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/Info/Item/Desc"]
+z_index = -1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -57.0
-offset_right = 42.0
-offset_bottom = 2.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Stats" type="Panel" parent="CanvasLayer/HUD/Info"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7r4gi")
+
+[node name="Stats" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="Level" type="Label" parent="CanvasLayer/HUD/Info/Stats"]
+[node name="Level" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Level: 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatIcons" type="HBoxContainer" parent="CanvasLayer/HUD/Info/Stats"]
+[node name="StatIcons" type="HBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="Speed" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/StatIcons"]
+[node name="Speed" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
+script = ExtResource("8_7t5mc")
+stat_name = "speed"
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Speed"]
+[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Speed"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("8_w7kh3")
 stretch_mode = 2
 
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Speed"]
+[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Speed"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "++++"
+text = "||||||||"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Firerate" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/StatIcons"]
+[node name="Firerate" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
+script = ExtResource("8_7t5mc")
+stat_name = "firerate"
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Firerate"]
+[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Firerate"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("9_jhx03")
 stretch_mode = 2
 
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Firerate"]
+[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Firerate"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "++++"
+text = "||||||||"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Regen" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/StatIcons"]
+[node name="Regen" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
+script = ExtResource("8_7t5mc")
+stat_name = "regen_rate"
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Regen"]
+[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Regen"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("10_o8fc1")
 stretch_mode = 2
 
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Regen"]
+[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Regen"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "++++"
+text = "||||||||"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Reach" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/StatIcons"]
+[node name="Reach" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
+script = ExtResource("8_7t5mc")
+stat_name = "pickup_range"
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Reach"]
+[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Reach"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("11_xo05s")
 stretch_mode = 2
 
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/StatIcons/Reach"]
+[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Reach"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "++++"
+text = "||||||||"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Multi" type="Label" parent="CanvasLayer/HUD/Info/Stats"]
+[node name="Multi" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "+0% to base stats"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Item" type="Panel" parent="CanvasLayer/HUD/Info"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 73.0
-offset_right = 172.0
-offset_bottom = 107.0
-size_flags_horizontal = 3
-
-[node name="Info" type="HBoxContainer" parent="CanvasLayer/HUD/Info/Item"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = -4.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Item/Info"]
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("12_o8fc1")
-stretch_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/HUD/Info/Item/Info"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "Bullets explode on impact"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
 [node name="Buttons" type="HBoxContainer" parent="CanvasLayer/HUD/Info"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -12.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 0
+layout_mode = 2
+alignment = 1
 
 [node name="Options" type="Button" parent="CanvasLayer/HUD/Info/Buttons"]
 layout_mode = 2
@@ -363,10 +377,12 @@ limit_bottom = 1024
 [node name="Bullets" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Pickups" type="Node" parent="."]
-unique_name_in_owner = true
-
 [node name="Enemies" type="Node" parent="."]
 unique_name_in_owner = true
 
+[node name="Pickups" type="Node" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="RunTimer" to="." method="_on_run_timer_timeout"]
+[connection signal="visibility_changed" from="CanvasLayer/HUD/Info/Item" to="CanvasLayer/HUD/Info/Item" method="_on_visibility_changed"]
 [connection signal="pressed" from="CanvasLayer/HUD/Info/Buttons/Quit" to="." method="_on_quit_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqy1gvn4mheux"
-path="res://.godot/imported/skull.png-cd6d05ad0ea37cdf50240dcb3a819f6a.ctex"
+uid="uid://bh6gi628v5yew"
+path="res://.godot/imported/miniboss1.png-efd4781251e69ac9b7dd225ad2647ed3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/skull.png"
-dest_files=["res://.godot/imported/skull.png-cd6d05ad0ea37cdf50240dcb3a819f6a.ctex"]
+source_file="res://sprites/enemies/miniboss1.png"
+dest_files=["res://.godot/imported/miniboss1.png-efd4781251e69ac9b7dd225ad2647ed3.ctex"]
 
 [params]
 

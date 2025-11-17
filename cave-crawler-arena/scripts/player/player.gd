@@ -15,7 +15,7 @@ class_name Player
 var input := Vector2.ZERO
 var attack_input := false
 
-var speed := 35.0
+var speed := 38.0
 var accel := 40.0
 var decel := 20.0
 

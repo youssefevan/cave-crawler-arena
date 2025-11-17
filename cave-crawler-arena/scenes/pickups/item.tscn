@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cue13ekm4hvfb"]
+
+[ext_resource type="Script" uid="uid://b5m2gc2wu4avm" path="res://scripts/pickups/item.gd" id="1_vslxv"]
+[ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="3_02xx3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vslxv"]
+radius = 24.020824
+
+[node name="Item" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_vslxv")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vslxv")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = -9.0
+theme = ExtResource("3_02xx3")
+text = "\"E\" to equip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

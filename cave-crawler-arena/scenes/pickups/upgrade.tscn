@@ -20,7 +20,6 @@ hframes = 4
 shape = SubResource("CircleShape2D_wh3l6")
 
 [node name="Marker" type="Sprite2D" parent="."]
-z_index = 12
 texture = ExtResource("3_0fjvj")
 script = ExtResource("4_r2idj")
 

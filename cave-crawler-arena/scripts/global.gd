@@ -8,23 +8,30 @@ var enemy_pool = {
 }
 
 var mini_boss_pool = [
-	preload("res://scenes/enemies/skull.tscn"),
+	preload("res://scenes/enemies/miniboss_1.tscn"),
 ]
+
+var item_pool = {
+	"acid": load("res://scenes/pickups/acid.tscn"),
+	"lightning": load("res://scenes/pickups/lightning.tscn"),
+}
 
 # base value, current level
 var stats := {
-	"speed": [35.0, 0],
-	"firerate": [1.0, 0],
+	"speed": [38.0, 0],
+	"firerate": [0.8, 0],
 	"pickup_range": [8.0, 0],
-	"regen_rate": [2.0, 0],
+	"regen_rate": [1.5, 0],
 }
 
-var max_stat_level = 12
+var max_stat_level = 8
 
 var health = 100
 var xp = 0
 var level = 1
 var bullet_damage = 1
+
+var equipped_item = null
 
 func get_xp_to_level():
 	return floor(pow(10 * level, 1.1))

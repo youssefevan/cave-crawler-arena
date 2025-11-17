@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_fxid1"]
 [ext_resource type="Script" uid="uid://bfv4qi40rdhw4" path="res://scripts/enemies/rat.gd" id="1_t1pi2"]
-[ext_resource type="Texture2D" uid="uid://c0cvjva7m7n51" path="res://sprites/rat.png" id="2_ohayx"]
+[ext_resource type="Texture2D" uid="uid://dw0xvujivdxhg" path="res://sprites/enemies/rat.png" id="2_ohayx"]
 [ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="3_ac66d"]
 [ext_resource type="Script" uid="uid://djgi4m2wp65bs" path="res://scripts/enemies/states/enemy_idle.gd" id="4_hajvu"]
 [ext_resource type="Script" uid="uid://0wryy3yypl5d" path="res://scripts/enemies/states/enemy_aggro.gd" id="5_ujef0"]
@@ -148,7 +148,8 @@ health = 2
 min_xp_drop = 2
 max_xp_drop = 5
 max_xp_value = 2
-max_group_size = 2
+min_group_size = 2
+max_group_size = 12
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {

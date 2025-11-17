@@ -1,10 +1,10 @@
 extends Area2D
 
-var speed = 130.0
-var expiration_timer := 0.7
+var speed = 160.0
+var expiration_timer := 0.5
 
 func _ready():
-	expiration_timer = 0.7
+	expiration_timer = 0.5
 	await get_tree().create_timer(expiration_timer, false).timeout
 	queue_free()
 

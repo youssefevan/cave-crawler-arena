@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnyradu6a22hq"
-path="res://.godot/imported/flea.png-604674781c9cbd570723b753cdb36696.ctex"
+uid="uid://dw0xvujivdxhg"
+path="res://.godot/imported/rat.png-2c93084c4bc8a89127fe763048e9d3f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/flea.png"
-dest_files=["res://.godot/imported/flea.png-604674781c9cbd570723b753cdb36696.ctex"]
+source_file="res://sprites/enemies/rat.png"
+dest_files=["res://.godot/imported/rat.png-2c93084c4bc8a89127fe763048e9d3f4.ctex"]
 
 [params]
 

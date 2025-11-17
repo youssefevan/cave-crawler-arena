@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0cvjva7m7n51"
-path="res://.godot/imported/rat.png-8facf96f6f570184edc31a2457d58093.ctex"
+uid="uid://ci0m0gqfu6s5q"
+path="res://.godot/imported/crab.png-1a55ca2d24b2db79d72c118f01a42049.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/rat.png"
-dest_files=["res://.godot/imported/rat.png-8facf96f6f570184edc31a2457d58093.ctex"]
+source_file="res://sprites/enemies/crab.png"
+dest_files=["res://.godot/imported/crab.png-1a55ca2d24b2db79d72c118f01a42049.ctex"]
 
 [params]
 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2jrydw7qfub8"]
+
+[ext_resource type="PackedScene" uid="uid://cue13ekm4hvfb" path="res://scenes/pickups/item.tscn" id="1_wai0q"]
+[ext_resource type="Texture2D" uid="uid://b1edyj55ouv88" path="res://sprites/items/lightning.png" id="2_ffvkq"]
+
+[node name="Lightning" instance=ExtResource("1_wai0q")]
+item_name = "lightning"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_ffvkq")
