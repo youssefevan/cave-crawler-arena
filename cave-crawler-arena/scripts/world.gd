@@ -14,7 +14,7 @@ var spawning_wave := false
 var wave := 0
 var previous_wave_sizes = []
 
-var run_time := 900
+@export var run_time := 900
 
 func _ready():
 	start_wave()

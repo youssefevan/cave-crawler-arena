@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_3uc6t"]
 [ext_resource type="Script" uid="uid://bpeaca8j8u3g2" path="res://scripts/enemies/bosses/boss.gd" id="2_ian0n"]
-[ext_resource type="Texture2D" uid="uid://d1prgkm3xf0or" path="res://sprites/enemies/skull.png" id="2_ub7yk"]
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="4_ian0n"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ub7yk"]
+load_path = "res://.godot/imported/wave.png-851d5594b88ae37c1e1dcfa0f34350c9.ctex"
 
 [node name="Boss" groups=["Enemy"] instance=ExtResource("1_3uc6t")]
 z_index = 1
@@ -12,7 +14,7 @@ max_health = 20.0
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2(0, -2)
-texture = ExtResource("2_ub7yk")
+texture = SubResource("CompressedTexture2D_ub7yk")
 
 [node name="Collider" parent="Hitbox" index="0"]
 position = Vector2(0, 0)
