@@ -15,11 +15,10 @@ class_name Skull
 var dir
 
 var can_fire := true
-var firerate := 1.0
+var firerate := 0.75
 
 func _ready():
 	super._ready()
-	speed = 40.0
 	dir = global_position.direction_to(player.global_position).normalized()
 	state_manager.init(self)
 

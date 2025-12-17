@@ -2,6 +2,7 @@ extends Boss
 class_name Miniboss
 
 @onready var item_scene = preload("res://scenes/pickups/item.tscn")
+@onready var bullet_scene = preload("res://scenes/hazards/bone.tscn")
 
 var dir
 var frame := 0
@@ -16,6 +17,12 @@ func _physics_process(delta):
 	
 	if frame % 5 == 0:
 		dir = global_position.direction_to(player.global_position).normalized()
+	
+	if frame % 30 == 0 and global_position.distance_to(player.global_position) < 80:
+		var b = bullet_scene.instantiate()
+		b.rotation = dir.angle()
+		b.global_position = global_position
+		get_parent().call_deferred("add_child", b)
 	
 	velocity = lerp(velocity, dir * speed, accel * delta)
 	

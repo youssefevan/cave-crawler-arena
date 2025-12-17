@@ -143,7 +143,6 @@ height = 13.0
 
 [node name="Rat" instance=ExtResource("1_fxid1")]
 script = ExtResource("1_t1pi2")
-speed = 20.0
 health = 2
 min_xp_drop = 2
 max_xp_drop = 5

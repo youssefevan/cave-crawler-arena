@@ -19,7 +19,7 @@ var speed := 38.0
 var accel := 40.0
 var decel := 20.0
 
-var max_health = 100.0
+var max_health = 50.0
 
 var can_attack := true
 var invulnerable := false
@@ -53,7 +53,7 @@ func handle_aim():
 	$Weapon.look_at(get_global_mouse_position())
 	
 	$Weapon/Sprite.flip_v = (global_position.x - get_global_mouse_position().x >= 0.0)
-		
+	
 	
 	attack()
 
@@ -85,18 +85,19 @@ func get_hit():
 	Global.health = max(0, Global.health - 10)
 	
 	invulnerable = true
+	$Hurtbox/Collider.disabled = true
 	hit_flash()
-	await get_tree().create_timer(2.0, false).timeout
+	await get_tree().create_timer(0.6, false).timeout
+	$Hurtbox/Collider.disabled = false
 	invulnerable = false
-	
-	$Sprite.modulate = Color(1, 1, 1, 1)
 
 func hit_flash() -> void:
 	while invulnerable:
 		$Sprite.modulate = Color(1.0, 0.0, 0.0, 0.2)
-		await get_tree().create_timer(0.15, false).timeout
+		await get_tree().create_timer(0.1, false).timeout
 		$Sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
-		await get_tree().create_timer(0.15, false).timeout
+		await get_tree().create_timer(0.11, false).timeout
+	$Sprite.modulate = Color(1, 1, 1, 1)
 
 func _on_pickup_range_area_entered(area):
 	if area is Pickup:

@@ -12,6 +12,7 @@
 
 [node name="Miniboss1" instance=ExtResource("1_4sm0u")]
 script = ExtResource("2_3qbsb")
+max_health = 25.0
 min_xp_drop = 25
 max_xp_drop = 50
 max_xp_value = 3

@@ -16,7 +16,7 @@ var stats := {
 	"speed": [38.0, 0],
 	"firerate": [0.8, 0],
 	"pickup_range": [8.0, 0],
-	"regen_rate": [1.5, 0],
+	"regen_rate": [3.0, 0],
 }
 
 var max_stat_level = 8

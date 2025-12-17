@@ -107,7 +107,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_4mrxx")
 min_value = 1.0
-value = 100.0
+max_value = 50.0
+value = 50.0
 fill_mode = 3
 show_percentage = false
 
