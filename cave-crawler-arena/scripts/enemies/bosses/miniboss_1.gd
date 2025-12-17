@@ -1,6 +1,8 @@
 extends Boss
 class_name Miniboss
 
+@onready var item_scene = preload("res://scenes/pickups/item.tscn")
+
 var dir
 var frame := 0
 
@@ -20,12 +22,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func die():
-	var available_items = Global.item_pool.duplicate()
-	if Global.equipped_item != null:
-		available_items.erase(Global.equipped_item)
-	
-	var key = available_items.keys().pick_random()
-	var item = Global.item_pool[key].instantiate()
+	var item = item_scene.instantiate()
 	item.global_position = global_position
 	get_parent().get_parent().call_deferred("add_child", item)
 	

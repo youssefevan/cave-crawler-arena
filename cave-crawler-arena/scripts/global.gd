@@ -11,11 +11,6 @@ var mini_boss_pool = [
 	preload("res://scenes/enemies/bosses/miniboss_1.tscn"),
 ]
 
-var item_pool = {
-	"fire": load("res://scenes/pickups/fire.tscn"),
-	"bomb": load("res://scenes/pickups/bomb.tscn"),
-}
-
 # base value, current level
 var stats := {
 	"speed": [38.0, 0],

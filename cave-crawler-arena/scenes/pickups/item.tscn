@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cue13ekm4hvfb"]
+[gd_scene load_steps=5 format=3 uid="uid://cue13ekm4hvfb"]
 
 [ext_resource type="Script" uid="uid://b5m2gc2wu4avm" path="res://scripts/pickups/item.gd" id="1_vslxv"]
+[ext_resource type="Texture2D" uid="uid://dkmqimq7ni5o0" path="res://sprites/items/items.png" id="2_02xx3"]
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="3_02xx3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vslxv"]
@@ -12,6 +13,8 @@ collision_mask = 2
 script = ExtResource("1_vslxv")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_02xx3")
+hframes = 4
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vslxv")

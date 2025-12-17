@@ -132,7 +132,7 @@ func coin_collected():
 			#spawn_upgrade()
 		spawn_upgrade()
 		
-		if Global.level % 5 == 0:
+		if Global.level % 1 == 0:
 			spawn_mini_boss()
 
 func spawn_mini_boss():
