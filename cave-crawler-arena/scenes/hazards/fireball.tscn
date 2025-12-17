@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds5tpmbj16co2"]
+
+[ext_resource type="Script" uid="uid://ebffvpgciwpu" path="res://scripts/hazards/fireball.gd" id="2_d6pof"]
+[ext_resource type="Texture2D" uid="uid://dker7jajl3vks" path="res://sprites/hazards/fireball.png" id="3_pnu0j"]
+
+[sub_resource type="Animation" id="Animation_pnu0j"]
+resource_name = "move"
+length = 0.2
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_8r66s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ts8d6"]
+_data = {
+&"RESET": SubResource("Animation_8r66s"),
+&"move": SubResource("Animation_pnu0j")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnu0j"]
+radius = 6.0
+
+[node name="Fireball" type="Area2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 17
+script = ExtResource("2_d6pof")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ts8d6")
+}
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_pnu0j")
+hframes = 3
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_pnu0j")
+debug_color = Color(1, 0, 0, 0.18039216)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -5,13 +5,13 @@ var item_info = {
 		"No item equipped",
 		load("res://sprites/items/empty.png"),
 		],
-	"acid": [
-		"Burns enemies who touch it",
-		load("res://sprites/items/corrorsion.png")
+	"fire": [
+		"Bullets apply burn",
+		load("res://sprites/items/fire.png")
 		],
-	"lightning": [
+	"bomb": [
 		"Bullets explode on hit",
-		load("res://sprites/items/lightning.png")
+		load("res://sprites/items/bomb.png")
 		],
 }
 

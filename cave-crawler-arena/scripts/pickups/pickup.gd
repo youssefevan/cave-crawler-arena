@@ -7,6 +7,8 @@ var direction := Vector2(0, 0)
 var decay := 5.0
 var vel := 1.0
 
+var speed := 5.0
+
 var within_range = false
 var player : Player
 
@@ -25,7 +27,7 @@ func _physics_process(delta):
 		global_position += direction * vel
 	else:
 		direction = global_position.direction_to(player.global_position)
-		vel = lerpf(vel, 5.0, decay * delta)
+		vel = lerpf(vel, speed, decay * delta)
 		global_position += direction * vel
 
 func despawn():

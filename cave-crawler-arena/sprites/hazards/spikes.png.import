@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn6gdnjw2v5hh"
-path="res://.godot/imported/counter.png-cbb4b8ca23ff3f5841c07ded82089a50.ctex"
+uid="uid://c4g3732sp0cp"
+path="res://.godot/imported/spikes.png-41d030eb7981d758c347197eeaf02aed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/counter.png"
-dest_files=["res://.godot/imported/counter.png-cbb4b8ca23ff3f5841c07ded82089a50.ctex"]
+source_file="res://sprites/hazards/spikes.png"
+dest_files=["res://.godot/imported/spikes.png-41d030eb7981d758c347197eeaf02aed.ctex"]
 
 [params]
 

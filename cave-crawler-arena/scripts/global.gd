@@ -8,12 +8,12 @@ var enemy_pool = {
 }
 
 var mini_boss_pool = [
-	preload("res://scenes/enemies/miniboss_1.tscn"),
+	preload("res://scenes/enemies/bosses/miniboss_1.tscn"),
 ]
 
 var item_pool = {
-	"acid": load("res://scenes/pickups/acid.tscn"),
-	"lightning": load("res://scenes/pickups/lightning.tscn"),
+	"fire": load("res://scenes/pickups/fire.tscn"),
+	"bomb": load("res://scenes/pickups/bomb.tscn"),
 }
 
 # base value, current level

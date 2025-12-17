@@ -1,5 +1,11 @@
 # https://www.youtube.com/watch?v=iny4KAtVMCg
 
+##### NOTE:	Marker needs to be child of CanvasLayer in order to be rendered over
+#####		GUI. I can't make the "Pickups" node a CanvasLayer because I only
+#####		want the marker to be rendered over the GUI, not anything else
+#####		related to Pickups.
+#####		It's kinda gross...
+
 extends Sprite2D
 
 var onscreen_offset = Vector2(0.0, -12.0)
@@ -15,7 +21,7 @@ func _physics_process(delta):
 		camera = get_viewport().get_camera_2d()
 		return
 	
-	var target_pos = get_parent().global_position
+	var target_pos = get_parent().get_parent().global_position
 	var viewport_dim = get_viewport().get_visible_rect().size
 	var screen_coords = (target_pos - camera.global_position) * camera.zoom + viewport_dim * 0.5
 	var screen_rect = Rect2(Vector2.ZERO, viewport_dim).grow(-screen_margin)
@@ -37,7 +43,7 @@ func _physics_process(delta):
 		target_display_rot = dir.angle() - PI * 0.5
 	
 	global_position = lerp(global_position, target_display_pos, delta * 8.0)
-	rotation = lerp(rotation, target_display_rot, delta * 8.0)
+	rotation = lerp_angle(rotation, target_display_rot, delta * 8.0)
 	
 	#global_position = target_display_pos
 	#rotation = target_display_rot

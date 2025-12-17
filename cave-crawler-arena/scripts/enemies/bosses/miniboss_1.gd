@@ -27,6 +27,6 @@ func die():
 	var key = available_items.keys().pick_random()
 	var item = Global.item_pool[key].instantiate()
 	item.global_position = global_position
-	get_parent().get_parent().add_child(item)
+	get_parent().get_parent().call_deferred("add_child", item)
 	
 	super.die()

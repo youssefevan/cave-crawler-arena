@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7gugs1tq8i5t"
-path="res://.godot/imported/corrorsion.png-59e37bd3245590bd32987921bcb36e31.ctex"
+uid="uid://dker7jajl3vks"
+path="res://.godot/imported/fireball.png-6525ea93b78c55520a8062885f21ac98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/corrorsion.png"
-dest_files=["res://.godot/imported/corrorsion.png-59e37bd3245590bd32987921bcb36e31.ctex"]
+source_file="res://sprites/hazards/fireball.png"
+dest_files=["res://.godot/imported/fireball.png-6525ea93b78c55520a8062885f21ac98.ctex"]
 
 [params]
 

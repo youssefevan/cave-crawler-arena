@@ -3,6 +3,10 @@ class_name Upgrade
 
 var stat = ""
 
+func _ready():
+	speed = 1.0
+	super._ready()
+
 func choose_type():
 	var available_stats = []
 	

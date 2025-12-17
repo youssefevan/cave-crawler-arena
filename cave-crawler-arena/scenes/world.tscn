@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://gk7ouh35fc1e" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://c1ewrypht14m3" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://csocpola5mk3u" path="res://scripts/gui/health.gd" id="2_71j4m"]
-[ext_resource type="PackedScene" uid="uid://mxleet7y6b71" path="res://scenes/enemies/skull.tscn" id="2_dss4m"]
+[ext_resource type="PackedScene" uid="uid://mxleet7y6b71" path="res://scenes/enemies/bosses/skull.tscn" id="2_dss4m"]
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="2_i7141"]
 [ext_resource type="Texture2D" uid="uid://cgodtknkmupww" path="res://sprites/tiles.png" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://cdd4r5317ovjd" path="res://scripts/gui/xp.gd" id="3_qfnet"]
