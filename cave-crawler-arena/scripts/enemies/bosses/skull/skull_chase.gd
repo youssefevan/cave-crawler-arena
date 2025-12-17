@@ -1,6 +1,7 @@
 extends State
 
 var frame := 0
+var weight = 1
 
 func enter():
 	super.enter()
@@ -17,10 +18,11 @@ func physics_update(delta):
 	entity.velocity = lerp(entity.velocity, entity.dir * entity.speed, entity.accel * delta)
 	
 	if entity.global_position.distance_to(entity.player.global_position) < 100 and frame > 60*3:
-		var next_state = randi_range(0, 1)
+		var next_state = randf()
 		
-		match next_state:
-			0:
-				return entity.shoot
-			1:
-				return entity.spikes
+		if next_state < 0.5 * weight:
+			weight = 1.5
+			return entity.shoot
+		else:
+			weight = 0.5
+			return entity.spikes

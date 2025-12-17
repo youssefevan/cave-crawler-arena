@@ -16,6 +16,8 @@ var dir
 var can_fire := true
 var firerate := 1.0
 
+var last_attack = []
+
 func _ready():
 	super._ready()
 	dir = global_position.direction_to(player.global_position).normalized()

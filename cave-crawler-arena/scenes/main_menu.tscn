@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://csulapwy47orq"]
+[gd_scene load_steps=8 format=3 uid="uid://csulapwy47orq"]
 
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://bys0mel17fnnl" path="res://scripts/gui/main_menu.gd" id="2_ekxnf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d4jpic7hkicaq" path="res://sprites/gui/options.png" id="3_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="4_8ln24"]
 [ext_resource type="Texture2D" uid="uid://c1k5s5nmmdi5a" path="res://sprites/title.png" id="6_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://ob1iv6c1xh4x" path="res://scenes/cursor.tscn" id="7_oa1go"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -54,6 +55,8 @@ layout_mode = 2
 text = "Quit"
 icon = ExtResource("4_8ln24")
 alignment = 0
+
+[node name="Cursor" parent="." instance=ExtResource("7_oa1go")]
 
 [connection signal="pressed" from="Buttons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

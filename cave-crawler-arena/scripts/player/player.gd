@@ -50,6 +50,10 @@ func handle_aim():
 			enemies_in_range.append(i)
 	
 	$Weapon.look_at(get_global_mouse_position())
+	
+	$Weapon/Sprite.flip_v = (global_position.x - get_global_mouse_position().x >= 0.0)
+		
+	
 	attack()
 
 func attack():
