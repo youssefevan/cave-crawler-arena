@@ -22,6 +22,7 @@ var decel := 20.0
 var max_health = 100.0
 
 var can_attack := true
+var invulnerable := false
 
 func _ready():
 	Global.health = max_health
@@ -77,7 +78,25 @@ func regen():
 		regen()
 
 func get_hit():
+	Engine.time_scale = 0.1
+	await get_tree().create_timer(0.15, false, false, true).timeout
+	Engine.time_scale = 1.0
+	
 	Global.health = max(0, Global.health - 10)
+	
+	invulnerable = true
+	hit_flash()
+	await get_tree().create_timer(2.0, false).timeout
+	invulnerable = false
+	
+	$Sprite.modulate = Color(1, 1, 1, 1)
+
+func hit_flash() -> void:
+	while invulnerable:
+		$Sprite.modulate = Color(1.0, 0.0, 0.0, 0.2)
+		await get_tree().create_timer(0.15, false).timeout
+		$Sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
+		await get_tree().create_timer(0.15, false).timeout
 
 func _on_pickup_range_area_entered(area):
 	if area is Pickup:
@@ -85,4 +104,5 @@ func _on_pickup_range_area_entered(area):
 
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4) and area.is_in_group("Enemy"):
-		get_hit()
+		if !invulnerable:
+			get_hit()
