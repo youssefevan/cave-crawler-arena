@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://mxleet7y6b71"]
+[gd_scene load_steps=13 format=3 uid="uid://mxleet7y6b71"]
 
 [ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/bosses/boss.tscn" id="1_1t3j5"]
 [ext_resource type="Script" uid="uid://8n22u0ap6vkh" path="res://scripts/enemies/bosses/skull/skull.gd" id="2_v22qf"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ct2cw4xiwci8o" path="res://scripts/enemies/bosses/skull/skull_chase.gd" id="6_7f2rg"]
 [ext_resource type="Script" uid="uid://d2j83qos3ku2k" path="res://scripts/enemies/bosses/skull/skull_shoot.gd" id="7_entxl"]
 [ext_resource type="Script" uid="uid://bqe385kie21jx" path="res://scripts/enemies/bosses/skull/skull_spikes.gd" id="8_ddwp6"]
+[ext_resource type="Script" uid="uid://cacpopsliofmm" path="res://scripts/enemies/bosses/skull/skull_charge.gd" id="9_rbqb5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v22qf"]
 
@@ -52,6 +53,9 @@ script = ExtResource("7_entxl")
 
 [node name="Spikes" type="Node" parent="StateManager" index="2"]
 script = ExtResource("8_ddwp6")
+
+[node name="Charge" type="Node" parent="StateManager" index="3"]
+script = ExtResource("9_rbqb5")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 

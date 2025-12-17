@@ -6,6 +6,7 @@ class_name Skull
 @onready var chase = $StateManager/Chase
 @onready var shoot = $StateManager/Shoot
 @onready var spikes = $StateManager/Spikes
+@onready var charge = $StateManager/Charge
 
 # scenes
 @onready var fireball = preload("res://scenes/hazards/fireball.tscn")
@@ -16,10 +17,9 @@ var dir
 var can_fire := true
 var firerate := 1.0
 
-var last_attack = []
-
 func _ready():
 	super._ready()
+	speed = 40.0
 	dir = global_position.direction_to(player.global_position).normalized()
 	state_manager.init(self)
 

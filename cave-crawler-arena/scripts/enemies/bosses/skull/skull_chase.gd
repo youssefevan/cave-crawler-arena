@@ -1,10 +1,11 @@
 extends State
 
 var frame := 0
-var weight = 1
+var last_attack = null
 
 func enter():
 	super.enter()
+	
 	frame = 0
 
 func physics_update(delta):
@@ -18,11 +19,12 @@ func physics_update(delta):
 	entity.velocity = lerp(entity.velocity, entity.dir * entity.speed, entity.accel * delta)
 	
 	if entity.global_position.distance_to(entity.player.global_position) < 100 and frame > 60*3:
-		var next_state = randf()
+		var attacks = [entity.shoot, entity.spikes, entity.charge]
+		var next_attack = attacks.pick_random()
 		
-		if next_state < 0.5 * weight:
-			weight = 0.5
-			return entity.shoot
-		else:
-			weight = 1.5
-			return entity.spikes
+		if last_attack != null:
+			while next_attack == last_attack:
+				next_attack = attacks.pick_random()
+		
+		last_attack = next_attack
+		return next_attack
