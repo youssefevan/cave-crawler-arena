@@ -43,7 +43,7 @@ func handle_shooting():
 func handle_spikes():
 	if can_fire:
 		var s = spikes_scene.instantiate()
-		s.global_position = player.global_position
+		s.global_position = player.global_position + (player.velocity / Vector2(2.0, 2.0))
 		get_parent().get_parent().call_deferred("add_child", s)
 		
 		can_fire = false

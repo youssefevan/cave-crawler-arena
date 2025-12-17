@@ -21,8 +21,8 @@ func physics_update(delta):
 		var next_state = randf()
 		
 		if next_state < 0.5 * weight:
-			weight = 1.5
+			weight = 0.5
 			return entity.shoot
 		else:
-			weight = 0.5
+			weight = 1.5
 			return entity.spikes
