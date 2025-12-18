@@ -18,7 +18,7 @@ func _physics_process(delta):
 	if frame % 5 == 0:
 		dir = global_position.direction_to(player.global_position).normalized()
 	
-	if frame % 30 == 0 and global_position.distance_to(player.global_position) < 80:
+	if frame % 60 == 0 and global_position.distance_to(player.global_position) < 80:
 		var b = bullet_scene.instantiate()
 		b.rotation = dir.angle()
 		b.global_position = global_position

@@ -1,4 +1,16 @@
-extends Area2D
+extends Bullet
 
 func _ready():
+	speed = 50.0
+	expiration_timer = 4.0
 	$Animator.play("move")
+	
+	super._ready()
+
+func _physics_process(delta):
+	super._physics_process(delta)
+	$Sprite.global_rotation = 0
+
+func _on_area_entered(area):
+	if area.get_collision_layer_value(5) and area.is_in_group("Player"):
+		queue_free()
