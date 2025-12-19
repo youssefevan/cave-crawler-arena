@@ -388,13 +388,13 @@ limit_top = 0
 limit_right = 1024
 limit_bottom = 1024
 
-[node name="Bullets" type="Node" parent="."]
+[node name="Pickups" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Enemies" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Pickups" type="Node" parent="."]
+[node name="Bullets" type="Node" parent="."]
 unique_name_in_owner = true
 
 [connection signal="timeout" from="RunTimer" to="." method="_on_run_timer_timeout"]
