@@ -29,7 +29,8 @@ var bullet_damage = 1
 var equipped_item = null
 
 func get_xp_to_level():
-	return floor(pow(10 * level, 1.1))
+	return 20*level
+	#return floor(pow(10 * level, 1.1))
 
 func get_stat(stat : String):
 	if stats[stat][1] == 0:

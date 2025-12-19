@@ -128,9 +128,8 @@ func coin_collected():
 		Global.xp -= Global.get_xp_to_level()
 		Global.level += 1
 		
-		#if Global.level % 2 == 0:
-			#spawn_upgrade()
-		spawn_upgrade()
+		if Global.level % 2 == 0:
+			spawn_upgrade()
 		
 		if Global.level % 5 == 0:
 			spawn_mini_boss()

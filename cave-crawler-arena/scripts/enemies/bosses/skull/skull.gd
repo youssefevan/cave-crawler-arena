@@ -15,7 +15,10 @@ class_name Skull
 var dir
 
 var can_fire := true
-var firerate := 0.75
+var firerate := 0.2
+var spikerate := 0.5
+
+var aim := randf_range(0, 360)
 
 func _ready():
 	super._ready()
@@ -31,9 +34,15 @@ func _physics_process(delta):
 func handle_shooting():
 	if can_fire:
 		var f = fireball.instantiate()
-		f.rotation = dir.angle()
+		aim += 15.0
+		f.rotation_degrees = aim
 		f.global_position = global_position
 		get_parent().get_parent().call_deferred("add_child", f)
+		
+		var f1 = fireball.instantiate()
+		f1.rotation_degrees = -aim
+		f1.global_position = global_position
+		get_parent().get_parent().call_deferred("add_child", f1)
 		
 		can_fire = false
 		await get_tree().create_timer(firerate, false).timeout
@@ -42,9 +51,9 @@ func handle_shooting():
 func handle_spikes():
 	if can_fire:
 		var s = spikes_scene.instantiate()
-		s.global_position = player.global_position + (player.velocity / Vector2(2.0, 2.0))
+		s.global_position = player.global_position + (player.velocity / Vector2(3.0, 3.0))
 		get_parent().get_parent().call_deferred("add_child", s)
 		
 		can_fire = false
-		await get_tree().create_timer(firerate, false).timeout
+		await get_tree().create_timer(spikerate, false).timeout
 		can_fire = true

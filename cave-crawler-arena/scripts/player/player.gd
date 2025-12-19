@@ -60,7 +60,7 @@ func handle_aim():
 
 func attack():
 	if can_attack:
-		AudioManager.play_sfx(shoot_sfx)
+		#AudioManager.play_sfx(shoot_sfx)
 		
 		var attack = bullet.instantiate()
 		attack.rotation = $Weapon.global_rotation

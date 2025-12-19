@@ -19,14 +19,12 @@ func _ready():
 	#OptionsHandler.connect("volume_sfx_changed", volume_sfx_changed)
 	#volume_sfx_changed()
 
-func play_sfx(sound : AudioStream, randomize_tone := false, parent := get_tree().current_scene):
+func play_sfx(sound : AudioStream, base_pitch := 1.0, pitch_range := 0.0, parent := get_tree().current_scene):
 	var stream = AudioStreamPlayer.new()
 	
 	stream.set_bus("SFX")
 	stream.stream = sound
-	
-	if randomize_tone:
-		stream.pitch_scale = randf_range(0.9, 1.1)
+	stream.pitch_scale = randf_range(base_pitch - pitch_range, base_pitch + 0.0)
 	
 	stream.connect("finished", Callable(stream, "queue_free"))
 	

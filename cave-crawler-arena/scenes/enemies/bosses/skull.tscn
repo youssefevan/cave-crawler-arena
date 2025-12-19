@@ -18,7 +18,7 @@
 
 [node name="Skull" instance=ExtResource("1_1t3j5")]
 script = ExtResource("2_v22qf")
-max_health = 100.0
+max_health = 500.0
 speed = 50.0
 min_xp_drop = 0
 max_xp_drop = 0

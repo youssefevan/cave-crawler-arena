@@ -38,5 +38,6 @@ func choose_type():
 
 func despawn():
 	Global.xp += value
-	AudioManager.play_sfx(pickup_sfx, true)
+	var pitch = 0.5 + (Global.xp/Global.get_xp_to_level())
+	AudioManager.play_sfx(pickup_sfx, pitch, 0.1)
 	super.despawn()
