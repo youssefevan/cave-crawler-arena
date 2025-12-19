@@ -4,6 +4,8 @@ class_name Coin
 var value := 1
 var spawn_type := 1
 
+@onready var pickup_sfx = preload("res://audio/xp2.ogg")
+
 func _ready():
 	super._ready()
 	
@@ -36,4 +38,5 @@ func choose_type():
 
 func despawn():
 	Global.xp += value
+	AudioManager.play_sfx(pickup_sfx, true)
 	super.despawn()

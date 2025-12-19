@@ -12,6 +12,8 @@ class_name Player
 
 @export var bullet : PackedScene
 
+@onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
+
 var input := Vector2.ZERO
 var attack_input := false
 
@@ -54,11 +56,12 @@ func handle_aim():
 	
 	$Weapon/Sprite.flip_v = (global_position.x - get_global_mouse_position().x >= 0.0)
 	
-	
 	attack()
 
 func attack():
 	if can_attack:
+		AudioManager.play_sfx(shoot_sfx)
+		
 		var attack = bullet.instantiate()
 		attack.rotation = $Weapon.global_rotation
 		attack.global_position = $Weapon/Muzzle.global_position
@@ -75,7 +78,9 @@ func regen():
 		if Global.health < max_health:
 			Global.health += 1.0
 			Global.health = clamp(Global.health, 0, max_health)
+		
 		regen()
+		
 
 func get_hit():
 	Engine.time_scale = 0.1
