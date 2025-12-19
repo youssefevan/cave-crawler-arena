@@ -13,6 +13,10 @@ var item_info = {
 		"Bullets explode on hit",
 		load("res://sprites/items/bomb.png")
 		],
+	"freeze": [
+		"Bullets freeze enemies on hit",
+		load("res://sprites/items/freeze.png")
+	]
 }
 
 func _on_visibility_changed():

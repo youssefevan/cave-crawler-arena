@@ -6,3 +6,5 @@ collision_mask = 16
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 debug_color = Color(1, 0, 0, 0.18039216)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

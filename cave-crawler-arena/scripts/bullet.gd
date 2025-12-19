@@ -2,6 +2,9 @@ extends Area2D
 class_name Bullet
 
 @onready var explosion = preload("res://scenes/hazards/explosion.tscn")
+@onready var freeze_exp = preload("res://scenes/hazards/freeze_explosion.tscn")
+
+@onready var hit_effect = preload("res://scenes/effects/bullet_hit.tscn")
 
 var speed = 160.0
 var expiration_timer := 0.5
@@ -20,4 +23,10 @@ func _on_area_entered(area):
 			var e = explosion.instantiate()
 			e.global_position = global_position
 			get_parent().call_deferred("add_child", e)
+		elif Global.equipped_item == "freeze":
+			area.get_parent().freeze()
+		
+		var h = hit_effect.instantiate()
+		h.global_position = global_position
+		get_parent().call_deferred("add_child", h)
 		queue_free()

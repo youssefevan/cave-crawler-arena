@@ -8,7 +8,7 @@ var vel := 1.0
 var player : Player = null
 var despawn_timer := 120.0
 
-var item_pool = ["fire", "bomb"]
+var item_pool = ["fire", "bomb", "freeze"]
 var item_name = null
 
 @onready var item_scene = load("res://scenes/pickups/item.tscn")
@@ -35,6 +35,8 @@ func set_item_sprite():
 			$Sprite.frame = 2
 		"bomb":
 			$Sprite.frame = 0
+		"freeze":
+			$Sprite.frame = 4
 
 func despawn():
 	if player != null:

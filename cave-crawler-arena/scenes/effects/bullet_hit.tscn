@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlms020uyam2r"]
+
+[ext_resource type="Texture2D" uid="uid://bewpqlax3c1i6" path="res://sprites/effects/bullet_hit.png" id="1_b82f2"]
+[ext_resource type="Script" uid="uid://bvlb0hi3ixjt0" path="res://scripts/particles/bullet_hit.gd" id="2_wliox"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b82f2"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wliox"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="BulletHit" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_b82f2")
+emitting = false
+amount = 1
+texture = ExtResource("1_b82f2")
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_wliox")
+script = ExtResource("2_wliox")

@@ -1,16 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://c82psucejhwxl"]
+[gd_scene load_steps=7 format=3 uid="uid://c82psucejhwxl"]
 
 [ext_resource type="Script" uid="uid://2aex34agbip7" path="res://scripts/enemies/enemy.gd" id="1_38ino"]
 [ext_resource type="PackedScene" uid="uid://c6pba287ajugl" path="res://scenes/hitbox.tscn" id="2_fcftc"]
 [ext_resource type="Texture2D" uid="uid://bnxe5i48uhy33" path="res://sprites/wave.png" id="2_lu5c6"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="2_nb6gf"]
 [ext_resource type="PackedScene" uid="uid://csiu8nc7o6j0a" path="res://scenes/hurtbox.tscn" id="3_lu5c6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jt03m"]
+resource_local_to_scene = true
+shader = ExtResource("2_nb6gf")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_38ino")
+freeze_color = Color(0, 0.7176471, 1, 1)
 
 [node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jt03m")
 position = Vector2(-1.3113022e-06, 2.3841858e-07)
 texture = ExtResource("2_lu5c6")
 

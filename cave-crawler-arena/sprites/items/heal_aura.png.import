@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s404bcchidi"
-path="res://.godot/imported/claw.png-89d8e7cd97fdc94c00d993b456a1f947.ctex"
+uid="uid://drmvayeoy7ajw"
+path="res://.godot/imported/heal_aura.png-31eecab7f27e7b3f0eb5d53e0512d9e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/claw.png"
-dest_files=["res://.godot/imported/claw.png-89d8e7cd97fdc94c00d993b456a1f947.ctex"]
+source_file="res://sprites/items/heal_aura.png"
+dest_files=["res://.godot/imported/heal_aura.png-31eecab7f27e7b3f0eb5d53e0512d9e6.ctex"]
 
 [params]
 

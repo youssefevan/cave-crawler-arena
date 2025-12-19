@@ -24,7 +24,6 @@ var max_stat_level = 8
 var health = 100
 var xp = 0
 var level = 1
-var bullet_damage = 1
 
 var equipped_item = null
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://gehm4ayf6uti"]
 
 [ext_resource type="PackedScene" uid="uid://c6pba287ajugl" path="res://scenes/hitbox.tscn" id="1_5ijq3"]
-[ext_resource type="Texture2D" uid="uid://dw2ga83kddhbu" path="res://sprites/explosion.png" id="2_216jl"]
+[ext_resource type="Texture2D" uid="uid://dw2ga83kddhbu" path="res://sprites/effects/explosion.png" id="2_216jl"]
 [ext_resource type="Script" uid="uid://dqnkusbnqa8ei" path="res://scripts/hazards/explosion.gd" id="2_ovi5o"]
 
 [sub_resource type="Animation" id="Animation_216jl"]
