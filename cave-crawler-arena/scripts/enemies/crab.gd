@@ -9,6 +9,7 @@ func _ready():
 	$Animator.play("move")
 
 func _physics_process(delta):
+	super._physics_process(delta)
 	frame += 1
 	
 	if frame % 5 == 0:
@@ -17,3 +18,6 @@ func _physics_process(delta):
 	velocity = lerp(velocity, dir * speed, accel * delta)
 	
 	move_and_slide()
+
+func face_player():
+	pass

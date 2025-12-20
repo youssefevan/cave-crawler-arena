@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmh81k5mkdbbu"]
+[gd_scene load_steps=12 format=3 uid="uid://bmh81k5mkdbbu"]
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_0s1mp"]
 [ext_resource type="Texture2D" uid="uid://ci0m0gqfu6s5q" path="res://sprites/enemies/crab.png" id="2_jpe3k"]
 [ext_resource type="Script" uid="uid://bf6e048pqwm4f" path="res://scripts/enemies/crab.gd" id="2_sqms0"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="3_teqeg"]
 
 [sub_resource type="Animation" id="Animation_teqeg"]
 length = 0.001
@@ -42,6 +43,12 @@ _data = {
 &"move": SubResource("Animation_sqms0")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwctj"]
+resource_local_to_scene = true
+shader = ExtResource("3_teqeg")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqms0"]
 radius = 4.1231055
 
@@ -57,6 +64,7 @@ height = 16.0
 script = ExtResource("2_sqms0")
 min_group_size = 3
 max_group_size = 22
+hurt_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
@@ -64,6 +72,7 @@ libraries = {
 }
 
 [node name="Sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_jwctj")
 position = Vector2(0, 0)
 texture = ExtResource("2_jpe3k")
 hframes = 3

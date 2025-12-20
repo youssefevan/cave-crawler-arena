@@ -8,6 +8,7 @@ func _ready():
 	super._ready()
 
 func _physics_process(delta):
+	super._physics_process(delta)
 	%HealthBar.value = int((health/max_health) * 100)
 
 func spawn_coin():

@@ -7,4 +7,6 @@
 process_mode = 3
 texture = ExtResource("1_s0nli")
 offset = Vector2(2, 2)
+hframes = 2
+frame = 1
 script = ExtResource("2_ndevg")

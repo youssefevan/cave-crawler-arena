@@ -13,6 +13,7 @@ class_name Player
 @export var bullet : PackedScene
 
 @onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
+@onready var hurt_sfx = preload("res://audio/player_hurt.ogg")
 
 var input := Vector2.ZERO
 var attack_input := false
@@ -83,6 +84,8 @@ func regen():
 		
 
 func get_hit():
+	AudioManager.play_sfx(hurt_sfx)
+	
 	Engine.time_scale = 0.1
 	await get_tree().create_timer(0.15, false, false, true).timeout
 	Engine.time_scale = 1.0
@@ -110,5 +113,5 @@ func _on_pickup_range_area_entered(area):
 
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4) and area.is_in_group("Enemy"):
-		if !invulnerable:
+		if !invulnerable and Global.health > 0:
 			get_hit()

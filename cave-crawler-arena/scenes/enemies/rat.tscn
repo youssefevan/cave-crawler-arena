@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://buqli3ldmuxdc"]
+[gd_scene load_steps=19 format=3 uid="uid://buqli3ldmuxdc"]
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_fxid1"]
 [ext_resource type="Script" uid="uid://bfv4qi40rdhw4" path="res://scripts/enemies/rat.gd" id="1_t1pi2"]
 [ext_resource type="Texture2D" uid="uid://dw0xvujivdxhg" path="res://sprites/enemies/rat.png" id="2_ohayx"]
 [ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="3_ac66d"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="3_fffwg"]
 [ext_resource type="Script" uid="uid://djgi4m2wp65bs" path="res://scripts/enemies/states/enemy_idle.gd" id="4_hajvu"]
 [ext_resource type="Script" uid="uid://0wryy3yypl5d" path="res://scripts/enemies/states/enemy_aggro.gd" id="5_ujef0"]
 [ext_resource type="Script" uid="uid://1doy4qylvp2m" path="res://scripts/enemies/states/enemy_lunge.gd" id="6_h50a5"]
@@ -130,6 +131,12 @@ _data = {
 &"melee": SubResource("Animation_fffwg")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ac66d"]
+resource_local_to_scene = true
+shader = ExtResource("3_fffwg")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_rl5i1"]
 radius = 4.5
 
@@ -149,6 +156,7 @@ max_xp_drop = 5
 max_xp_value = 2
 min_group_size = 2
 max_group_size = 12
+hurt_color = Color(1, 0.6627451, 0, 1)
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
@@ -156,6 +164,7 @@ libraries = {
 }
 
 [node name="Sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_ac66d")
 position = Vector2(-1.3113022e-06, -3.9999998)
 texture = ExtResource("2_ohayx")
 hframes = 3
