@@ -4,7 +4,7 @@ func _ready():
 	close()
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and Global.health > 0:
 		if !visible:
 			open()
 		else:

@@ -17,6 +17,10 @@ var previous_wave_sizes = []
 @export var run_time := 900
 
 func _ready():
+	Engine.time_scale = 1.0
+	
+	player.connect("dead", player_died)
+	
 	start_wave()
 	
 	$RunTimer.wait_time = run_time
@@ -105,6 +109,13 @@ func spawn_wave():
 	# start next wave if enough enemies are killed
 	check_for_enemies()
 
+func player_died():
+	var tween = get_tree().create_tween()
+	tween.tween_property(Engine, "time_scale", 0.2, 1.0).set_trans(Tween.TRANS_LINEAR)
+	
+	await get_tree().create_timer(2.0, false, false, true).timeout
+	$CanvasLayer/HUD/Info.open()
+
 func enemy_died():
 	await get_tree().create_timer(0.5, true).timeout
 	if spawning_wave == false:
@@ -186,6 +197,7 @@ func get_good_spot(type : String):
 	return spawn_pos
 
 func _on_quit_pressed() -> void:
+	Engine.time_scale = 1.0
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
