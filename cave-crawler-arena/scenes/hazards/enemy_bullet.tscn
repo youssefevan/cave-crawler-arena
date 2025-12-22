@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dutl32wdlijro"]
+
+[ext_resource type="PackedScene" uid="uid://c6pba287ajugl" path="res://scenes/hitbox.tscn" id="1_1a7is"]
+[ext_resource type="Script" uid="uid://b5xp4t8b33s3n" path="res://scripts/hazards/enemy_bullet.gd" id="2_ka8qk"]
+[ext_resource type="Texture2D" uid="uid://0u4m1p2egotu" path="res://sprites/bullet.png" id="3_ka8qk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fgj0"]
+size = Vector2(4, 2)
+
+[node name="Hitbox" instance=ExtResource("1_1a7is")]
+script = ExtResource("2_ka8qk")
+
+[node name="Sprite" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_ka8qk")
+
+[node name="Collider" parent="." index="1"]
+shape = SubResource("RectangleShape2D_1fgj0")

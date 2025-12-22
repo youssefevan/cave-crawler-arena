@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://baijk7eexqnxx"]
+
+[ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_ecoe6"]
+[ext_resource type="Script" uid="uid://bm41ukcwa4usl" path="res://scripts/enemies/turret.gd" id="2_oabpu"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="2_ue2uv"]
+[ext_resource type="Texture2D" uid="uid://b4jnp81k0p4lf" path="res://sprites/enemies/turret.png" id="3_oabpu"]
+[ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="5_wqsho"]
+[ext_resource type="Script" uid="uid://b3kw4xrnyycba" path="res://scripts/enemies/turret/turret_chase.gd" id="6_w2i2w"]
+[ext_resource type="Script" uid="uid://c4egpxr8jn8es" path="res://scripts/enemies/turret/turret_shoot.gd" id="7_0w8p4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqsho"]
+resource_local_to_scene = true
+shader = ExtResource("2_ue2uv")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ecoe6"]
+radius = 4.1231055
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ue2uv"]
+radius = 4.1231055
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oabpu"]
+radius = 5.0
+
+[node name="Turret" instance=ExtResource("1_ecoe6")]
+script = ExtResource("2_oabpu")
+speed = 20.0
+health = 2
+min_xp_drop = 2
+max_xp_drop = 6
+max_xp_value = 3
+max_group_size = 2
+hurt_color = Color(0.65, 0.65, 0.65, 1)
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_wqsho")
+texture = ExtResource("3_oabpu")
+
+[node name="Collider" parent="." index="1"]
+shape = SubResource("CircleShape2D_ecoe6")
+
+[node name="Collider" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_ue2uv")
+
+[node name="Collider" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_oabpu")
+
+[node name="StateManager" type="Node" parent="." index="4" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("5_wqsho")
+starting_state = NodePath("Chase")
+
+[node name="Chase" type="Node" parent="StateManager" index="0"]
+script = ExtResource("6_w2i2w")
+
+[node name="Shoot" type="Node" parent="StateManager" index="1"]
+script = ExtResource("7_0w8p4")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

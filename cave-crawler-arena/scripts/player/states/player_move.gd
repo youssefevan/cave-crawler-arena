@@ -3,6 +3,7 @@ class_name PlayerMove
 
 func enter():
 	super.enter()
+	entity.animator.speed_scale = (Global.stats["speed"][1]/10.0) + 1.0
 	entity.animator.play("move")
 
 func physics_update(delta):

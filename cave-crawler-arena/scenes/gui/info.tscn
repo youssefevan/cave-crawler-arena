@@ -1,0 +1,208 @@
+[gd_scene load_steps=13 format=3 uid="uid://d37ko6nhb1ct4"]
+
+[ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="1_gpsae"]
+[ext_resource type="Script" uid="uid://bwwrkq4gbcped" path="res://scripts/gui/stats.gd" id="1_n6i86"]
+[ext_resource type="Script" uid="uid://c3hsrsc2gxlom" path="res://scripts/gui/item_display.gd" id="2_gpsae"]
+[ext_resource type="Texture2D" uid="uid://dypyu4was3lj" path="res://sprites/items/empty.png" id="3_atcyc"]
+[ext_resource type="Script" uid="uid://dnn12kp4uxns8" path="res://scripts/gui/stat_tracker.gd" id="4_7sg26"]
+[ext_resource type="Texture2D" uid="uid://nwf0ltlyugv8" path="res://sprites/upgrades/speed.png" id="5_jr28m"]
+[ext_resource type="Texture2D" uid="uid://dpjb6kbh8fnwc" path="res://sprites/upgrades/firerate.png" id="6_q5sjo"]
+[ext_resource type="Texture2D" uid="uid://bv2l1asbw5uq0" path="res://sprites/upgrades/regen.png" id="7_dcxwg"]
+[ext_resource type="Texture2D" uid="uid://co643kf063okn" path="res://sprites/upgrades/reach.png" id="8_sc8ju"]
+[ext_resource type="Texture2D" uid="uid://d4jpic7hkicaq" path="res://sprites/gui/options.png" id="9_bhfgu"]
+[ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="10_4uq3t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7r4gi"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[node name="Info" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -62.0
+offset_right = 59.5
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gpsae")
+alignment = 1
+script = ExtResource("1_n6i86")
+
+[node name="Item" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_gpsae")
+
+[node name="Icon" type="TextureRect" parent="Item"]
+layout_mode = 2
+texture = ExtResource("3_atcyc")
+stretch_mode = 2
+
+[node name="Desc" type="Label" parent="Item"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "test test test test test test test test"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="ColorRect" type="ColorRect" parent="Item/Desc"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Stats" type="Panel" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7r4gi")
+
+[node name="Stats" type="VBoxContainer" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Level" type="Label" parent="Stats/Stats"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Level: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatIcons" type="HBoxContainer" parent="Stats/Stats"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="Speed" type="VBoxContainer" parent="Stats/Stats/StatIcons"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("4_7sg26")
+stat_name = "speed"
+
+[node name="Icon" type="TextureRect" parent="Stats/Stats/StatIcons/Speed"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_jr28m")
+stretch_mode = 2
+
+[node name="Counter" type="Label" parent="Stats/Stats/StatIcons/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "||||||||"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Firerate" type="VBoxContainer" parent="Stats/Stats/StatIcons"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("4_7sg26")
+stat_name = "firerate"
+
+[node name="Icon" type="TextureRect" parent="Stats/Stats/StatIcons/Firerate"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("6_q5sjo")
+stretch_mode = 2
+
+[node name="Counter" type="Label" parent="Stats/Stats/StatIcons/Firerate"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "||||||||"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Regen" type="VBoxContainer" parent="Stats/Stats/StatIcons"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("4_7sg26")
+stat_name = "regen_rate"
+
+[node name="Icon" type="TextureRect" parent="Stats/Stats/StatIcons/Regen"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_dcxwg")
+stretch_mode = 2
+
+[node name="Counter" type="Label" parent="Stats/Stats/StatIcons/Regen"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "||||||||"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reach" type="VBoxContainer" parent="Stats/Stats/StatIcons"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("4_7sg26")
+stat_name = "pickup_range"
+
+[node name="Icon" type="TextureRect" parent="Stats/Stats/StatIcons/Reach"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_sc8ju")
+stretch_mode = 2
+
+[node name="Counter" type="Label" parent="Stats/Stats/StatIcons/Reach"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "||||||||"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Multi" type="Label" parent="Stats/Stats"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+0% to base stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Options" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "options"
+icon = ExtResource("9_bhfgu")
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "quit"
+icon = ExtResource("10_4uq3t")
+
+[connection signal="visibility_changed" from="Item" to="Item" method="_on_visibility_changed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

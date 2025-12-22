@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bu2lq4vaorqye"]
+[gd_scene load_steps=14 format=4 uid="uid://bu2lq4vaorqye"]
 
 [ext_resource type="Script" uid="uid://gk7ouh35fc1e" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://c1ewrypht14m3" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -8,29 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://cgodtknkmupww" path="res://sprites/tiles.png" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://cdd4r5317ovjd" path="res://scripts/gui/xp.gd" id="3_qfnet"]
 [ext_resource type="Texture2D" uid="uid://dx547ycdr2jb2" path="res://sprites/gui/health_overlay_alt.png" id="5_pm21f"]
-[ext_resource type="Script" uid="uid://bwwrkq4gbcped" path="res://scripts/gui/stats.gd" id="7_7r4gi"]
-[ext_resource type="Script" uid="uid://dnn12kp4uxns8" path="res://scripts/gui/stat_tracker.gd" id="8_7t5mc"]
-[ext_resource type="Script" uid="uid://c3hsrsc2gxlom" path="res://scripts/gui/item_display.gd" id="8_lakw3"]
-[ext_resource type="Texture2D" uid="uid://nwf0ltlyugv8" path="res://sprites/upgrades/speed.png" id="8_w7kh3"]
-[ext_resource type="Texture2D" uid="uid://dpjb6kbh8fnwc" path="res://sprites/upgrades/firerate.png" id="9_jhx03"]
-[ext_resource type="Texture2D" uid="uid://bv2l1asbw5uq0" path="res://sprites/upgrades/regen.png" id="10_o8fc1"]
-[ext_resource type="Texture2D" uid="uid://co643kf063okn" path="res://sprites/upgrades/reach.png" id="11_xo05s"]
-[ext_resource type="Texture2D" uid="uid://dypyu4was3lj" path="res://sprites/items/empty.png" id="13_7t5mc"]
-[ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="13_dss4m"]
-[ext_resource type="Texture2D" uid="uid://d4jpic7hkicaq" path="res://sprites/gui/options.png" id="14_7t5mc"]
+[ext_resource type="PackedScene" uid="uid://d37ko6nhb1ct4" path="res://scenes/gui/info.tscn" id="7_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://ob1iv6c1xh4x" path="res://scenes/cursor.tscn" id="17_pm21f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mrxx"]
 bg_color = Color(1, 1, 1, 1)
 anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7r4gi"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71j4m"]
 texture = ExtResource("2_k0juu")
@@ -186,189 +169,12 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Info" type="VBoxContainer" parent="CanvasLayer/HUD"]
+[node name="Info" parent="CanvasLayer/HUD" instance=ExtResource("7_w7kh3")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -62.0
-offset_right = 59.5
-offset_bottom = 62.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-script = ExtResource("7_7r4gi")
-
-[node name="Item" type="HBoxContainer" parent="CanvasLayer/HUD/Info"]
-layout_mode = 2
-alignment = 1
-script = ExtResource("8_lakw3")
-
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Item"]
-layout_mode = 2
-texture = ExtResource("13_7t5mc")
-stretch_mode = 2
-
-[node name="Desc" type="Label" parent="CanvasLayer/HUD/Info/Item"]
-custom_minimum_size = Vector2(0, 18)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "test test test test test test test test"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-clip_text = true
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/Info/Item/Desc"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Stats" type="Panel" parent="CanvasLayer/HUD/Info"]
-process_mode = 3
-custom_minimum_size = Vector2(0, 72)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_7r4gi")
-
-[node name="Stats" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 6
-alignment = 1
-
-[node name="Level" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Level: 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StatIcons" type="HBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 1
-
-[node name="Speed" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-script = ExtResource("8_7t5mc")
-stat_name = "speed"
-
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Speed"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("8_w7kh3")
-stretch_mode = 2
-
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Speed"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "||||||||"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Firerate" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-script = ExtResource("8_7t5mc")
-stat_name = "firerate"
-
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Firerate"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("9_jhx03")
-stretch_mode = 2
-
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Firerate"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "||||||||"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Regen" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-script = ExtResource("8_7t5mc")
-stat_name = "regen_rate"
-
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Regen"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("10_o8fc1")
-stretch_mode = 2
-
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Regen"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "||||||||"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Reach" type="VBoxContainer" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons"]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-script = ExtResource("8_7t5mc")
-stat_name = "pickup_range"
-
-[node name="Icon" type="TextureRect" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Reach"]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("11_xo05s")
-stretch_mode = 2
-
-[node name="Counter" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats/StatIcons/Reach"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "||||||||"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Multi" type="Label" parent="CanvasLayer/HUD/Info/Stats/Stats"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "+0% to base stats"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/HUD/Info"]
-layout_mode = 2
-alignment = 1
-
-[node name="Options" type="Button" parent="CanvasLayer/HUD/Info/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 8
-text = "options"
-icon = ExtResource("14_7t5mc")
-
-[node name="Quit" type="Button" parent="CanvasLayer/HUD/Info/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 8
-text = "quit"
-icon = ExtResource("13_dss4m")
+offset_left = -57.0
+offset_top = -55.0
+offset_right = 57.0
+offset_bottom = 55.0
 
 [node name="Cursor" parent="CanvasLayer" instance=ExtResource("17_pm21f")]
 
@@ -399,5 +205,3 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [connection signal="timeout" from="RunTimer" to="." method="_on_run_timer_timeout"]
-[connection signal="visibility_changed" from="CanvasLayer/HUD/Info/Item" to="CanvasLayer/HUD/Info/Item" method="_on_visibility_changed"]
-[connection signal="pressed" from="CanvasLayer/HUD/Info/Buttons/Quit" to="." method="_on_quit_pressed"]

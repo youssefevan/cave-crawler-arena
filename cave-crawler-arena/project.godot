@@ -39,6 +39,10 @@ folder_colors={
 "res://sprites/": "red"
 }
 
+[global_group]
+
+Player=""
+
 [input]
 
 up={

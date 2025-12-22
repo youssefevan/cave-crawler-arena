@@ -21,3 +21,6 @@ func _physics_process(delta):
 
 func face_player():
 	pass
+
+func die():
+	super.die()

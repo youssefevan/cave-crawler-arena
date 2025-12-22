@@ -44,23 +44,14 @@ func start_wave():
 # oh my god oh my god oh my god oh my god oh my god
 func spawn_wave():
 	# enemies are spawned in groups throughout the wave 
-	
-	# this selects the number of grouops that will be spawned in the wave
 	var num_groups = randi_range(3+floori(wave/10.0), 5+floori(wave/4.0))
 	
-	# for each group, this loop selects an enemy type and an amount of enemies
-	# to spawn in the group
 	for i in range(num_groups):
 		var available_enemies = []
 		var weights = []
 		
-		# the enemy pool stores all enemy packed scenes as well as what wave they unlock
-		# and their random selection weight
 		for j in Global.enemy_pool:
-			# checks which enemies are unlocked based on current wave
 			if Global.enemy_pool[j][0] <= wave:
-				# adds enemy scene to available enemies,
-				# adds their spawn chances to the weights list
 				available_enemies.append(j)
 				weights.append(Global.enemy_pool[j][1])
 		
@@ -74,12 +65,10 @@ func spawn_wave():
 		var rng = randf_range(0, weight_sum)
 		var cumulative = 0.0
 		
-		# uses the random number to select an enemy type based on their weight
 		var chosen_enemy = null
 		for j in range(available_enemies.size()):
 			cumulative += weights[j]
 			if rng <= cumulative:
-				# store selected enemy
 				chosen_enemy = available_enemies[j]
 				break
 		
@@ -89,7 +78,6 @@ func spawn_wave():
 		var group_size = randi_range(enemy_type.min_group_size,
 			min(enemy_type.min_group_size+floori(wave/2.0), enemy_type.max_group_size))
 		
-		# spawn the group of enemies
 		for j in range(group_size):
 			var e = chosen_enemy.instantiate()
 			e.global_position = spawn_pos
@@ -103,10 +91,8 @@ func spawn_wave():
 			await get_tree().create_timer(3.0, false).timeout
 			enemies_in_scene = enemies.get_child_count()
 		
-		# buffer between groups spawning
 		await get_tree().create_timer(randf_range(0.01, 0.5), false).timeout
 	
-	# start next wave if enough enemies are killed
 	check_for_enemies()
 
 func player_died():
@@ -195,11 +181,6 @@ func get_good_spot(type : String):
 		print(type, " type not supported")
 	
 	return spawn_pos
-
-func _on_quit_pressed() -> void:
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_run_timer_timeout():
 	spawn_boss()
