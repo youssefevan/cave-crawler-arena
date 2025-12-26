@@ -7,8 +7,8 @@ class_name Bullet
 
 @onready var hit_effect = preload("res://scenes/effects/bullet_hit.tscn")
 
-var speed = 160.0
-var expiration_timer := 0.5
+var speed = 200.0
+var expiration_timer := 0.6
 
 func _ready():
 	await get_tree().create_timer(expiration_timer, false).timeout

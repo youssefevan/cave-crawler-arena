@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq0bxhlaojbul"]
+
+[ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_5m14n"]
+[ext_resource type="Script" uid="uid://dyudfok45k1p4" path="res://scripts/enemies/bat.gd" id="2_18mee"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="2_i6os3"]
+[ext_resource type="Texture2D" uid="uid://lopvvumltfmv" path="res://sprites/enemies/bat.png" id="3_18mee"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jofwc"]
+resource_local_to_scene = true
+shader = ExtResource("2_i6os3")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6os3"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_18mee"]
+radius = 2.236068
+
+[node name="Bat" instance=ExtResource("1_5m14n")]
+script = ExtResource("2_18mee")
+speed = 50.0
+hurt_color = Color(0, 0, 0, 1)
+freeze_color = Color(0, 0, 0, 1)
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_jofwc")
+texture = ExtResource("3_18mee")
+
+[node name="Collider" parent="." index="1"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_i6os3")
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_18mee")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

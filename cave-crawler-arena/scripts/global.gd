@@ -5,7 +5,8 @@ var enemy_pool = {
 	preload("res://scenes/enemies/crab.tscn"): [1, 0.45],
 	preload("res://scenes/enemies/rat.tscn"): [4, 0.25],
 	preload("res://scenes/enemies/roly_poly.tscn"): [12, 0.15],
-	preload("res://scenes/enemies/turret.tscn"): [8, 0.15]
+	preload("res://scenes/enemies/turret.tscn"): [8, 0.15],
+	preload("res://scenes/enemies/bat.tscn"): [1, 0.5],
 }
 
 var mini_boss_pool = [

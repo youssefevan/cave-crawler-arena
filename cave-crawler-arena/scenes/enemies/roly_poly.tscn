@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://byygdppqpi8m6"]
+[gd_scene load_steps=12 format=3 uid="uid://byygdppqpi8m6"]
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_5faot"]
 [ext_resource type="Texture2D" uid="uid://dgkyamsnv830c" path="res://sprites/enemies/roly_poly.png" id="2_oy4k0"]
 [ext_resource type="Script" uid="uid://clofp00t3ygkj" path="res://scripts/enemies/roly_poly.gd" id="2_qgagy"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="3_qgagy"]
 
 [sub_resource type="Animation" id="Animation_4spga"]
 length = 0.001
@@ -42,6 +43,12 @@ _data = {
 &"roll": SubResource("Animation_qgagy")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4spga"]
+resource_local_to_scene = true
+shader = ExtResource("3_qgagy")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5faot"]
 radius = 3.0
 
@@ -54,7 +61,7 @@ radius = 3.5
 [node name="RolyPoly" instance=ExtResource("1_5faot")]
 script = ExtResource("2_qgagy")
 speed = 100.0
-health = 3
+health = 2
 min_xp_drop = 3
 max_xp_drop = 7
 max_xp_value = 3
@@ -67,6 +74,7 @@ libraries = {
 }
 
 [node name="Sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_4spga")
 texture = ExtResource("2_oy4k0")
 hframes = 3
 
