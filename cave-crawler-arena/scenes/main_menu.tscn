@@ -19,7 +19,7 @@ theme = ExtResource("1_l6cm7")
 script = ExtResource("2_ekxnf")
 
 [node name="Title" type="Sprite2D" parent="."]
-position = Vector2(160, 55)
+position = Vector2(240, 104)
 scale = Vector2(2, 2)
 texture = ExtResource("6_rtw2f")
 

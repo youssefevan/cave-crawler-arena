@@ -128,8 +128,8 @@ func coin_collected():
 		if Global.level % 2 == 0:
 			spawn_upgrade()
 		
-		if Global.level % 5 == 0:
-			spawn_mini_boss()
+		if Global.level % 5 == 0 and $RunTimer.time_left > 30.0:
+				spawn_mini_boss()
 
 func spawn_mini_boss():
 	var choice = Global.mini_boss_pool.pick_random()
