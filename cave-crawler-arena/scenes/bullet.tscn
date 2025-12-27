@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dx184557anwsl" path="res://scripts/bullet.gd" id="2_eoqba"]
 [ext_resource type="Texture2D" uid="uid://0u4m1p2egotu" path="res://sprites/bullet.png" id="3_l5glv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5glv"]
-size = Vector2(2, 4)
+[sub_resource type="CircleShape2D" id="CircleShape2D_l5glv"]
+radius = 2.0
 
 [node name="Bullet" groups=["Player"] instance=ExtResource("1_l5glv")]
 collision_mask = 17
@@ -16,6 +16,6 @@ texture = ExtResource("3_l5glv")
 
 [node name="Collider" parent="." index="1"]
 rotation = 1.5707964
-shape = SubResource("RectangleShape2D_l5glv")
+shape = SubResource("CircleShape2D_l5glv")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

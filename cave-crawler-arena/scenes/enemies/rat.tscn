@@ -138,15 +138,13 @@ shader_parameter/active = false
 shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rl5i1"]
-radius = 4.5
+radius = 5.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rl5i1"]
-radius = 4.0
-height = 12.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_fffwg"]
+radius = 5.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1pi2"]
-radius = 4.5
-height = 13.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ac66d"]
+radius = 5.0
 
 [node name="Rat" instance=ExtResource("1_fxid1")]
 script = ExtResource("1_t1pi2")
@@ -178,13 +176,13 @@ shape = SubResource("CircleShape2D_rl5i1")
 [node name="Collider" parent="Hitbox" index="0"]
 position = Vector2(0, 0)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_rl5i1")
+shape = SubResource("CircleShape2D_fffwg")
 disabled = true
 
 [node name="Collider" parent="Hurtbox" index="0"]
 position = Vector2(0, 0)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_t1pi2")
+shape = SubResource("CircleShape2D_ac66d")
 
 [node name="StateManager" type="Node" parent="." index="5" node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_ac66d")
