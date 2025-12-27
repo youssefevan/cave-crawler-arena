@@ -15,6 +15,7 @@ shader_parameter/input_color = Vector4(1, 1, 1, 1)
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_38ino")
 hurt_color = Color(1, 0, 0, 1)
 freeze_color = Color(0, 0.7176471, 1, 1)
