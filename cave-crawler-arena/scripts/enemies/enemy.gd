@@ -9,6 +9,9 @@ signal died
 var player : Player
 
 var accel := 5.0
+
+@export var enemy_name : String
+
 @export var speed := 30.0
 @export var health := 1
 @export var min_xp_drop := 1
@@ -82,6 +85,8 @@ func die():
 	for i in randi_range(min_xp_drop, max_xp_drop):
 		call_deferred("spawn_coin")
 	emit_signal("died")
+	
+	OptionsManager.set_enemies_killed(enemy_name)
 	call_deferred("queue_free")
 
 func spawn_coin():

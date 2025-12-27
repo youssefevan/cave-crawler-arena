@@ -26,6 +26,7 @@ shader_parameter/input_color = Vector4(1, 1, 1, 1)
 [node name="Skull" instance=ExtResource("1_1t3j5")]
 script = ExtResource("2_v22qf")
 max_health = 500.0
+enemy_name = "skull"
 speed = 50.0
 min_xp_drop = 0
 max_xp_drop = 0

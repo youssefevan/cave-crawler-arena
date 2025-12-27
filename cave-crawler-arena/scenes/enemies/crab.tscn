@@ -60,6 +60,7 @@ radius = 5.0
 
 [node name="Crab" instance=ExtResource("1_0s1mp")]
 script = ExtResource("2_sqms0")
+enemy_name = "crab"
 min_group_size = 3
 max_group_size = 22
 hurt_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)

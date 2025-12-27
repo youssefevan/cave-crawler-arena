@@ -12,6 +12,7 @@ func _physics_process(delta):
 
 func open():
 	visible = true
+	OptionsManager.save_stats()
 	get_tree().paused = true
 	
 	update_stats()
