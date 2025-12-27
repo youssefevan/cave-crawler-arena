@@ -16,8 +16,5 @@ func physics_update(delta):
 	
 	var player_dist = entity.global_position.distance_to(entity.player.global_position)
 	
-	if player_dist <= entity.melee_distance:
-		return entity.melee
-	
-	if player_dist <= entity.lunge_distance and player_dist > entity.melee_distance:
+	if player_dist <= entity.lunge_distance:
 		return entity.lunge

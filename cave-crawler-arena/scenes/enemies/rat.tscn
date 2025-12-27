@@ -25,18 +25,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [3]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hitbox/Collider:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_rl5i1"]
 resource_name = "lunge"
@@ -68,18 +56,6 @@ tracks/1/keys = {
 "method": &"attack"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Hitbox/Collider:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
 
 [sub_resource type="Animation" id="Animation_fffwg"]
 resource_name = "melee"
@@ -97,25 +73,13 @@ tracks/0/keys = {
 "update": 1,
 "values": [5, 4, 3]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hitbox/Collider:disabled")
+tracks/1/path = NodePath("StateManager/Melee")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.24999997, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StateManager/Melee")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0.25),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -177,7 +141,6 @@ shape = SubResource("CircleShape2D_rl5i1")
 position = Vector2(0, 0)
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_fffwg")
-disabled = true
 
 [node name="Collider" parent="Hurtbox" index="0"]
 position = Vector2(0, 0)

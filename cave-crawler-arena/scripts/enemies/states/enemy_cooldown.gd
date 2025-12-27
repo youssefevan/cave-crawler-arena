@@ -5,12 +5,8 @@ var frame = 0
 
 func enter():
 	super.enter()
-	timer = 45
 	frame = 0
 	#entity.animator.play("Cooldown")
-	var player_dist = entity.global_position.distance_to(entity.player.global_position)
-	if player_dist <= entity.melee_distance:
-		timer = 15
 
 func physics_update(delta):
 	super.physics_update(delta)
