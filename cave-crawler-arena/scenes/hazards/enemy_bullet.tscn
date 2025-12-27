@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fgj0"]
 size = Vector2(4, 2)
 
-[node name="Hitbox" instance=ExtResource("1_1a7is")]
+[node name="Hitbox" groups=["Enemy"] instance=ExtResource("1_1a7is")]
 script = ExtResource("2_ka8qk")
 
 [node name="Sprite" type="Sprite2D" parent="." index="0"]

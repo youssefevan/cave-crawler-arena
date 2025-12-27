@@ -1,8 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cudyt114ai5r3"]
+[gd_scene load_steps=9 format=3 uid="uid://cudyt114ai5r3"]
 
 [ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/bosses/boss.tscn" id="1_4sm0u"]
 [ext_resource type="Script" uid="uid://jlo7hxdnuvqf" path="res://scripts/enemies/bosses/miniboss_1.gd" id="2_3qbsb"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="3_3qbsb"]
 [ext_resource type="Texture2D" uid="uid://bh6gi628v5yew" path="res://sprites/enemies/miniboss1.png" id="3_s7dl8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7dl8"]
+resource_local_to_scene = true
+shader = ExtResource("3_3qbsb")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6w5wj"]
 
@@ -19,6 +26,8 @@ max_xp_value = 3
 max_group_size = 1
 
 [node name="Sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_s7dl8")
+position = Vector2(0, -1)
 texture = ExtResource("3_s7dl8")
 
 [node name="Collider" parent="." index="1"]

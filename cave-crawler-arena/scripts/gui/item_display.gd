@@ -16,6 +16,10 @@ var item_info = {
 	"freeze": [
 		"Bullets freeze enemies on hit",
 		load("res://sprites/items/freeze.png")
+	],
+	"splitshot": [
+		"Gun shoots 3 bullets at a time",
+		load("res://sprites/items/splitshot.png")
 	]
 }
 
