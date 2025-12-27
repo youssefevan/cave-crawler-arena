@@ -17,6 +17,11 @@ signal dead
 @onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
 @onready var hurt_sfx = preload("res://audio/player_hurt.ogg")
 
+var camera : Camera2D
+var shake_strength := 3.0
+var shake_decay := 12.0
+var current_shake := 0.0
+
 var input := Vector2.ZERO
 var attack_input := false
 
@@ -30,9 +35,23 @@ var can_attack := true
 var invulnerable := false
 
 func _ready():
+	
+	for i in get_children():
+		if i is Camera2D:
+			camera = i
+	
 	Global.health = max_health
 	state_manager.init(self)
 	regen()
+
+func _process(delta: float) -> void:
+	if current_shake > 0.0:
+		current_shake = lerpf(current_shake, 0.0, shake_decay * delta)
+		
+		camera.offset = Vector2(
+				randf_range(-current_shake, current_shake),
+				randf_range(-current_shake, current_shake)
+			)
 
 func _physics_process(delta):
 	state_manager.physics_update(delta)
@@ -102,6 +121,8 @@ func get_hit():
 	Engine.time_scale = 0.1
 	await get_tree().create_timer(0.15, false, false, true).timeout
 	Engine.time_scale = 1.0
+	
+	current_shake = shake_strength
 	
 	Global.health = max(0, Global.health - 10)
 	
