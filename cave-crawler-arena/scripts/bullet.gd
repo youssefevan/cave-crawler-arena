@@ -12,6 +12,7 @@ var expiration_timer := 0.6
 
 func _ready():
 	await get_tree().create_timer(expiration_timer, false).timeout
+	
 	queue_free()
 
 func _physics_process(delta):
@@ -36,4 +37,8 @@ func _on_area_entered(area):
 		var h = hit_effect.instantiate()
 		h.global_position = global_position
 		get_parent().call_deferred("add_child", h)
+		
+		if Global.equipped_item == "penetration":
+			return
+		
 		queue_free()

@@ -20,7 +20,11 @@ var item_info = {
 	"splitshot": [
 		"Gun shoots 3 bullets at a time",
 		load("res://sprites/items/splitshot.png")
-	]
+	],
+	"penetration": [
+		"Bullets penetrate through enemies",
+		load("res://sprites/items/penetration.png")
+	],
 }
 
 func _on_visibility_changed():
