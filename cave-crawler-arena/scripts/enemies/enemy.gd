@@ -117,10 +117,19 @@ func _on_hurtbox_area_entered(area):
 
 func respawn():
 	visible = true
+	
+	$Collider.disabled = false
+	$Hitbox/Collider.disabled = false
+	$Hurtbox/Collider.disabled = false
 	set_physics_process(true)
 
 func despawn():
 	current_health = health
 	visible = false
 	global_position = Vector2(-2000, -2000)
+	
+	
+	$Collider.disabled = true
+	$Hitbox/Collider.disabled = true
+	$Hurtbox/Collider.disabled = true
 	set_physics_process(false)

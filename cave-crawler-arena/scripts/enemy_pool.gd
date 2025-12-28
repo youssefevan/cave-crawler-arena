@@ -9,7 +9,7 @@ func _ready() -> void:
 		
 		add_child(node)
 		
-		for j in range(30):
+		for j in range(99):
 			var enemy = i.instantiate()
 			enemy.despawn()
 			node.call_deferred("add_child", enemy)
