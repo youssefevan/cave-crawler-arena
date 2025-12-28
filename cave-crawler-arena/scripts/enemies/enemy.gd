@@ -25,8 +25,12 @@ var freeze_time = 0.5
 @export var hurt_color : Color
 @export var freeze_color : Color
 
+var active_pool := false
+var current_health
+
 func _ready():
-	player = get_parent().get_parent().player
+	current_health = health
+	player = get_parent().get_parent().get_parent().player
 
 func _physics_process(delta):
 	face_player()
@@ -38,7 +42,7 @@ func face_player():
 		$Sprite.flip_h = true
 
 func get_hit():
-	health -= 1
+	current_health -= 1
 	
 	$Sprite.material.set_shader_parameter("input_color", hurt_color)
 	$Sprite.material.set_shader_parameter("active", true)
@@ -48,7 +52,7 @@ func get_hit():
 	$Sprite.material.set_shader_parameter("active", false)
 	
 	
-	if health <= 0:
+	if current_health <= 0:
 		die()
 
 func freeze():
@@ -82,19 +86,18 @@ func catch_fire():
 	catch_fire()
 
 func die():
-	for i in randi_range(min_xp_drop, max_xp_drop):
-		call_deferred("spawn_coin")
+	await spawn_coins()
 	emit_signal("died")
 	
-	OptionsManager.set_enemies_killed(enemy_name)
-	call_deferred("queue_free")
+	despawn()
 
-func spawn_coin():
-	var c = coin.instantiate()
-	get_parent().get_parent().connect_coin(c)
-	c.global_position = global_position
-	c.spawn_type = max_xp_value
-	get_parent().get_parent().pickups.add_child(c)
+func spawn_coins():
+	for i in randi_range(min_xp_drop, max_xp_drop):
+		var c = coin.instantiate()
+		get_parent().get_parent().get_parent().connect_coin(c)
+		c.global_position = global_position
+		c.spawn_type = max_xp_value
+		get_parent().get_parent().get_parent().pickups.call_deferred("add_child", c)
 
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4):
@@ -111,3 +114,13 @@ func _on_hurtbox_area_entered(area):
 					return
 			
 			get_hit()
+
+func respawn():
+	visible = true
+	set_physics_process(true)
+
+func despawn():
+	current_health = health
+	visible = false
+	global_position = Vector2(-2000, -2000)
+	set_physics_process(false)

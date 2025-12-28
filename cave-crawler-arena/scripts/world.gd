@@ -14,6 +14,8 @@ var spawning_wave := false
 var wave := 0
 var previous_wave_sizes = []
 
+var active_enemies := 0
+
 @export var run_time := 900
 
 func _ready():
@@ -21,10 +23,11 @@ func _ready():
 	
 	player.connect("dead", player_died)
 	
-	start_wave()
-	
 	$RunTimer.wait_time = run_time
 	$RunTimer.start()
+	
+	await get_tree().create_timer(2.0, false).timeout
+	start_wave()
 
 func _physics_process(delta):
 	var minutes = floori(%RunTimer.time_left/60.0)
@@ -80,9 +83,18 @@ func spawn_wave():
 		
 		for j in range(group_size):
 			var e = chosen_enemy.instantiate()
-			e.global_position = spawn_pos
-			enemies.add_child(e)
-			e.connect("died", enemy_died)
+			for group in enemies.get_children():
+				if group.name == e.name:
+					var enemy = null
+					for k in group.get_children():
+						if k.visible == false:
+							enemy = k
+							break
+					
+					enemy.respawn()
+					enemy.global_position = spawn_pos
+					active_enemies += 1
+			
 			await get_tree().create_timer(0.1, false).timeout
 		
 		# delay spawning while there are too many enemies in scene
@@ -103,12 +115,13 @@ func player_died():
 	$CanvasLayer/HUD/Info.open()
 
 func enemy_died():
+	active_enemies -= 1
 	await get_tree().create_timer(0.5, true).timeout
 	if spawning_wave == false:
 		check_for_enemies()
 
 func check_for_enemies():
-	if enemies.get_child_count() < wave and not spawning_wave:
+	if active_enemies < wave and not spawning_wave:
 		var waiting_period = randf_range(3, 6)
 		await get_tree().create_timer(waiting_period, true).timeout
 		

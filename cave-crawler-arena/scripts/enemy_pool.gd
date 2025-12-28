@@ -1,0 +1,17 @@
+extends Node
+
+func _ready() -> void:
+	for i in Global.enemy_pool:
+		
+		var node = Node.new()
+		node.name = i.instantiate().name
+		print(node.name)
+		
+		add_child(node)
+		
+		for j in range(30):
+			var enemy = i.instantiate()
+			enemy.despawn()
+			node.call_deferred("add_child", enemy)
+			
+			enemy.connect("died", get_parent().enemy_died)

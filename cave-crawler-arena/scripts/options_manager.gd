@@ -13,7 +13,7 @@ var enemies_killed = {
 }
 
 func _ready() -> void:
-	load_statss()
+	load_stats()
 
 func save_stats():
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
@@ -24,7 +24,7 @@ func save_stats():
 	
 	file.store_var(data)
 
-func load_statss():
+func load_stats():
 	if FileAccess.file_exists(save_path):
 		var file = FileAccess.open(save_path, FileAccess.READ)
 		var load_data = file.get_var()
