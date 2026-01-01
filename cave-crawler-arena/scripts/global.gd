@@ -19,6 +19,7 @@ var stats := {
 	"firerate": [0.8, 0],
 	"pickup_range": [8.0, 0],
 	"regen_rate": [3.0, 0],
+	#"max_health": [50, 0],
 }
 
 var max_stat_level = 8
@@ -39,10 +40,12 @@ func get_stat(stat : String):
 	
 	match stat:
 		"speed":
-			return stats["speed"][0] * pow(1.1, stats["speed"][1]) * (1+(level/100))
+			return stats["speed"][0] * pow(1.1, stats["speed"][1])# * (1+(level/100))
 		"firerate":
-			return stats["firerate"][0] * pow(0.8, stats["firerate"][1]) * (1+(level/100))
+			return stats["firerate"][0] * pow(0.8, stats["firerate"][1])# * (1+(level/100))
 		"pickup_range":
-			return stats["pickup_range"][0] * pow(1.3, stats["pickup_range"][1]) * (1+(level/100))
+			return stats["pickup_range"][0] * pow(1.3, stats["pickup_range"][1])# * (1+(level/100))
 		"regen_rate":
-			return stats["regen_rate"][0] * pow(0.8, stats["regen_rate"][1]) * (1-(level/100))
+			return stats["regen_rate"][0] * pow(0.8, stats["regen_rate"][1])# * (1-(level/100))
+		#"max_health":
+			#return stats["max_health"][0] * (1 + (stats["max_health"][1] * 10) )

@@ -112,7 +112,7 @@ func player_died():
 	tween.tween_property(Engine, "time_scale", 0.2, 1.0).set_trans(Tween.TRANS_LINEAR)
 	
 	await get_tree().create_timer(2.0, false, false, true).timeout
-	$CanvasLayer/HUD/Info.open()
+	#$CanvasLayer/HUD/Info.open()
 
 func enemy_died():
 	active_enemies -= 1

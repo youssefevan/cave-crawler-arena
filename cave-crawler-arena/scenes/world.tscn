@@ -174,10 +174,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Info" parent="CanvasLayer/HUD" instance=ExtResource("7_w7kh3")]
 layout_mode = 1
-offset_left = -57.0
-offset_top = -55.0
-offset_right = 57.0
-offset_bottom = 55.0
 
 [node name="Cursor" parent="CanvasLayer" instance=ExtResource("17_pm21f")]
 

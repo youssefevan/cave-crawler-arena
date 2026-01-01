@@ -68,11 +68,11 @@ func handle_input():
 	input = input.normalized()
 
 func handle_aim():
-	var enemies_in_range = []
-	var entities_in_range = attack_range.get_overlapping_bodies()
-	for i in entities_in_range:
-		if i is Enemy:
-			enemies_in_range.append(i)
+	#var enemies_in_range = []
+	#var entities_in_range = attack_range.get_overlapping_bodies()
+	#for i in entities_in_range:
+		#if i is Enemy:
+			#enemies_in_range.append(i)
 	
 	$Weapon.look_at(get_global_mouse_position())
 	
