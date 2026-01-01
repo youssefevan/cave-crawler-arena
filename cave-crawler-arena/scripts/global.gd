@@ -19,7 +19,10 @@ var stats := {
 	"firerate": [0.8, 0],
 	"pickup_range": [8.0, 0],
 	"regen_rate": [3.0, 0],
-	#"max_health": [50, 0],
+	"max_health": [50, 0],
+	"bullet_size": [1.0, 0],
+	"bullet_life": [0.3, 0],
+	"bullet_speed": [100.0, 0],
 }
 
 var max_stat_level = 8
@@ -28,11 +31,13 @@ var health = 100
 var xp = 0
 var level = 1
 
-var equipped_item = null
-
 func get_xp_to_level() -> float:
 	return 20.0*level
 	#return floor(pow(10 * level, 1.1))
+
+func level_up_stat(stat : String):
+	stats[stat][1] += 1
+	stats[stat][1] = min(stats[stat][1], max_stat_level)
 
 func get_stat(stat : String):
 	if stats[stat][1] == 0:

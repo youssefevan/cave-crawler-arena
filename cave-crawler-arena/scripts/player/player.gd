@@ -84,16 +84,16 @@ func attack():
 	if can_attack:
 		#AudioManager.play_sfx(shoot_sfx)
 		
-		if Global.equipped_item == "splitshot":
-			var b1 = bullet.instantiate()
-			b1.rotation_degrees = rad_to_deg($Weapon.global_rotation) + 15.0
-			b1.global_position = $Weapon/Muzzle.global_position
-			get_parent().bullets.add_child(b1)
-			
-			var b2 = bullet.instantiate()
-			b2.rotation_degrees = rad_to_deg($Weapon.global_rotation) - 15.0
-			b2.global_position = $Weapon/Muzzle.global_position
-			get_parent().bullets.add_child(b2)
+		#if Global.equipped_item == "splitshot":
+			#var b1 = bullet.instantiate()
+			#b1.rotation_degrees = rad_to_deg($Weapon.global_rotation) + 15.0
+			#b1.global_position = $Weapon/Muzzle.global_position
+			#get_parent().bullets.add_child(b1)
+			#
+			#var b2 = bullet.instantiate()
+			#b2.rotation_degrees = rad_to_deg($Weapon.global_rotation) - 15.0
+			#b2.global_position = $Weapon/Muzzle.global_position
+			#get_parent().bullets.add_child(b2)
 		
 		var attack = bullet.instantiate()
 		attack.rotation = $Weapon.global_rotation

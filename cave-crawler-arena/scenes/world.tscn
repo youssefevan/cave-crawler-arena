@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cgodtknkmupww" path="res://sprites/tiles.png" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://cdd4r5317ovjd" path="res://scripts/gui/xp.gd" id="3_qfnet"]
 [ext_resource type="Texture2D" uid="uid://dx547ycdr2jb2" path="res://sprites/gui/health_overlay_alt.png" id="5_pm21f"]
-[ext_resource type="PackedScene" uid="uid://d37ko6nhb1ct4" path="res://scenes/gui/info.tscn" id="7_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://ch7bdj4yopj1x" path="res://scenes/gui/shop.tscn" id="8_q5onr"]
 [ext_resource type="Script" uid="uid://dw38as5li8fd8" path="res://scripts/enemy_pool.gd" id="11_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://ob1iv6c1xh4x" path="res://scenes/cursor.tscn" id="17_pm21f"]
 
@@ -55,64 +55,14 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("2_i7141")
 
-[node name="Health" type="VBoxContainer" parent="CanvasLayer/HUD"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -46.0
-offset_right = 40.0
-offset_bottom = -6.0
-grow_vertical = 0
-alignment = 1
-script = ExtResource("2_71j4m")
-
-[node name="Label" type="Label" parent="CanvasLayer/HUD/Health"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "100/100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/Health/Label"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -18.0
-offset_top = -1.0
-offset_right = 18.0
-offset_bottom = 8.0
-grow_horizontal = 2
-color = Color(0, 0, 0, 1)
-
-[node name="HPBar" type="ProgressBar" parent="CanvasLayer/HUD/Health"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_4mrxx")
-min_value = 1.0
-max_value = 50.0
-value = 50.0
-fill_mode = 3
-show_percentage = false
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Health/HPBar"]
-layout_mode = 1
-offset_right = 28.0
-offset_bottom = 28.0
-texture = ExtResource("5_pm21f")
-
 [node name="XP" type="VBoxContainer" parent="CanvasLayer/HUD"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 4.0
-offset_top = 3.0
-offset_right = -4.0
-offset_bottom = 20.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 28.0
 grow_horizontal = 2
 script = ExtResource("3_qfnet")
 
@@ -172,7 +122,60 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Info" parent="CanvasLayer/HUD" instance=ExtResource("7_w7kh3")]
+[node name="Health" type="VBoxContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -70.0
+offset_right = -176.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("2_71j4m")
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/Health"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/Health/Label"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -18.0
+offset_top = -1.0
+offset_right = 18.0
+offset_bottom = 8.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer/HUD/Health"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_4mrxx")
+min_value = 1.0
+max_value = 50.0
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Health/HPBar"]
+layout_mode = 1
+offset_right = 28.0
+offset_bottom = 28.0
+texture = ExtResource("5_pm21f")
+
+[node name="Shop" parent="CanvasLayer/HUD" instance=ExtResource("8_q5onr")]
+visible = false
 layout_mode = 1
 
 [node name="Cursor" parent="CanvasLayer" instance=ExtResource("17_pm21f")]

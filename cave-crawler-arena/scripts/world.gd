@@ -138,8 +138,7 @@ func coin_collected():
 		Global.xp -= Global.get_xp_to_level()
 		Global.level += 1
 		
-		if Global.level % 2 == 0:
-			spawn_upgrade()
+		open_shop()
 		
 		if Global.level % 5 == 0 and $RunTimer.time_left > 30.0:
 			spawn_mini_boss()
@@ -161,11 +160,14 @@ func spawn_boss():
 	b.global_position = spawn_pos
 	%Enemies.call_deferred("add_child", b)
 
-func spawn_upgrade():
-	var spawn_pos = get_good_spot("upgrade")
-	var u = upgrade_scene.instantiate()
-	u.global_position = spawn_pos
-	%Pickups.call_deferred("add_child", u)
+func open_shop():
+	$CanvasLayer/HUD/Shop.open()
+
+#func spawn_upgrade():
+	#var spawn_pos = get_good_spot("upgrade")
+	#var u = upgrade_scene.instantiate()
+	#u.global_position = spawn_pos
+	#%Pickups.call_deferred("add_child", u)
 
 func get_good_spot(type : String):
 	var good_spot = false

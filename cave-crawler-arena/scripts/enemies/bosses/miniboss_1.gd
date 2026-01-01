@@ -1,7 +1,7 @@
 extends Boss
 class_name Miniboss
 
-@onready var item_scene = preload("res://scenes/pickups/item.tscn")
+#@onready var item_scene = preload("res://scenes/pickups/item.tscn")
 @onready var bullet_scene = preload("res://scenes/hazards/bone.tscn")
 
 var dir
@@ -29,8 +29,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 func die():
-	var item = item_scene.instantiate()
-	item.global_position = global_position
-	get_parent().get_parent().call_deferred("add_child", item)
+	#var item = item_scene.instantiate()
+	#item.global_position = global_position
+	#get_parent().get_parent().call_deferred("add_child", item)
 	
 	super.die()

@@ -25,7 +25,7 @@ var freeze_time = 0.5
 @export var hurt_color : Color
 @export var freeze_color : Color
 
-var active_pool := false
+var active_pool
 var current_health
 
 func _ready():
@@ -102,16 +102,16 @@ func spawn_coins():
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4):
 		if area.is_in_group("Player"):
-			if Global.equipped_item == "bomb":
-				pass
-				#if area is Bullet:
+			#if Global.equipped_item == "bomb":
+				#pass
+				##if area is Bullet:
+					##return
+			#elif Global.equipped_item == "fire":
+				#if area is Explosion:
 					#return
-			elif Global.equipped_item == "fire":
-				if area is Explosion:
-					return
-			elif Global.equipped_item == "freeze":
-				if area is Explosion:
-					return
+			#elif Global.equipped_item == "freeze":
+				#if area is Explosion:
+					#return
 			
 			get_hit()
 

@@ -21,24 +21,24 @@ func _physics_process(delta):
 
 func _on_area_entered(area):
 	if area.get_collision_layer_value(5) and area.is_in_group("Enemy"):
-		if Global.equipped_item == "bomb":
-			var e = explosion.instantiate()
-			e.global_position = global_position
-			get_parent().call_deferred("add_child", e)
-		elif Global.equipped_item == "fire":
-			var e = fire_explosion.instantiate()
-			e.global_position = global_position
-			get_parent().call_deferred("add_child", e)
-		elif Global.equipped_item == "freeze":
-			var e = freeze_explosion.instantiate()
-			e.global_position = global_position
-			get_parent().call_deferred("add_child", e)
+		#if Global.equipped_item == "bomb":
+			#var e = explosion.instantiate()
+			#e.global_position = global_position
+			#get_parent().call_deferred("add_child", e)
+		#elif Global.equipped_item == "fire":
+			#var e = fire_explosion.instantiate()
+			#e.global_position = global_position
+			#get_parent().call_deferred("add_child", e)
+		#elif Global.equipped_item == "freeze":
+			#var e = freeze_explosion.instantiate()
+			#e.global_position = global_position
+			#get_parent().call_deferred("add_child", e)
 		
 		var h = hit_effect.instantiate()
 		h.global_position = global_position
 		get_parent().call_deferred("add_child", h)
 		
-		if Global.equipped_item == "penetration":
-			return
+		#if Global.equipped_item == "penetration":
+			#return
 		
 		queue_free()
