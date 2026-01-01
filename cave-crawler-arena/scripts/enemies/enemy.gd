@@ -6,6 +6,7 @@ signal died
 @onready var coin : PackedScene = preload("res://scenes/pickups/coin.tscn")
 @onready var fire_partices = preload("res://scenes/effects/fire.tscn")
 
+var world : Node2D
 var player : Player
 
 var accel := 5.0
@@ -13,7 +14,7 @@ var accel := 5.0
 @export var enemy_name : String
 
 @export var speed := 30.0
-@export var health := 1
+@export var max_health := 1
 @export var min_xp_drop := 1
 @export var max_xp_drop := 3
 @export var max_xp_value := 1
@@ -29,8 +30,7 @@ var active_pool
 var current_health
 
 func _ready():
-	current_health = health
-	player = get_parent().get_parent().get_parent().player
+	current_health = max_health
 
 func _physics_process(delta):
 	face_player()
@@ -94,10 +94,10 @@ func die():
 func spawn_coins():
 	for i in randi_range(min_xp_drop, max_xp_drop):
 		var c = coin.instantiate()
-		get_parent().get_parent().get_parent().connect_coin(c)
+		world.connect_coin(c)
 		c.global_position = global_position
 		c.spawn_type = max_xp_value
-		get_parent().get_parent().get_parent().pickups.call_deferred("add_child", c)
+		world.pickups.call_deferred("add_child", c)
 
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4):
@@ -124,7 +124,7 @@ func respawn():
 	set_physics_process(true)
 
 func despawn():
-	current_health = health
+	current_health = max_health
 	visible = false
 	global_position = Vector2(-2000, -2000)
 	

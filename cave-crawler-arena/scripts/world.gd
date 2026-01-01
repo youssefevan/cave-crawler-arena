@@ -146,6 +146,8 @@ func coin_collected():
 func spawn_mini_boss():
 	var choice = Global.mini_boss_pool.pick_random()
 	var mini = choice.instantiate()
+	mini.world = self
+	mini.player = player
 	
 	mini.global_position = get_good_spot("enemy")
 	%Enemies.call_deferred("add_child", mini)
