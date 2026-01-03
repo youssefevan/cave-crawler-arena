@@ -2,15 +2,19 @@ extends Area2D
 class_name Bullet
 
 @onready var explosion = preload("res://scenes/hazards/explosion.tscn")
-@onready var fire_explosion = preload("res://scenes/hazards/fire_explosion.tscn")
-@onready var freeze_explosion = preload("res://scenes/hazards/freeze_explosion.tscn")
+#@onready var fire_explosion = preload("res://scenes/hazards/fire_explosion.tscn")
+#@onready var freeze_explosion = preload("res://scenes/hazards/freeze_explosion.tscn")
 
 @onready var hit_effect = preload("res://scenes/effects/bullet_hit.tscn")
 
-var speed = 200.0
+var speed = 150.0
 var expiration_timer := 0.6
 
 func _ready():
+	expiration_timer = Global.get_stat("bullet_life")
+	scale.x = Global.get_stat("bullet_size")
+	scale.y = Global.get_stat("bullet_size")
+	
 	await get_tree().create_timer(expiration_timer, false).timeout
 	
 	queue_free()

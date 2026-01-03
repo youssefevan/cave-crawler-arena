@@ -113,7 +113,7 @@ radius = 5.0
 [node name="Rat" instance=ExtResource("1_fxid1")]
 script = ExtResource("1_t1pi2")
 enemy_name = "rat"
-health = 2
+max_health = 2
 min_xp_drop = 2
 max_xp_drop = 5
 max_xp_value = 2

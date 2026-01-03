@@ -24,3 +24,5 @@ lifetime = 0.3
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_wliox")
 script = ExtResource("2_wliox")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

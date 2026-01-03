@@ -18,9 +18,11 @@ radius = 2.0
 radius = 2.236068
 
 [node name="Bat" instance=ExtResource("1_5m14n")]
+collision_mask = 1
 script = ExtResource("2_18mee")
 enemy_name = "bat"
 speed = 50.0
+max_health = 2
 min_xp_drop = 2
 max_xp_drop = 5
 max_xp_value = 2

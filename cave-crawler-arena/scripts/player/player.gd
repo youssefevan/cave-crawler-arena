@@ -29,8 +29,6 @@ var speed := 38.0
 var accel := 40.0
 var decel := 20.0
 
-var max_health = 50.0
-
 var can_attack := true
 var invulnerable := false
 
@@ -40,7 +38,7 @@ func _ready():
 		if i is Camera2D:
 			camera = i
 	
-	Global.health = max_health
+	Global.health = Global.get_stat("max_health")
 	state_manager.init(self)
 	regen()
 
@@ -108,9 +106,9 @@ func attack():
 func regen():
 	await get_tree().create_timer(Global.get_stat("regen_rate"), false).timeout
 	if state_manager.current_state != die:
-		if Global.health < max_health:
+		if Global.health < Global.get_stat("max_health"):
 			Global.health += 1.0
-			Global.health = clamp(Global.health, 0, max_health)
+			Global.health = clamp(Global.health, 0, Global.get_stat("max_health"))
 		
 		regen()
 		

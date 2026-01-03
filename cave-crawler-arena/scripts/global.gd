@@ -5,8 +5,8 @@ var enemy_pool = {
 	preload("res://scenes/enemies/crab.tscn"): [1, 0.4],
 	preload("res://scenes/enemies/rat.tscn"): [4, 0.2],
 	preload("res://scenes/enemies/roly_poly.tscn"): [16, 0.1],
-	preload("res://scenes/enemies/turret.tscn"): [8, 0.1],
-	preload("res://scenes/enemies/bat.tscn"): [12, 0.2],
+	preload("res://scenes/enemies/turret.tscn"): [12, 0.1],
+	preload("res://scenes/enemies/bat.tscn"): [8, 0.2],
 }
 
 var mini_boss_pool = [
@@ -22,7 +22,6 @@ var stats := {
 	"max_health": [50, 0],
 	"bullet_size": [1.0, 0],
 	"bullet_life": [0.3, 0],
-	"bullet_speed": [100.0, 0],
 }
 
 var max_stat_level = 8
@@ -45,12 +44,16 @@ func get_stat(stat : String):
 	
 	match stat:
 		"speed":
-			return stats["speed"][0] * pow(1.1, stats["speed"][1])# * (1+(level/100))
+			return stats[stat][0] * pow(1.1, stats[stat][1])# * (1+(level/100))
 		"firerate":
-			return stats["firerate"][0] * pow(0.8, stats["firerate"][1])# * (1+(level/100))
+			return stats[stat][0] * pow(0.8, stats[stat][1])# * (1+(level/100))
 		"pickup_range":
-			return stats["pickup_range"][0] * pow(1.3, stats["pickup_range"][1])# * (1+(level/100))
+			return stats[stat][0] * pow(1.3, stats[stat][1])# * (1+(level/100))
 		"regen_rate":
-			return stats["regen_rate"][0] * pow(0.8, stats["regen_rate"][1])# * (1-(level/100))
-		#"max_health":
-			#return stats["max_health"][0] * (1 + (stats["max_health"][1] * 10) )
+			return stats[stat][0] * pow(0.8, stats[stat][1])# * (1-(level/100))
+		"bullet_size":
+			return 1 + (stats[stat][1] * 0.1)
+		"bullet_life":
+			return 0.2 + (stats[stat][1] * 0.1)
+		"max_health":
+			return stats[stat][0] + (stats[stat][1] * 10)

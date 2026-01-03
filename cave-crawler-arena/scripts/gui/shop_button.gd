@@ -22,6 +22,15 @@ func update(choice : String):
 		"pickup_range":
 			text = "+pickup range"
 			icon = preload("res://sprites/upgrades/reach.png")
+		"bullet_life":
+			text = "+attack range"
+		
+		"bullet_size":
+			text = "+attack size"
+			
+		"max_health":
+			text = "+max health"
+			
 		_:
 			text = item
 			icon = preload("res://sprites/items/empty.png")
