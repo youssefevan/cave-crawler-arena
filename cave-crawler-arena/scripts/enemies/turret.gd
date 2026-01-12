@@ -30,3 +30,11 @@ func shoot_bullet():
 		can_shoot = false
 		await get_tree().create_timer(1.0, false).timeout
 		can_shoot = true
+
+func respawn():
+	can_shoot = true
+	super.respawn()
+
+func despawn():
+	can_shoot = false
+	super.despawn()

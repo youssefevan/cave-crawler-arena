@@ -76,6 +76,7 @@ func spawn_wave():
 				break
 		
 		var enemy_type = chosen_enemy.instantiate()
+		print(enemy_type.name)
 		# each enemy has a unique min and max group size, so it needs to be
 		# selected after the enemy type is known
 		var group_size = randi_range(enemy_type.min_group_size,
