@@ -20,3 +20,4 @@ func spawn_coin():
 func die():
 	await spawn_coins()
 	emit_signal("died")
+	call_deferred("free")

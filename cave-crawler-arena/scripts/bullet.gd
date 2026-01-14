@@ -7,7 +7,7 @@ class_name Bullet
 
 @onready var hit_effect = preload("res://scenes/effects/bullet_hit.tscn")
 
-var speed = 150.0
+var speed = 180.0
 var expiration_timer := 0.6
 
 func _ready():

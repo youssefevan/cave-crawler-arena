@@ -21,7 +21,7 @@ var stats := {
 	"regen_rate": [3.0, 0],
 	"max_health": [50, 0],
 	"bullet_size": [1.0, 0],
-	"bullet_life": [0.4, 0],
+	"bullet_life": [0.25, 0],
 }
 
 var items := {
@@ -61,13 +61,13 @@ func get_stat(stat : String):
 		"firerate":
 			return stats[stat][0] * pow(0.8, stats[stat][1])# * (1+(level/100))
 		"pickup_range":
-			return stats[stat][0] * pow(1.3, stats[stat][1])# * (1+(level/100))
+			return stats[stat][0] + (8.0 * stats[stat][1])# * (1+(level/100))
 		"regen_rate":
 			return stats[stat][0] * pow(0.8, stats[stat][1])# * (1-(level/100))
 		"bullet_size":
 			return 1 + (stats[stat][1] * 0.3)
 		"bullet_life":
-			return 0.2 + (stats[stat][1] * 0.1)
+			return 0.25 + (stats[stat][1] * 0.1)
 		"max_health":
 			return stats[stat][0] + (stats[stat][1] * 10)
 
