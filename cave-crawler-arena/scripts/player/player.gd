@@ -17,6 +17,8 @@ signal dead
 @onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
 @onready var hurt_sfx = preload("res://audio/player_hurt.ogg")
 
+@onready var bomb_scene = preload("res://scenes/hazards/bomb.tscn")
+
 var camera : Camera2D
 var shake_strength := 3.0
 var shake_decay := 12.0
@@ -31,6 +33,8 @@ var decel := 20.0
 
 var can_attack := true
 var invulnerable := false
+
+var can_spawn_bomb := true
 
 var enemies_in_heal_aura := false
 
@@ -74,6 +78,10 @@ func _physics_process(delta):
 	
 	target_heal_aura_color = Color.from_hsv(0.11, 1.0, 1.0, float(enemies_in_heal_aura)/3.0)
 	heal_aura_color = lerp(heal_aura_color, target_heal_aura_color, 5.0 * delta)
+	
+	
+	if Global.get_item("bomb") > 0.0:
+		spawn_bomb()
 	
 	queue_redraw()
 	
@@ -131,6 +139,16 @@ func attack():
 		can_attack = false
 		await get_tree().create_timer(Global.get_stat("firerate"), false).timeout
 		can_attack = true
+
+func spawn_bomb():
+	if can_spawn_bomb and Global.get_item("bomb") > 0:
+		var b = bomb_scene.instantiate()
+		b.global_position = global_position
+		get_tree().get_root().call_deferred("add_child", b)
+		
+		can_spawn_bomb = false
+		await get_tree().create_timer(Global.get_item("bomb"), false).timeout
+		can_spawn_bomb = true
 
 func regen():
 	var regen_rate = Global.get_stat("regen_rate")

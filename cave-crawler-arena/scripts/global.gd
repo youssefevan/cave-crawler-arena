@@ -29,6 +29,7 @@ var items := {
 	"skull_friend": 0,
 	"heal_aura": 0,
 	"flamedash": 0,
+	"bomb": 0,
 }
 
 var max_stat_level = 8
@@ -79,3 +80,8 @@ func get_item(item : String):
 				return 20.0 + (items[item] * 12.0)
 		"splitshot":
 			return items[item]
+		"bomb":
+			if items[item] == 0:
+				return 0
+			else:
+				return 2.5 - (items[item] * 0.5)

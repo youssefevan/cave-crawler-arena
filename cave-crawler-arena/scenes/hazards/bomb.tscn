@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2bcr4u6ed72r"]
+
+[ext_resource type="Script" uid="uid://cydeyqgnqd518" path="res://scripts/hazards/bomb.gd" id="1_i0m54"]
+[ext_resource type="Texture2D" uid="uid://d06swfrlpobg1" path="res://sprites/bomb.png" id="1_oguka"]
+
+[sub_resource type="Animation" id="Animation_oguka"]
+resource_name = "explode"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.049999997, 0.1, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_i0m54"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_muqgq"]
+_data = {
+&"RESET": SubResource("Animation_i0m54"),
+&"explode": SubResource("Animation_oguka")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i0m54"]
+radius = 13.038404
+
+[node name="Bomb" type="Area2D" groups=["Player"]]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("1_i0m54")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+libraries = {
+&"": SubResource("AnimationLibrary_muqgq")
+}
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_oguka")
+hframes = 7
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i0m54")
+disabled = true
+
+[connection signal="animation_finished" from="Animator" to="." method="_on_animator_animation_finished"]
