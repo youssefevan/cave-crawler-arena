@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1ewrypht14m3"]
+[gd_scene load_steps=23 format=3 uid="uid://c1ewrypht14m3"]
 
 [ext_resource type="Texture2D" uid="uid://ckmm2f1msxl40" path="res://sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ba2cmdu7bqut" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -132,6 +132,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 3.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y4r1p"]
+radius = 15.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_g2els")
@@ -163,6 +166,7 @@ texture = ExtResource("1_3vyb7")
 hframes = 3
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 4
 
@@ -197,6 +201,14 @@ texture = ExtResource("7_smehm")
 
 [node name="Collider" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_smehm")
+
+[node name="HealAura" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Collider" type="CollisionShape2D" parent="HealAura"]
+shape = SubResource("CircleShape2D_y4r1p")
+debug_color = Color(0.46437377, 0.5760211, 0.3979822, 0.41960785)
 
 [connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

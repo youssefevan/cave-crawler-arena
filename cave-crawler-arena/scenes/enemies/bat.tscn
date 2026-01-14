@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq0bxhlaojbul"]
+[gd_scene load_steps=9 format=3 uid="uid://bq0bxhlaojbul"]
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_5m14n"]
 [ext_resource type="Script" uid="uid://dyudfok45k1p4" path="res://scripts/enemies/bat.gd" id="2_18mee"]
@@ -12,6 +12,9 @@ shader_parameter/active = false
 shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i6os3"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jofwc"]
 radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_18mee"]
@@ -36,6 +39,10 @@ texture = ExtResource("3_18mee")
 [node name="Collider" parent="." index="1"]
 position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_i6os3")
+
+[node name="Collider" parent="Hitbox" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_jofwc")
 
 [node name="Collider" parent="Hurtbox" index="0"]
 position = Vector2(0, 0)

@@ -32,6 +32,11 @@ var decel := 20.0
 var can_attack := true
 var invulnerable := false
 
+var enemies_in_heal_aura := false
+
+var heal_aura_color := Color.TRANSPARENT
+var target_heal_aura_color := Color.TRANSPARENT
+
 func _ready():
 	
 	for i in get_children():
@@ -57,7 +62,25 @@ func _physics_process(delta):
 	speed = Global.get_stat("speed")
 	$PickupRange/Collider.shape.radius = Global.get_stat("pickup_range")
 	
+	var heal_aura = Global.get_item("heal_aura")
+	if heal_aura > 0:
+		$HealAura/Collider.shape.radius = heal_aura
+		$HealAura/Collider.disabled = false
+		enemies_in_heal_aura = $HealAura.has_overlapping_bodies()
+	else:
+		$HealAura/Collider.disabled = true
+		enemies_in_heal_aura = false
+	
+	
+	target_heal_aura_color = Color.from_hsv(0.11, 1.0, 1.0, float(enemies_in_heal_aura)/3.0)
+	heal_aura_color = lerp(heal_aura_color, target_heal_aura_color, 5.0 * delta)
+	
+	queue_redraw()
+	
 	move_and_slide()
+
+func _draw():
+	draw_arc(Vector2.ZERO, Global.get_item("heal_aura"), 0, 360, 64, heal_aura_color, 1.0, false)
 
 func handle_input():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -104,14 +127,17 @@ func attack():
 		can_attack = true
 
 func regen():
-	await get_tree().create_timer(Global.get_stat("regen_rate"), false).timeout
+	var regen_rate = Global.get_stat("regen_rate")
+	if enemies_in_heal_aura:
+		regen_rate /= 2.0
+	print(regen_rate, enemies_in_heal_aura)
+	await get_tree().create_timer(regen_rate, false).timeout
 	if state_manager.current_state != die:
 		if Global.health < Global.get_stat("max_health"):
 			Global.health += 1.0
 			Global.health = clamp(Global.health, 0, Global.get_stat("max_health"))
 		
 		regen()
-		
 
 func get_hit():
 	AudioManager.play_sfx(hurt_sfx)

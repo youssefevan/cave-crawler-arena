@@ -69,3 +69,8 @@ func get_stat(stat : String):
 			return 0.2 + (stats[stat][1] * 0.1)
 		"max_health":
 			return stats[stat][0] + (stats[stat][1] * 10)
+
+func get_item(item : String):
+	match item:
+		"heal_aura":
+			return items[item] * 15.0

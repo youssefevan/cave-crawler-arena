@@ -161,6 +161,8 @@ func spawn_boss():
 	var spawn_pos = get_good_spot("enemy")
 	var b = boss.instantiate()
 	b.global_position = spawn_pos
+	b.world = self
+	b.player = player
 	%Enemies.call_deferred("add_child", b)
 
 func open_shop():

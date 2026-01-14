@@ -59,6 +59,7 @@ radius = 3.0
 radius = 3.5
 
 [node name="RolyPoly" instance=ExtResource("1_5faot")]
+collision_mask = 1
 script = ExtResource("2_qgagy")
 enemy_name = "rolypoly"
 speed = 100.0
