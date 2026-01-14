@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bu2lq4vaorqye"]
+[gd_scene load_steps=17 format=4 uid="uid://bu2lq4vaorqye"]
 
 [ext_resource type="Script" uid="uid://gk7ouh35fc1e" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://c1ewrypht14m3" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cgodtknkmupww" path="res://sprites/tiles.png" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://cdd4r5317ovjd" path="res://scripts/gui/xp.gd" id="3_qfnet"]
 [ext_resource type="Texture2D" uid="uid://dx547ycdr2jb2" path="res://sprites/gui/health_overlay_alt.png" id="5_pm21f"]
+[ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="8_jhx03"]
+[ext_resource type="Script" uid="uid://dve8jykkb70pd" path="res://scripts/gui/pause_menu.gd" id="8_o8fc1"]
 [ext_resource type="PackedScene" uid="uid://ch7bdj4yopj1x" path="res://scenes/gui/shop.tscn" id="8_q5onr"]
 [ext_resource type="Script" uid="uid://dw38as5li8fd8" path="res://scripts/enemy_pool.gd" id="11_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://ob1iv6c1xh4x" path="res://scenes/cursor.tscn" id="17_pm21f"]
@@ -177,6 +179,49 @@ texture = ExtResource("5_pm21f")
 [node name="Shop" parent="CanvasLayer/HUD" instance=ExtResource("8_q5onr")]
 visible = false
 layout_mode = 1
+
+[node name="Pause" type="Control" parent="CanvasLayer/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -71.0
+offset_right = 112.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_o8fc1")
+
+[node name="Content" type="VBoxContainer" parent="CanvasLayer/HUD/Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="Panel" parent="CanvasLayer/HUD/Pause/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/HUD/Pause/Content"]
+layout_mode = 2
+
+[node name="Options" type="Button" parent="CanvasLayer/HUD/Pause/Content/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Options"
+icon = ExtResource("8_jhx03")
+
+[node name="Quit" type="Button" parent="CanvasLayer/HUD/Pause/Content/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quit"
+icon = ExtResource("8_jhx03")
 
 [node name="Cursor" parent="CanvasLayer" instance=ExtResource("17_pm21f")]
 
