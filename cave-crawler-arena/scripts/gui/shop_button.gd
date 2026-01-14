@@ -24,13 +24,13 @@ func update(choice : String):
 			icon = preload("res://sprites/upgrades/reach.png")
 		"bullet_life":
 			text = "+attack range"
-		
+			icon = preload("res://sprites/upgrades/bullet_life.png")
 		"bullet_size":
 			text = "+attack size"
-			
+			icon = preload("res://sprites/upgrades/bullet_size.png")
 		"max_health":
 			text = "+max health"
-			
+			icon = preload("res://sprites/upgrades/max_health.png")
 		"heal_aura":
 			text = "heal aura"
 			icon = preload("res://sprites/items/heal_aura.png")
@@ -39,10 +39,10 @@ func update(choice : String):
 			icon = preload("res://sprites/items/splitshot.png")
 		"flamedash":
 			text = "flamedash"
-			icon = preload("res://sprites/items/splitshot.png")
+			icon = preload("res://sprites/items/flamedash.png")
 		"skull_friend":
 			text = "skull friend"
-			icon = preload("res://sprites/items/splitshot.png")
+			icon = preload("res://sprites/items/skull_friend.png")
 		_:
 			text = selection
 			icon = preload("res://sprites/items/empty.png")

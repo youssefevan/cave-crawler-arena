@@ -16,7 +16,7 @@ var mini_boss_pool = [
 # base value, current level
 var stats := {
 	"speed": [38.0, 0],
-	"firerate": [0.8, 0],
+	"firerate": [0.7, 0],
 	"pickup_range": [8.0, 0],
 	"regen_rate": [3.0, 0],
 	"max_health": [50, 0],
@@ -64,7 +64,7 @@ func get_stat(stat : String):
 		"regen_rate":
 			return stats[stat][0] * pow(0.8, stats[stat][1])# * (1-(level/100))
 		"bullet_size":
-			return 1 + (stats[stat][1] * 0.1)
+			return 1 + (stats[stat][1] * 0.3)
 		"bullet_life":
 			return 0.2 + (stats[stat][1] * 0.1)
 		"max_health":
@@ -73,4 +73,9 @@ func get_stat(stat : String):
 func get_item(item : String):
 	match item:
 		"heal_aura":
-			return items[item] * 15.0
+			if items[item] == 0:
+				return 0
+			else:
+				return 20.0 + (items[item] * 12.0)
+		"splitshot":
+			return items[item]

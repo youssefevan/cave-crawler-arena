@@ -16,3 +16,7 @@ func spawn_coin():
 	c.spawn_type = max_xp_value
 	c.vel = 5.0
 	world.pickups.add_child(c)
+
+func die():
+	await spawn_coins()
+	emit_signal("died")

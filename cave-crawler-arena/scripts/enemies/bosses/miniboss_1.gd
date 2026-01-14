@@ -27,10 +27,3 @@ func _physics_process(delta):
 	velocity = lerp(velocity, dir.normalized() * speed, accel * delta)
 	
 	move_and_slide()
-
-func die():
-	#var item = item_scene.instantiate()
-	#item.global_position = global_position
-	#get_parent().get_parent().call_deferred("add_child", item)
-	
-	super.die()

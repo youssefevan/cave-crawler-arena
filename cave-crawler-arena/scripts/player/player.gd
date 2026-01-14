@@ -105,32 +105,38 @@ func attack():
 	if can_attack:
 		#AudioManager.play_sfx(shoot_sfx)
 		
-		#if Global.equipped_item == "splitshot":
-			#var b1 = bullet.instantiate()
-			#b1.rotation_degrees = rad_to_deg($Weapon.global_rotation) + 15.0
-			#b1.global_position = $Weapon/Muzzle.global_position
-			#get_parent().bullets.add_child(b1)
-			#
-			#var b2 = bullet.instantiate()
-			#b2.rotation_degrees = rad_to_deg($Weapon.global_rotation) - 15.0
-			#b2.global_position = $Weapon/Muzzle.global_position
-			#get_parent().bullets.add_child(b2)
+		var num_bullets = Global.get_item("splitshot") + 1
+		var spread_angle_degrees = 60.0
+
+		if num_bullets > 1:
+			if num_bullets == 2:
+				spread_angle_degrees = 30.0
+			
+			var start_angle = $Weapon.rotation_degrees - spread_angle_degrees / 2
+			var angle_step = spread_angle_degrees / (num_bullets - 1)
+			
+			for i in num_bullets:
+				var b = bullet.instantiate()
+				b.rotation_degrees = start_angle + angle_step * i
+				b.global_position = $Weapon/Muzzle.global_position
+				get_parent().bullets.add_child(b)
+		else:
+			var b = bullet.instantiate()
+			b.rotation = $Weapon.global_rotation
+			b.global_position = $Weapon/Muzzle.global_position
+			get_parent().bullets.add_child(b)
 		
-		var attack = bullet.instantiate()
-		attack.rotation = $Weapon.global_rotation
-		attack.global_position = $Weapon/Muzzle.global_position
-		get_parent().bullets.add_child(attack)
 		$Weapon/Animator.stop()
 		$Weapon/Animator.play("fire")
 		can_attack = false
-		await get_tree().create_timer(Global.get_stat("firerate"), true).timeout
+		await get_tree().create_timer(Global.get_stat("firerate"), false).timeout
 		can_attack = true
 
 func regen():
 	var regen_rate = Global.get_stat("regen_rate")
 	if enemies_in_heal_aura:
 		regen_rate /= 2.0
-	print(regen_rate, enemies_in_heal_aura)
+	#print(regen_rate, enemies_in_heal_aura)
 	await get_tree().create_timer(regen_rate, false).timeout
 	if state_manager.current_state != die:
 		if Global.health < Global.get_stat("max_health"):
