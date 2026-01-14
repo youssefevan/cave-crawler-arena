@@ -2,14 +2,14 @@ extends Area2D
 
 var timer := 2.5
 var dir : Vector2
-var vel := 3.0
+var vel := 2.0
 
 func _ready():
 	timer = Global.get_item("bomb")
 	$Sprite.frame = 0
 	$Collider.disabled = true
 	
-	dir = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+	dir = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()
 	
 	await get_tree().create_timer(1.0, false).timeout
 	explode()

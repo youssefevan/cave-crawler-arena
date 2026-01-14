@@ -43,6 +43,9 @@ func update(choice : String):
 		"skull_friend":
 			text = "skull friend"
 			icon = preload("res://sprites/items/skull_friend.png")
+		"bomb":
+			text = "bomb"
+			icon = preload("res://sprites/items/bomb.png")
 		_:
 			text = selection
 			icon = preload("res://sprites/items/empty.png")
