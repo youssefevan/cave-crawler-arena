@@ -21,10 +21,18 @@ var stats := {
 	"regen_rate": [3.0, 0],
 	"max_health": [50, 0],
 	"bullet_size": [1.0, 0],
-	"bullet_life": [0.3, 0],
+	"bullet_life": [0.4, 0],
+}
+
+var items := {
+	"splitshot": 0,
+	"skull_friend": 0,
+	"heal_aura": 0,
+	"flamedash": 0,
 }
 
 var max_stat_level = 8
+var max_item_level = 4
 
 var health = 100
 var xp = 0
@@ -37,6 +45,10 @@ func get_xp_to_level() -> float:
 func level_up_stat(stat : String):
 	stats[stat][1] += 1
 	stats[stat][1] = min(stats[stat][1], max_stat_level)
+
+func level_up_item(item : String):
+	items[item] += 1
+	items[item] = min(items[item], max_item_level)
 
 func get_stat(stat : String):
 	if stats[stat][1] == 0:

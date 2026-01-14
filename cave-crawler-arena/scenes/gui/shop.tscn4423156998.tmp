@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch7bdj4yopj1x"]
+
+[ext_resource type="Script" uid="uid://yaryi5lycpvh" path="res://scripts/gui/shop.gd" id="1_r1tlm"]
+[ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="1_ui0ai"]
+[ext_resource type="Texture2D" uid="uid://dypyu4was3lj" path="res://sprites/items/empty.png" id="2_ui0ai"]
+[ext_resource type="Script" uid="uid://18cq58m5nu6o" path="res://scripts/gui/shop_button.gd" id="4_bqti5"]
+
+[node name="Shop" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -65.0
+offset_right = 80.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ui0ai")
+script = ExtResource("1_r1tlm")
+
+[node name="Items" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Items"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "+++ Level Up +++"
+horizontal_alignment = 1
+
+[node name="Choice1" type="Button" parent="Items"]
+layout_mode = 2
+text = "+movement speed"
+icon = ExtResource("2_ui0ai")
+autowrap_mode = 2
+clip_text = true
+script = ExtResource("4_bqti5")
+
+[node name="Choice2" type="Button" parent="Items"]
+layout_mode = 2
+text = "+movement speed"
+icon = ExtResource("2_ui0ai")
+script = ExtResource("4_bqti5")
+
+[node name="Choice3" type="Button" parent="Items"]
+layout_mode = 2
+text = "+movement speed"
+icon = ExtResource("2_ui0ai")
+script = ExtResource("4_bqti5")

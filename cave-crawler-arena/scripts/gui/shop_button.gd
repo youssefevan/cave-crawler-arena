@@ -1,15 +1,15 @@
 extends Button
 class_name ShopButton
 
-var item
+var selection
 
 func _ready():
 	connect("pressed", _on_shop_button_pressed)
 
 func update(choice : String):
-	item = choice
+	selection = choice
 	
-	match item:
+	match selection:
 		"speed":
 			text = "+movement speed"
 			icon = preload("res://sprites/upgrades/speed.png")
@@ -31,9 +31,24 @@ func update(choice : String):
 		"max_health":
 			text = "+max health"
 			
+		"heal_aura":
+			text = "heal aura"
+			icon = preload("res://sprites/items/heal_aura.png")
+		"splitshot":
+			text = "splitshot"
+			icon = preload("res://sprites/items/splitshot.png")
+		"flamedash":
+			text = "flamedash"
+			icon = preload("res://sprites/items/splitshot.png")
+		"skull_friend":
+			text = "skull friend"
+			icon = preload("res://sprites/items/splitshot.png")
 		_:
-			text = item
+			text = selection
 			icon = preload("res://sprites/items/empty.png")
 
 func _on_shop_button_pressed():
-	Global.level_up_stat(item)
+	if Global.level % 5 != 0:
+		Global.level_up_stat(selection)
+	else:
+		Global.level_up_item(selection)

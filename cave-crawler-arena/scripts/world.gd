@@ -164,7 +164,8 @@ func spawn_boss():
 	%Enemies.call_deferred("add_child", b)
 
 func open_shop():
-	$CanvasLayer/HUD/Shop.open()
+	# Upgrade items every 5th level, otherwise, upgrade stats
+	$CanvasLayer/HUD/Shop.open(Global.level % 5 == 0)
 
 #func spawn_upgrade():
 	#var spawn_pos = get_good_spot("upgrade")
