@@ -38,10 +38,10 @@ func update(choice : String):
 			text = "splitshot"
 			icon = preload("res://sprites/items/splitshot.png")
 		"flamedash":
-			text = "flamedash"
+			text = "flamedash [not implemented]"
 			icon = preload("res://sprites/items/flamedash.png")
 		"skull_friend":
-			text = "skull friend"
+			text = "skull friend [not implemented]"
 			icon = preload("res://sprites/items/skull_friend.png")
 		"bomb":
 			text = "bomb"

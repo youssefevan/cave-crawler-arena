@@ -7,3 +7,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("pause"):
 		visible = !visible
 		get_tree().paused = !get_tree().paused
+		update_info()
+
+func update_info():
+	$Content/BG/Info/Stats.text = str(Global.stats)
+	$Content/BG/Info/Items.text = str(Global.items)
