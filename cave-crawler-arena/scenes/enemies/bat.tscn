@@ -21,7 +21,8 @@ radius = 2.0
 radius = 2.236068
 
 [node name="Bat" instance=ExtResource("1_5m14n")]
-collision_mask = 1
+collision_layer = 132
+collision_mask = 129
 script = ExtResource("2_18mee")
 enemy_name = "bat"
 speed = 50.0
@@ -30,7 +31,7 @@ min_xp_drop = 2
 max_xp_drop = 5
 max_xp_value = 2
 max_group_size = 3
-hurt_color = Color(0.39017507, 0.17814937, 0.6614584, 1)
+hurt_color = Color(0.2931667, 0.13499999, 0.5, 1)
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource("ShaderMaterial_jofwc")

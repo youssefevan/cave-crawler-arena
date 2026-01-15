@@ -32,7 +32,7 @@ min_xp_drop = 2
 max_xp_drop = 6
 max_xp_value = 3
 max_group_size = 2
-hurt_color = Color(0.65, 0.65, 0.65, 1)
+hurt_color = Color(0.5, 0.5, 0.5, 1)
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource("ShaderMaterial_wqsho")

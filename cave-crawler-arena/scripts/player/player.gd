@@ -114,11 +114,11 @@ func attack():
 		#AudioManager.play_sfx(shoot_sfx)
 		
 		var num_bullets = Global.get_item("splitshot") + 1
-		var spread_angle_degrees = 60.0
-
+		var spread_angle_degrees = 45.0
+		
 		if num_bullets > 1:
 			if num_bullets == 2:
-				spread_angle_degrees = 30.0
+				spread_angle_degrees = 20.0
 			
 			var start_angle = $Weapon.rotation_degrees - spread_angle_degrees / 2
 			var angle_step = spread_angle_degrees / (num_bullets - 1)
