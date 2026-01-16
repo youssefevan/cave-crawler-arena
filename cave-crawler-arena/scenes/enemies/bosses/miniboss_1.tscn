@@ -1,9 +1,48 @@
-[gd_scene load_steps=9 format=3 uid="uid://cudyt114ai5r3"]
+[gd_scene load_steps=12 format=3 uid="uid://cudyt114ai5r3"]
 
 [ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/bosses/boss.tscn" id="1_4sm0u"]
 [ext_resource type="Script" uid="uid://jlo7hxdnuvqf" path="res://scripts/enemies/bosses/miniboss_1.gd" id="2_3qbsb"]
 [ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="3_3qbsb"]
 [ext_resource type="Texture2D" uid="uid://bh6gi628v5yew" path="res://sprites/enemies/miniboss1.png" id="3_s7dl8"]
+
+[sub_resource type="Animation" id="Animation_3qbsb"]
+resource_name = "move"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_s7dl8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jysi"]
+_data = {
+&"RESET": SubResource("Animation_s7dl8"),
+&"move": SubResource("Animation_3qbsb")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7dl8"]
 resource_local_to_scene = true
@@ -18,7 +57,6 @@ shader_parameter/input_color = Vector4(1, 1, 1, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_08yde"]
 
 [node name="Miniboss1" instance=ExtResource("1_4sm0u")]
-collision_mask = 1
 motion_mode = 0
 script = ExtResource("2_3qbsb")
 enemy_name = "miniboss1"
@@ -28,12 +66,18 @@ max_xp_drop = 50
 max_xp_value = 3
 max_group_size = 1
 
-[node name="Sprite" parent="." index="0"]
+[node name="Animator" type="AnimationPlayer" parent="." index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_5jysi")
+}
+
+[node name="Sprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_s7dl8")
 position = Vector2(0, -1)
 texture = ExtResource("3_s7dl8")
+hframes = 4
 
-[node name="Collider" parent="." index="1"]
+[node name="Collider" parent="." index="2"]
 position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_6w5wj")
 

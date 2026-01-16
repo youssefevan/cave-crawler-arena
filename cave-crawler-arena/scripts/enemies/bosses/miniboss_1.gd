@@ -10,6 +10,7 @@ var frame := 0
 func _ready():
 	super._ready()
 	dir = global_position.direction_to(player.global_position)
+	$Animator.play("move")
 
 func _physics_process(delta):
 	super._physics_process(delta)

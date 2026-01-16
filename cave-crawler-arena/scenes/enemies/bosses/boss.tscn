@@ -16,7 +16,8 @@ load_path = "res://.godot/imported/wave.png-851d5594b88ae37c1e1dcfa0f34350c9.cte
 
 [node name="Boss" groups=["Enemy"] instance=ExtResource("1_3uc6t")]
 z_index = 1
-collision_mask = 1
+collision_layer = 132
+collision_mask = 129
 script = ExtResource("2_ian0n")
 
 [node name="Sprite" parent="." index="0"]
