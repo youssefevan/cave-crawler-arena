@@ -144,6 +144,7 @@ func spawn_bomb():
 	if can_spawn_bomb and Global.get_item("bomb") > 0:
 		var b = bomb_scene.instantiate()
 		b.global_position = global_position
+		b.rotation = $Weapon.global_rotation
 		get_tree().get_root().call_deferred("add_child", b)
 		
 		can_spawn_bomb = false

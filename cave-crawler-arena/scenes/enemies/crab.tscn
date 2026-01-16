@@ -62,7 +62,7 @@ radius = 5.0
 script = ExtResource("2_sqms0")
 enemy_name = "crab"
 min_group_size = 3
-max_group_size = 22
+max_group_size = 50
 hurt_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
