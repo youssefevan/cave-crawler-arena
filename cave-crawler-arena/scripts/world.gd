@@ -11,7 +11,7 @@ extends Node2D
 
 var spawning_wave := false
 
-var wave := 0
+var wave := 1
 var previous_wave_sizes = []
 
 var active_enemies := 0
@@ -46,8 +46,8 @@ func start_wave():
 
 # oh my god oh my god oh my god oh my god oh my god
 func spawn_wave():
-	# enemies are spawned in groups throughout the wave 
-	var num_groups = randi_range(3+floori(wave/10.0), 5+floori(wave/4.0))
+	# enemies are spawned in groups throughout the wave
+	var num_groups = randi_range(3+floori(wave/5.0), 5+floori(wave/2.0))
 	
 	for i in range(num_groups):
 		var available_enemies = []
@@ -91,16 +91,20 @@ func spawn_wave():
 						if k.visible == false:
 							enemy = k
 							break
+						
 					
-					enemy.respawn()
-					enemy.global_position = spawn_pos
-					active_enemies += 1
+					#### needs fix: when high wave and large groups,
+					#### object pool doesnt have enough available objects
+					if enemy != null:
+						enemy.respawn()
+						enemy.global_position = spawn_pos
+						active_enemies += 1
 			
 			await get_tree().create_timer(0.1, false).timeout
 		
 		# delay spawning while there are too many enemies in scene
 		var enemies_in_scene = enemies.get_child_count()
-		while enemies_in_scene > 200:
+		while enemies_in_scene > 400:
 			await get_tree().create_timer(3.0, false).timeout
 			enemies_in_scene = enemies.get_child_count()
 		
@@ -122,7 +126,7 @@ func enemy_died():
 		check_for_enemies()
 
 func check_for_enemies():
-	if active_enemies < wave and not spawning_wave:
+	if active_enemies < wave*3 and not spawning_wave:
 		var waiting_period = randf_range(3, 6)
 		await get_tree().create_timer(waiting_period, true).timeout
 		

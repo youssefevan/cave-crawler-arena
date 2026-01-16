@@ -111,7 +111,7 @@ func handle_aim():
 
 func attack():
 	if can_attack:
-		#AudioManager.play_sfx(shoot_sfx)
+		AudioManager.play_sfx(shoot_sfx)
 		
 		var num_bullets = Global.get_item("splitshot") + 1
 		var spread_angle_degrees = 45.0

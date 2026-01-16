@@ -8,8 +8,6 @@ func enter():
 	entity.animator.play("lunge")
 	frame = 0
 
-### Change lunge to feel less sparatic: smoother, more linear, predictable movement
-
 func physics_update(delta):
 	super.physics_update(delta)
 	frame += 1

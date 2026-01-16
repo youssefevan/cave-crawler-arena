@@ -35,7 +35,7 @@ sources/0 = SubResource("TileSetAtlasSource_71j4m")
 script = ExtResource("1_k0juu")
 player = NodePath("Player")
 boss = ExtResource("2_dss4m")
-run_time = 600
+run_time = 720
 
 [node name="RunTimer" type="Timer" parent="."]
 unique_name_in_owner = true

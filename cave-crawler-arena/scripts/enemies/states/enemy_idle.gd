@@ -9,4 +9,4 @@ func physics_update(delta):
 	entity.velocity = lerp(entity.velocity, Vector2.ZERO, entity.accel * delta)
 	
 	if entity.player != null:
-		return entity.aggro
+		return entity.lunge

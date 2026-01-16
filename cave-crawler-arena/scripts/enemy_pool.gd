@@ -11,7 +11,7 @@ func _ready() -> void:
 		
 		add_child(node)
 		
-		for j in range(99):
+		for j in range(200):
 			var enemy = i.instantiate()
 			enemy.world = world
 			enemy.player = world.player

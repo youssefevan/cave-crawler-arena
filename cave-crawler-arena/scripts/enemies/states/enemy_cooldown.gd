@@ -1,11 +1,12 @@
 extends State
 
-var timer = 45
+var timer = 60
 var frame = 0
 
 func enter():
 	super.enter()
 	frame = 0
+	timer = randi_range(45, 75)
 	#entity.animator.play("Cooldown")
 
 func physics_update(delta):
@@ -15,4 +16,4 @@ func physics_update(delta):
 	entity.velocity = lerp(entity.velocity, Vector2.ZERO, entity.accel * delta)
 	
 	if frame >= timer:
-		return entity.idle
+		return entity.lunge

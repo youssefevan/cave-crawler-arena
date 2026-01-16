@@ -16,7 +16,7 @@ var mini_boss_pool = [
 # base value, current level
 var stats := {
 	"speed": [38.0, 0],
-	"firerate": [0.7, 0],
+	"firerate": [1.5, 0],
 	"pickup_range": [8.0, 0],
 	"regen_rate": [3.0, 0],
 	"max_health": [50, 0],

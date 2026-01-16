@@ -45,4 +45,4 @@ func _on_area_entered(area):
 		#if Global.equipped_item == "penetration":
 			#return
 		
-		queue_free()
+		#queue_free()
