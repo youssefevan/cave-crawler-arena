@@ -58,8 +58,6 @@ func spawn_wave():
 				available_enemies.append(j)
 				weights.append(Global.enemy_pool[j][1])
 		
-		var spawn_pos = get_good_spot("enemy")
-		
 		# totals the spawn chance weights in order to normailze the selection
 		var weight_sum = 0
 		for j in weights:
@@ -97,7 +95,7 @@ func spawn_wave():
 					#### object pool doesnt have enough available objects
 					if enemy != null:
 						enemy.respawn()
-						enemy.global_position = spawn_pos
+						enemy.global_position = get_good_spot("enemy")
 						active_enemies += 1
 			
 			await get_tree().create_timer(0.1, false).timeout
@@ -105,10 +103,10 @@ func spawn_wave():
 		# delay spawning while there are too many enemies in scene
 		var enemies_in_scene = enemies.get_child_count()
 		while enemies_in_scene > 400:
-			await get_tree().create_timer(3.0, false).timeout
+			await get_tree().create_timer(5.0, false).timeout
 			enemies_in_scene = enemies.get_child_count()
 		
-		await get_tree().create_timer(randf_range(0.01, 0.5), false).timeout
+		await get_tree().create_timer(randf_range(0.01, 0.1)).timeout
 	
 	check_for_enemies()
 
@@ -188,10 +186,9 @@ func get_good_spot(type : String):
 			var posx = randf_range(64, 1024-64)
 			var posy = randf_range(64, 1024-64)
 			
-			if abs(posx-player.global_position.x) > 160 and abs(posy-player.global_position.y) > 90:
-				if abs(posx-player.global_position.x) < 320 and abs(posy-player.global_position.y) < 180:
-					spawn_pos = Vector2(posx, posy)
-					good_spot = true
+			if Vector2(posx, posy).distance_to(player.global_position) > 300:
+				spawn_pos = Vector2(posx, posy)
+				good_spot = true
 		
 	elif type == "upgrade":
 		while not good_spot:

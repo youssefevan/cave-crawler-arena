@@ -117,7 +117,7 @@ min_xp_drop = 2
 max_xp_drop = 5
 max_xp_value = 2
 min_group_size = 3
-max_group_size = 50
+max_group_size = 40
 hurt_color = Color(1, 0.6627451, 0, 1)
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
