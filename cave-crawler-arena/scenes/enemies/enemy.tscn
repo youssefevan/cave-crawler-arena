@@ -12,7 +12,7 @@ shader = ExtResource("2_nb6gf")
 shader_parameter/active = false
 shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1

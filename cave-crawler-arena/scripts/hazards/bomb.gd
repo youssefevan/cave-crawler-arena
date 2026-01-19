@@ -18,6 +18,7 @@ func _physics_process(delta):
 	var dir = Vector2.RIGHT.rotated(rotation)
 	vel = lerpf(vel, 0.0, 3.0 * delta)
 	global_position += dir * vel
+	$Sprite.rotation = 0
 
 func _on_animator_animation_finished(anim_name):
 	if anim_name == "explode":

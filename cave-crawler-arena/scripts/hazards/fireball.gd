@@ -1,11 +1,9 @@
 extends Bullet
 
 func _ready():
-	speed = 90.0
+	speed = 70.0
 	expiration_timer = 2.0
 	$Animator.play("move")
-	
-	super._ready()
 
 func _physics_process(delta):
 	super._physics_process(delta)

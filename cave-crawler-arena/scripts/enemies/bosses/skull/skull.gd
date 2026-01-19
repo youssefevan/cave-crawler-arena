@@ -9,7 +9,7 @@ class_name Skull
 @onready var charge = $StateManager/Charge
 
 # scenes
-@onready var fireball = preload("res://scenes/hazards/fireball.tscn")
+@onready var fireball = preload("res://scenes/hazards/bone.tscn")
 @onready var spikes_scene = preload("res://scenes/hazards/spikes.tscn")
 
 var dir

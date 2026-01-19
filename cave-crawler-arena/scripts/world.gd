@@ -41,6 +41,10 @@ func start_wave():
 	
 	wave += 1
 	print("wave: ", wave)
+	
+	if wave % 8 == 0 and $RunTimer.time_left > 30.0:
+		spawn_mini_boss()
+	
 	await spawn_wave()
 	spawning_wave = false
 
@@ -135,16 +139,19 @@ func check_for_enemies():
 func connect_coin(coin):
 	coin.connect("collected", coin_collected)
 
+func connect_upgrade(upgrade):
+	upgrade.connect("upgrade_collected", upgrade_collected)
+
 func coin_collected():
 	if Global.xp >= Global.get_xp_to_level():
 		#level_up.open()
 		Global.xp -= Global.get_xp_to_level()
 		Global.level += 1
 		
-		open_shop()
+		if Global.level % 5 == 0:
+			spawn_upgrade()
 		
-		if Global.level % 5 == 0 and $RunTimer.time_left > 30.0:
-			spawn_mini_boss()
+		open_shop()
 
 func spawn_mini_boss():
 	var choice = Global.mini_boss_pool.pick_random()
@@ -168,14 +175,17 @@ func spawn_boss():
 	%Enemies.call_deferred("add_child", b)
 
 func open_shop():
-	# Upgrade items every 5th level, otherwise, upgrade stats
-	$CanvasLayer/HUD/Shop.open(Global.level % 5 == 0)
+	$CanvasLayer/HUD/Shop.open(false)
 
-#func spawn_upgrade():
-	#var spawn_pos = get_good_spot("upgrade")
-	#var u = upgrade_scene.instantiate()
-	#u.global_position = spawn_pos
-	#%Pickups.call_deferred("add_child", u)
+func spawn_upgrade():
+	var spawn_pos = get_good_spot("upgrade")
+	var u = upgrade_scene.instantiate()
+	u.global_position = spawn_pos
+	%Pickups.call_deferred("add_child", u)
+	connect_upgrade(u)
+
+func upgrade_collected():
+	$CanvasLayer/HUD/Shop.open(true)
 
 func get_good_spot(type : String):
 	var good_spot = false
@@ -192,12 +202,12 @@ func get_good_spot(type : String):
 		
 	elif type == "upgrade":
 		while not good_spot:
-			var posx = randf_range(64, 1024-64)
-			var posy = randf_range(64, 1024-64)
+			var posx = randf_range(128, 1024-128)
+			var posy = randf_range(128, 1024-128)
 			var chosen_pos = Vector2(posx, posy)
 			
-			if chosen_pos.distance_to(player.global_position) > 128:
-				spawn_pos = chosen_pos
+			if Vector2(posx, posy).distance_to(player.global_position) > 300:
+				spawn_pos = Vector2(posx, posy)
 				good_spot = true
 	else:
 		print(type, " type not supported")

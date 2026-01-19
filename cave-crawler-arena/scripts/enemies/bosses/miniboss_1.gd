@@ -2,7 +2,7 @@ extends Boss
 class_name Miniboss
 
 #@onready var item_scene = preload("res://scenes/pickups/item.tscn")
-@onready var bullet_scene = preload("res://scenes/hazards/bone.tscn")
+@onready var bullet_scene = preload("res://scenes/hazards/fireball.tscn")
 
 var dir
 var frame := 0

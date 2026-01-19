@@ -109,7 +109,7 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac66d"]
 radius = 5.0
 
-[node name="Rat" instance=ExtResource("1_fxid1")]
+[node name="Rat" groups=["Enemy"] instance=ExtResource("1_fxid1")]
 script = ExtResource("1_t1pi2")
 enemy_name = "rat"
 max_health = 2
