@@ -1,7 +1,7 @@
 extends Area2D
 class_name EnemyBullet
 
-@export var speed = 120.0
+@export var speed = 100.0
 @export var expiration_timer = 2.0
 
 func _ready():

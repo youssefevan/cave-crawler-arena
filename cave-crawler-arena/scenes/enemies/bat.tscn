@@ -30,7 +30,7 @@ max_health = 2
 min_xp_drop = 2
 max_xp_drop = 5
 max_xp_value = 2
-max_group_size = 3
+max_group_size = 25
 hurt_color = Color(0.2931667, 0.13499999, 0.5, 1)
 
 [node name="Sprite" parent="." index="0"]

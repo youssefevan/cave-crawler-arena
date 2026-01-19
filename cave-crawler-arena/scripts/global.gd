@@ -2,11 +2,11 @@ extends Node
 
 # packedscene, wave unlocked, spawn chance
 var enemy_pool = {
-	preload("res://scenes/enemies/crab.tscn"): [1, 0.4],
-	preload("res://scenes/enemies/rat.tscn"): [4, 0.2],
-	preload("res://scenes/enemies/roly_poly.tscn"): [16, 0.1],
-	preload("res://scenes/enemies/turret.tscn"): [12, 0.1],
-	preload("res://scenes/enemies/bat.tscn"): [8, 0.2],
+	preload("res://scenes/enemies/crab.tscn"): [1, 1.0],
+	preload("res://scenes/enemies/rat.tscn"): [4, 1.0],
+	preload("res://scenes/enemies/roly_poly.tscn"): [16, 1.0],
+	preload("res://scenes/enemies/turret.tscn"): [12, 1.0],
+	preload("res://scenes/enemies/bat.tscn"): [8, 1.0],
 }
 
 var mini_boss_pool = [

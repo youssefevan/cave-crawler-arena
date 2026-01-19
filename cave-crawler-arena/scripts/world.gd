@@ -11,7 +11,7 @@ extends Node2D
 
 var spawning_wave := false
 
-var wave := 1
+var wave := 0
 var previous_wave_sizes = []
 
 var active_enemies := 0
@@ -40,7 +40,6 @@ func start_wave():
 	spawning_wave = true
 	
 	wave += 1
-	print("wave: ", wave)
 	
 	if wave % 8 == 0 and $RunTimer.time_left > 30.0:
 		spawn_mini_boss()
@@ -51,7 +50,11 @@ func start_wave():
 # oh my god oh my god oh my god oh my god oh my god
 func spawn_wave():
 	# enemies are spawned in groups throughout the wave
-	var num_groups = randi_range(3+floori(wave/5.0), 5+floori(wave/2.0))
+	print("--wave: ", wave, "--")
+	
+	var num_groups = randi_range(2, 3)
+	
+	print("groups: ", num_groups)
 	
 	for i in range(num_groups):
 		var available_enemies = []
@@ -82,7 +85,9 @@ func spawn_wave():
 		# each enemy has a unique min and max group size, so it needs to be
 		# selected after the enemy type is known
 		var group_size = randi_range(enemy_type.min_group_size,
-			min(enemy_type.min_group_size+wave, enemy_type.max_group_size))
+			min(enemy_type.min_group_size + wave, enemy_type.max_group_size))
+		
+		print("enemy group [", enemy_type.name, "] | size: ", group_size)
 		
 		for j in range(group_size):
 			var e = chosen_enemy.instantiate()
