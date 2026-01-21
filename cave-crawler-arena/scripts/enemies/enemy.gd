@@ -4,7 +4,7 @@ class_name Enemy
 signal died
 
 @onready var coin : PackedScene = preload("res://scenes/pickups/coin.tscn")
-@onready var fire_partices = preload("res://scenes/effects/fire.tscn")
+#@onready var fire_partices = preload("res://scenes/effects/fire.tscn")
 
 @onready var hurt_sfx = preload("res://audio/enemy_hit.ogg")
 
@@ -23,13 +23,13 @@ var accel := 5.0
 @export var min_group_size := 1
 @export var max_group_size := 5
 
-var on_fire = false
-var freeze_time = 0.5
+#var on_fire = false
+#var freeze_time = 0.5
 @export var hurt_color : Color
-@export var freeze_color : Color
+#@export var freeze_color : Color
 
 var active = false
-var current_health
+var current_health := 1
 
 func _ready():
 	current_health = max_health
@@ -78,22 +78,22 @@ func get_hit():
 	#if anim != null:
 		#anim.speed_scale = 1
 
-func catch_fire():
-	if !on_fire:
-		on_fire = true
-		var f = fire_partices.instantiate()
-		call_deferred("add_child", f)
-		f.emitting = true
-	
-	await get_tree().create_timer(1.0, false).timeout
-	get_hit()
-	catch_fire()
+#func catch_fire():
+	#if !on_fire:
+		#on_fire = true
+		#var f = fire_partices.instantiate()
+		#call_deferred("add_child", f)
+		#f.emitting = true
+	#
+	#await get_tree().create_timer(1.0, false).timeout
+	#get_hit()
+	#catch_fire()
 
 func die():
 	await spawn_coins()
 	emit_signal("died")
 	OptionsManager.enemies_killed[enemy_name] += 1
-	despawn()
+	queue_free()
 
 func spawn_coins():
 	for i in randi_range(min_xp_drop, max_xp_drop):
@@ -118,25 +118,3 @@ func _on_hurtbox_area_entered(area):
 					#return
 			
 			get_hit()
-
-func respawn():
-	active = true
-	visible = true
-	
-	$Collider.disabled = false
-	$Hitbox/Collider.disabled = false
-	$Hurtbox/Collider.disabled = false
-	set_physics_process(true)
-
-func despawn():
-	active = true
-	
-	current_health = max_health
-	visible = false
-	global_position = Vector2(-2000, -2000)
-	
-	
-	$Collider.disabled = true
-	$Hitbox/Collider.disabled = true
-	$Hurtbox/Collider.disabled = true
-	set_physics_process(false)

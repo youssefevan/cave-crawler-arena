@@ -89,29 +89,22 @@ func spawn_wave():
 		
 		print("enemy group [", enemy_type.name, "] | size: ", group_size)
 		
+		enemy_type.queue_free()
+		
 		for j in range(group_size):
-			for group in enemies.get_children():
-				if group.name == enemy_type.name:
-					var enemy = null
-					for k in group.get_children():
-						if k.visible == false:
-							enemy = k
-							break
-					
-					#### needs fix: when high wave and large groups,
-					#### object pool doesnt have enough available objects
-					if enemy != null:
-						enemy.respawn()
-						enemy.global_position = get_good_spot("enemy")
-						active_enemies += 1
+			var enemy = chosen_enemy.instantiate()
+			enemy.global_position = get_good_spot("enemy")
+			enemy.world = self
+			enemy.player = player
+			enemy.connect("died", enemy_died)
+			enemies.call_deferred("add_child", enemy)
 			
+			active_enemies += 1
 			await get_tree().create_timer(0.1, false).timeout
 		
 		# delay spawning while there are too many enemies in scene
-		var enemies_in_scene = enemies.get_child_count()
-		while enemies_in_scene > 400:
+		while active_enemies > 400:
 			await get_tree().create_timer(5.0, false).timeout
-			enemies_in_scene = enemies.get_child_count()
 		
 		await get_tree().create_timer(randf_range(0.01, 0.1)).timeout
 	

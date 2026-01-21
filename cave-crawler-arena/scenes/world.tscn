@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bu2lq4vaorqye"]
+[gd_scene load_steps=16 format=4 uid="uid://bu2lq4vaorqye"]
 
 [ext_resource type="Script" uid="uid://gk7ouh35fc1e" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://c1ewrypht14m3" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="8_jhx03"]
 [ext_resource type="Script" uid="uid://dve8jykkb70pd" path="res://scripts/gui/pause_menu.gd" id="8_o8fc1"]
 [ext_resource type="PackedScene" uid="uid://ch7bdj4yopj1x" path="res://scenes/gui/shop.tscn" id="8_q5onr"]
-[ext_resource type="Script" uid="uid://dw38as5li8fd8" path="res://scripts/enemy_pool.gd" id="11_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://ob1iv6c1xh4x" path="res://scenes/cursor.tscn" id="17_pm21f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mrxx"]
@@ -269,10 +268,8 @@ limit_bottom = 2048
 [node name="Pickups" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Enemies" type="Node" parent="." node_paths=PackedStringArray("world")]
+[node name="Enemies" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("11_e3hyu")
-world = NodePath("..")
 
 [node name="Bullets" type="Node" parent="."]
 unique_name_in_owner = true

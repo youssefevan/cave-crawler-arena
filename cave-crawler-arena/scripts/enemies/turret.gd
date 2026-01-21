@@ -11,7 +11,6 @@ var can_shoot := true
 
 func _ready():
 	super._ready()
-	
 	state_manager.init(self)
 
 func _physics_process(delta):
@@ -30,11 +29,3 @@ func shoot_bullet():
 		can_shoot = false
 		await get_tree().create_timer(2.0, false).timeout
 		can_shoot = true
-
-func respawn():
-	can_shoot = true
-	super.respawn()
-
-func despawn():
-	can_shoot = false
-	super.despawn()

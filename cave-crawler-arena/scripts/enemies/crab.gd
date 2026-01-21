@@ -4,7 +4,6 @@ var frame := 0
 var dir
 
 func _ready():
-	super._ready()
 	dir = global_position.direction_to(player.global_position).normalized()
 	$Animator.play("move")
 
