@@ -1,18 +1,11 @@
-extends CharacterBody2D
-
-var player : Player
-var speed := 150.0
+extends Hitbox
 
 func _physics_process(delta):
-	var circling = (global_position - player.global_position).normalized().rotated(PI/2) * speed
+	$Sprite.global_rotation = 0.0
 	
-	var encroach_speed = 8.0
-	if global_position.distance_to(player.global_position) > 130.0:
-		encroach_speed = 30.0
+	if Global.get_item("skull_friend") == 0.0:
+		visible = false
+		$CollisionShape2D.disabled = true
 	else:
-		encroach_speed = 8.0
-	
-	var move_in = global_position.direction_to(player.global_position) * 8
-	velocity = circling + move_in
-	
-	move_and_slide()
+		visible = true
+		$CollisionShape2D.disabled = false

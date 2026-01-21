@@ -28,7 +28,7 @@ func shoot_bullet():
 		b.rotation = (global_position.direction_to(player.global_position + (player.velocity/2))).angle()
 		world.bullets.call_deferred("add_child", b)
 		can_shoot = false
-		await get_tree().create_timer(1.0, false).timeout
+		await get_tree().create_timer(2.0, false).timeout
 		can_shoot = true
 
 func respawn():

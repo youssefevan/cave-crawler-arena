@@ -54,14 +54,14 @@ func update(choice : String):
 			icon = preload("res://sprites/items/flamedash.png")
 		"skull_friend":
 			type = "item"
-			text = "skull friend [not implemented]"
+			text = "friend"
 			icon = preload("res://sprites/items/skull_friend.png")
 		"bomb":
 			type = "item"
 			text = "bomb"
 			icon = preload("res://sprites/items/bomb.png")
 		_:
-			text = selection
+			text = "null"
 			icon = preload("res://sprites/items/empty.png")
 
 func _on_shop_button_pressed():

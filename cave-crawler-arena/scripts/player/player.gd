@@ -42,7 +42,6 @@ var heal_aura_color := Color.TRANSPARENT
 var target_heal_aura_color := Color.TRANSPARENT
 
 func _ready():
-	
 	for i in get_children():
 		if i is Camera2D:
 			camera = i
@@ -75,6 +74,7 @@ func _physics_process(delta):
 		$HealAura/Collider.disabled = true
 		enemies_in_heal_aura = false
 	
+	$FollowRadius.rotation_degrees += Global.get_item("skull_friend") * delta
 	
 	target_heal_aura_color = Color.from_hsv(0.11, 1.0, 1.0, float(enemies_in_heal_aura)/3.0)
 	heal_aura_color = lerp(heal_aura_color, target_heal_aura_color, 5.0 * delta)
@@ -158,9 +158,9 @@ func regen():
 	if state_manager.current_state != die:
 		if Global.health < Global.get_stat("max_health"):
 			if enemies_in_heal_aura:
-				Global.health += 4
+				Global.health += 3 * (1 + Global.get_item("heal_aura"))
 			else:
-				Global.health += 2
+				Global.health += 3
 			Global.health = clamp(Global.health, 0, Global.get_stat("max_health"))
 		
 		regen()

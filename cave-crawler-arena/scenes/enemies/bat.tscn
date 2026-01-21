@@ -1,9 +1,48 @@
-[gd_scene load_steps=9 format=3 uid="uid://bq0bxhlaojbul"]
+[gd_scene load_steps=12 format=3 uid="uid://bq0bxhlaojbul"]
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_5m14n"]
 [ext_resource type="Script" uid="uid://dyudfok45k1p4" path="res://scripts/enemies/bat.gd" id="2_18mee"]
 [ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="2_i6os3"]
 [ext_resource type="Texture2D" uid="uid://lopvvumltfmv" path="res://sprites/enemies/bat.png" id="3_18mee"]
+
+[sub_resource type="Animation" id="Animation_18mee"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_i6os3"]
+resource_name = "fly"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jofwc"]
+_data = {
+&"RESET": SubResource("Animation_18mee"),
+&"fly": SubResource("Animation_i6os3")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jofwc"]
 resource_local_to_scene = true
@@ -12,13 +51,13 @@ shader_parameter/active = false
 shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i6os3"]
-radius = 2.0
+radius = 2.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jofwc"]
-radius = 2.0
+radius = 2.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_18mee"]
-radius = 2.236068
+radius = 3.0
 
 [node name="Bat" instance=ExtResource("1_5m14n")]
 collision_layer = 132
@@ -33,15 +72,21 @@ max_xp_value = 2
 max_group_size = 25
 hurt_color = Color(0.2931667, 0.13499999, 0.5, 1)
 
-[node name="Sprite" parent="." index="0"]
+[node name="Animator" type="AnimationPlayer" parent="." index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_jofwc")
+}
+
+[node name="Sprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_jofwc")
 texture = ExtResource("3_18mee")
+hframes = 3
 
-[node name="Collider" parent="." index="1"]
+[node name="Collider" parent="." index="2"]
 position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_i6os3")
 
-[node name="Hitbox" parent="." index="2"]
+[node name="Hitbox" parent="." index="3"]
 damage = 30
 
 [node name="Collider" parent="Hitbox" index="0"]

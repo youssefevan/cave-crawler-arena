@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c1ewrypht14m3"]
+[gd_scene load_steps=24 format=3 uid="uid://c1ewrypht14m3"]
 
 [ext_resource type="Texture2D" uid="uid://ckmm2f1msxl40" path="res://sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ba2cmdu7bqut" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://172ju7537g5q" path="res://scripts/player/states/die.gd" id="6_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://ddppn7j1c4cgt" path="res://sprites/gun.png" id="7_smehm"]
 [ext_resource type="PackedScene" uid="uid://csiu8nc7o6j0a" path="res://scenes/hurtbox.tscn" id="8_smehm"]
+[ext_resource type="PackedScene" uid="uid://bvlt7yhsjvupd" path="res://scenes/hazards/friend.tscn" id="10_y4r1p"]
 
 [sub_resource type="Animation" id="Animation_3v2ag"]
 length = 0.001
@@ -209,6 +210,11 @@ collision_mask = 4
 [node name="Collider" type="CollisionShape2D" parent="HealAura"]
 shape = SubResource("CircleShape2D_y4r1p")
 debug_color = Color(0.46437377, 0.5760211, 0.3979822, 0.41960785)
+
+[node name="FollowRadius" type="Node2D" parent="."]
+
+[node name="Friend" parent="FollowRadius" instance=ExtResource("10_y4r1p")]
+position = Vector2(48, 0)
 
 [connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

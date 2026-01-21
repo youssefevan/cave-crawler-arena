@@ -24,7 +24,7 @@ func play_sfx(sound : AudioStream, base_pitch := 1.0, pitch_range := 0.0, parent
 	
 	stream.set_bus("SFX")
 	stream.stream = sound
-	stream.pitch_scale = randf_range(base_pitch - pitch_range, base_pitch + 0.0)
+	stream.pitch_scale = randf_range(base_pitch - pitch_range, base_pitch + pitch_range)
 	
 	stream.connect("finished", Callable(stream, "queue_free"))
 	
@@ -32,6 +32,7 @@ func play_sfx(sound : AudioStream, base_pitch := 1.0, pitch_range := 0.0, parent
 	for i in get_children():
 		if i is AudioStreamPlayer and i.stream == sound:
 			i.stop()
+			i.pitch_scale = randf_range(base_pitch - pitch_range, base_pitch + pitch_range)
 			i.play()
 			can_play = false
 	if can_play:

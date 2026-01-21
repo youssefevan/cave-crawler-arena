@@ -85,3 +85,5 @@ func get_item(item : String):
 				return 0
 			else:
 				return 2.5 - (items[item] * 0.5)
+		"skull_friend":
+			return items[item] * 45.0

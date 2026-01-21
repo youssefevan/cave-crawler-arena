@@ -12,3 +12,9 @@ func _process(delta):
 func update_info():
 	$Content/BG/Info/Stats.text = str(Global.stats)
 	$Content/BG/Info/Items.text = str(Global.items)
+
+
+func _on_quit_pressed():
+	get_tree().paused = false
+	OptionsManager.save_stats()
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

@@ -6,6 +6,8 @@ signal died
 @onready var coin : PackedScene = preload("res://scenes/pickups/coin.tscn")
 @onready var fire_partices = preload("res://scenes/effects/fire.tscn")
 
+@onready var hurt_sfx = preload("res://audio/enemy_hit.ogg")
+
 var world : Node2D
 var player : Player
 
@@ -26,7 +28,7 @@ var freeze_time = 0.5
 @export var hurt_color : Color
 @export var freeze_color : Color
 
-var active_pool
+var active = false
 var current_health
 
 func _ready():
@@ -44,6 +46,8 @@ func face_player():
 func get_hit():
 	current_health -= 1
 	
+	AudioManager.play_sfx(hurt_sfx, 1.0, 0.5)
+	
 	$Sprite.material.set_shader_parameter("input_color", hurt_color)
 	$Sprite.material.set_shader_parameter("active", true)
 	self.set_physics_process(false)
@@ -55,24 +59,24 @@ func get_hit():
 	if current_health <= 0:
 		die()
 
-func freeze():
-	var anim = null
-	for i in get_children():
-		if i is AnimationPlayer:
-			anim = i
-	
-	if anim != null:
-		anim.speed_scale = 0
-	
-	$Sprite.material.set_shader_parameter("input_color", freeze_color)
-	$Sprite.material.set_shader_parameter("active", true)
-	self.set_physics_process(false)
-	await get_tree().create_timer(freeze_time, false).timeout
-	self.set_physics_process(true)
-	$Sprite.material.set_shader_parameter("active", false)
-	
-	if anim != null:
-		anim.speed_scale = 1
+#func freeze():
+	#var anim = null
+	#for i in get_children():
+		#if i is AnimationPlayer:
+			#anim = i
+	#
+	#if anim != null:
+		#anim.speed_scale = 0
+	#
+	#$Sprite.material.set_shader_parameter("input_color", freeze_color)
+	#$Sprite.material.set_shader_parameter("active", true)
+	#self.set_physics_process(false)
+	#await get_tree().create_timer(freeze_time, false).timeout
+	#self.set_physics_process(true)
+	#$Sprite.material.set_shader_parameter("active", false)
+	#
+	#if anim != null:
+		#anim.speed_scale = 1
 
 func catch_fire():
 	if !on_fire:
@@ -88,7 +92,7 @@ func catch_fire():
 func die():
 	await spawn_coins()
 	emit_signal("died")
-	
+	OptionsManager.enemies_killed[enemy_name] += 1
 	despawn()
 
 func spawn_coins():
@@ -116,6 +120,7 @@ func _on_hurtbox_area_entered(area):
 			get_hit()
 
 func respawn():
+	active = true
 	visible = true
 	
 	$Collider.disabled = false
@@ -124,6 +129,8 @@ func respawn():
 	set_physics_process(true)
 
 func despawn():
+	active = true
+	
 	current_health = max_health
 	visible = false
 	global_position = Vector2(-2000, -2000)

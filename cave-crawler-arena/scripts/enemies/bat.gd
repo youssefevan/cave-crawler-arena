@@ -1,5 +1,8 @@
 extends Enemy
 
+func _ready():
+	$Animator.play("fly")
+
 func _physics_process(delta):
 	super._physics_process(delta)
 	
@@ -11,7 +14,7 @@ func _physics_process(delta):
 	else:
 		encroach_speed = 8.0
 	
-	var move_in = global_position.direction_to(player.global_position) * 8
+	var move_in = global_position.direction_to(player.global_position) * encroach_speed
 	velocity = circling + move_in
 	
 	move_and_slide()

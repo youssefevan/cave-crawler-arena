@@ -22,6 +22,8 @@ func save_stats():
 		"enemies_killed": enemies_killed,
 	}
 	
+	print(data)
+	
 	file.store_var(data)
 
 func load_stats():

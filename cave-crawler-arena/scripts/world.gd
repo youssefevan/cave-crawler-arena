@@ -7,6 +7,7 @@ extends Node2D
 @onready var enemies = %Enemies
 
 @onready var upgrade_scene = preload("res://scenes/pickups/upgrade.tscn")
+
 @export var boss : PackedScene
 
 var spawning_wave := false
@@ -20,7 +21,6 @@ var active_enemies := 0
 
 func _ready():
 	Engine.time_scale = 1.0
-	
 	player.connect("dead", player_died)
 	
 	$RunTimer.wait_time = run_time
@@ -41,7 +41,7 @@ func start_wave():
 	
 	wave += 1
 	
-	if wave % 8 == 0 and $RunTimer.time_left > 30.0:
+	if wave % 10 == 0 and $RunTimer.time_left > 30.0:
 		spawn_mini_boss()
 	
 	await spawn_wave()
@@ -90,9 +90,8 @@ func spawn_wave():
 		print("enemy group [", enemy_type.name, "] | size: ", group_size)
 		
 		for j in range(group_size):
-			var e = chosen_enemy.instantiate()
 			for group in enemies.get_children():
-				if group.name == e.name:
+				if group.name == enemy_type.name:
 					var enemy = null
 					for k in group.get_children():
 						if k.visible == false:
@@ -127,12 +126,13 @@ func player_died():
 
 func enemy_died():
 	active_enemies -= 1
+	
 	await get_tree().create_timer(0.5, true).timeout
 	if spawning_wave == false:
 		check_for_enemies()
 
 func check_for_enemies():
-	if active_enemies < wave*3 and not spawning_wave:
+	if active_enemies < wave*2 and not spawning_wave:
 		var waiting_period = randf_range(3, 6)
 		await get_tree().create_timer(waiting_period, true).timeout
 		
@@ -197,20 +197,23 @@ func get_good_spot(type : String):
 	
 	if type == "enemy":
 		while not good_spot:
-			var posx = randf_range(64, 1024-64)
-			var posy = randf_range(64, 1024-64)
+			var posx = randf_range(64, 2048-64)
+			var posy = randf_range(64, 2048-64)
 			
-			if Vector2(posx, posy).distance_to(player.global_position) > 300:
+			var dist_to_player = Vector2(posx, posy).distance_to(player.global_position)
+			
+			if dist_to_player > 200 and dist_to_player < 600:
 				spawn_pos = Vector2(posx, posy)
 				good_spot = true
 		
 	elif type == "upgrade":
 		while not good_spot:
-			var posx = randf_range(128, 1024-128)
-			var posy = randf_range(128, 1024-128)
-			var chosen_pos = Vector2(posx, posy)
+			var posx = randf_range(128, 2048-128)
+			var posy = randf_range(128, 2048-128)
 			
-			if Vector2(posx, posy).distance_to(player.global_position) > 300:
+			var dist_to_player = Vector2(posx, posy).distance_to(player.global_position)
+			
+			if dist_to_player > 200 and dist_to_player < 600:
 				spawn_pos = Vector2(posx, posy)
 				good_spot = true
 	else:
