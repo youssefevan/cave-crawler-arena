@@ -1,7 +1,7 @@
 extends Hitbox
 class_name EnemyBullet
 
-var speed = 100.0
+var speed = 70.0
 var expiration_timer = 2.0
 
 func _ready():

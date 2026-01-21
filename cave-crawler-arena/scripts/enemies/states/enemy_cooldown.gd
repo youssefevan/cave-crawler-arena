@@ -6,7 +6,7 @@ var frame = 0
 func enter():
 	super.enter()
 	frame = 0
-	timer = randi_range(45, 75)
+	timer = 60
 	#entity.animator.play("Cooldown")
 
 func physics_update(delta):
