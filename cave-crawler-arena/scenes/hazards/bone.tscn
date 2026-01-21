@@ -50,6 +50,7 @@ radius = 4.0
 script = ExtResource("2_qgois")
 speed = 50.0
 expiration_timer = 4.0
+damage = 30
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {

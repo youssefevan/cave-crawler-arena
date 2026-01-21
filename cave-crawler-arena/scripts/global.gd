@@ -19,7 +19,7 @@ var stats := {
 	"firerate": [1.5, 0],
 	"pickup_range": [8.0, 0],
 	"regen_rate": [3.0, 0],
-	"max_health": [50, 0],
+	"max_health": [300, 0],
 	"bullet_size": [1.0, 0],
 	"bullet_life": [0.2, 0],
 }
@@ -69,7 +69,7 @@ func get_stat(stat : String):
 		"bullet_life":
 			return stats[stat][0] + (stats[stat][1] * 0.05)
 		"max_health":
-			return stats[stat][0] + (stats[stat][1] * 10)
+			return stats[stat][0] + (stats[stat][1] * 40)
 
 func get_item(item : String):
 	match item:

@@ -81,6 +81,9 @@ hframes = 4
 position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_6w5wj")
 
+[node name="Hitbox" parent="." index="3"]
+damage = 40
+
 [node name="Collider" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_62sh0")
 

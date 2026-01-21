@@ -153,18 +153,19 @@ func spawn_bomb():
 
 func regen():
 	var regen_rate = Global.get_stat("regen_rate")
-	if enemies_in_heal_aura:
-		regen_rate /= 2.0
 	#print(regen_rate, enemies_in_heal_aura)
 	await get_tree().create_timer(regen_rate, false).timeout
 	if state_manager.current_state != die:
 		if Global.health < Global.get_stat("max_health"):
-			Global.health += 1.0
+			if enemies_in_heal_aura:
+				Global.health += 4
+			else:
+				Global.health += 2
 			Global.health = clamp(Global.health, 0, Global.get_stat("max_health"))
 		
 		regen()
 
-func get_hit():
+func get_hit(damage):
 	AudioManager.play_sfx(hurt_sfx)
 	
 	Engine.time_scale = 0.1
@@ -173,7 +174,7 @@ func get_hit():
 	
 	current_shake = shake_strength
 	
-	Global.health = max(0, Global.health - 10)
+	Global.health = max(0, Global.health - int(damage))
 	
 	if Global.health <= 0:
 		dead.emit()
@@ -199,5 +200,8 @@ func _on_pickup_range_area_entered(area):
 
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4) and area.is_in_group("Enemy"):
-		if !invulnerable and Global.health > 0:
-			get_hit()
+		if !invulnerable and Global.health > 0 and area is Hitbox:
+			if area.damage != null:
+				get_hit(area.damage)
+			else:
+				get_hit(20)

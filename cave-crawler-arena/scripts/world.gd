@@ -98,7 +98,6 @@ func spawn_wave():
 						if k.visible == false:
 							enemy = k
 							break
-						
 					
 					#### needs fix: when high wave and large groups,
 					#### object pool doesnt have enough available objects

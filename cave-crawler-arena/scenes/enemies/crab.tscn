@@ -79,6 +79,9 @@ hframes = 3
 [node name="Collider" parent="." index="2"]
 shape = SubResource("CircleShape2D_sqms0")
 
+[node name="Hitbox" parent="." index="3"]
+damage = 30
+
 [node name="Collider" parent="Hitbox" index="0"]
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_teqeg")

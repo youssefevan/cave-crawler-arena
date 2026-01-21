@@ -1,4 +1,4 @@
-extends Area2D
+extends Hitbox
 class_name Bullet
 
 @onready var explosion = preload("res://scenes/hazards/explosion.tscn")
@@ -22,6 +22,7 @@ func _ready():
 func _physics_process(delta):
 	var dir = Vector2.RIGHT.rotated(rotation)
 	global_position += dir * speed * delta
+	
 
 func _on_area_entered(area):
 	if area.get_collision_layer_value(5) and area.is_in_group("Enemy"):

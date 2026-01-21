@@ -137,6 +137,9 @@ frame = 3
 position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_rl5i1")
 
+[node name="Hitbox" parent="." index="3"]
+damage = 40
+
 [node name="Collider" parent="Hitbox" index="0"]
 position = Vector2(0, 0)
 rotation = 1.5707964
