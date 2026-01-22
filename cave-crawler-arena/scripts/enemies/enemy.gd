@@ -43,8 +43,11 @@ func face_player():
 	else:
 		$Sprite.flip_h = true
 
-func get_hit():
-	current_health -= 1
+func get_hit(is_crit):
+	if is_crit:
+		current_health -= 3
+	else:
+		current_health -= 1
 	
 	AudioManager.play_sfx(hurt_sfx, 1.0, 0.5)
 	
@@ -109,7 +112,7 @@ func spawn_coins():
 
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4):
-		if area.is_in_group("Player"):
+		if area.is_in_group("Player") and area is Bullet:
 			#if Global.equipped_item == "bomb":
 				#pass
 				##if area is Bullet:
@@ -120,5 +123,4 @@ func _on_hurtbox_area_entered(area):
 			#elif Global.equipped_item == "freeze":
 				#if area is Explosion:
 					#return
-			
-			get_hit()
+			get_hit(area.is_crit)

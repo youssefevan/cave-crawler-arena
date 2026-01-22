@@ -23,6 +23,7 @@ var stats := {
 	"max_health": [300, 0],
 	"bullet_size": [1.0, 0],
 	"bullet_life": [0.2, 0],
+	"crit_chance": [0.0, 0]
 }
 
 var items := {
@@ -70,6 +71,8 @@ func get_stat(stat : String):
 			return stats[stat][0] + (stats[stat][1] * 0.05)
 		"max_health":
 			return stats[stat][0] + (stats[stat][1] * 40)
+		"crit_chance":
+			return 0.06 * stats[stat][1]
 
 func get_item(item : String):
 	match item:

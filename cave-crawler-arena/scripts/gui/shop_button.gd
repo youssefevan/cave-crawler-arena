@@ -34,12 +34,16 @@ func update(choice : String):
 			icon = preload("res://sprites/upgrades/bullet_life.png")
 		"bullet_size":
 			type = "stat"
-			text = "+attack size"
+			text = "+bullet size"
 			icon = preload("res://sprites/upgrades/bullet_size.png")
 		"max_health":
 			type = "stat"
-			text = "+max health"
+			text = "+40 max health"
 			icon = preload("res://sprites/upgrades/max_health.png")
+		"crit_chance":
+			type = "stat"
+			text = "+6% crit chance"
+			icon = preload("res://sprites/upgrades/crit_chance.png")
 		"heal_aura":
 			type = "item"
 			text = "heal aura"

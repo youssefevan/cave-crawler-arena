@@ -9,11 +9,19 @@ class_name Bullet
 
 var speed = 220.0
 var expiration_timer := 0.6
+var is_crit := false
+
+@export var crit_color : Color
 
 func _ready():
 	expiration_timer = Global.get_stat("bullet_life")
 	scale.x = Global.get_stat("bullet_size")
 	scale.y = Global.get_stat("bullet_size")
+	
+	if randf() < Global.get_stat("crit_chance"):
+		is_crit = true
+		$Sprite.material.set_shader_parameter("input_color", crit_color)
+		$Sprite.material.set_shader_parameter("active", true)
 	
 	await get_tree().create_timer(expiration_timer, false).timeout
 	
@@ -40,7 +48,7 @@ func _on_area_entered(area):
 			#get_parent().call_deferred("add_child", e)
 		
 		var h = hit_effect.instantiate()
-		h.global_position = global_position
+		h.global_position = $HitPos.global_position
 		get_parent().call_deferred("add_child", h)
 		
 		#if Global.equipped_item == "penetration":
