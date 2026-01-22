@@ -66,8 +66,9 @@ func _physics_process(delta):
 	$PickupRange/Collider.shape.radius = Global.get_stat("pickup_range")
 	
 	var heal_aura = Global.get_item("heal_aura")
+	
 	if heal_aura > 0:
-		$HealAura/Collider.shape.radius = heal_aura
+		$HealAura/Collider.shape.radius = Global.get_item("heal_aura")
 		$HealAura/Collider.disabled = false
 		enemies_in_heal_aura = $HealAura.has_overlapping_bodies()
 	else:
@@ -78,7 +79,6 @@ func _physics_process(delta):
 	
 	target_heal_aura_color = Color.from_hsv(0.11, 1.0, 1.0, float(enemies_in_heal_aura)/3.0)
 	heal_aura_color = lerp(heal_aura_color, target_heal_aura_color, 5.0 * delta)
-	
 	
 	if Global.get_item("bomb") > 0.0:
 		spawn_bomb()

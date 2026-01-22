@@ -74,7 +74,10 @@ func get_stat(stat : String):
 func get_item(item : String):
 	match item:
 		"heal_aura":
-			return items[item]
+			if items[item] == 0:
+				return items[item]
+			else:
+				return 20.0 + items[item] * 20.0
 		"splitshot":
 			return items[item]
 		"bomb":
