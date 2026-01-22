@@ -6,6 +6,8 @@ class_name Miniboss
 
 var dir
 var frame := 0
+var can_shoot := true
+var in_range := false
 
 func _ready():
 	super._ready()
@@ -19,12 +21,23 @@ func _physics_process(delta):
 	if frame % 5 == 0:
 		dir = global_position.direction_to(player.global_position)
 	
-	if frame % 45 == 0 and global_position.distance_to(player.global_position) < 100.0:
+	if global_position.distance_to(player.global_position) < 110.0:
+		velocity = lerp(velocity, dir.normalized() * speed/2.0, accel * delta)
+		in_range = true
+		shoot()
+	else:
+		velocity = lerp(velocity, dir.normalized() * speed, accel * delta)
+		in_range = false
+	
+	move_and_slide()
+
+func shoot():
+	if can_shoot:
 		var b = bullet_scene.instantiate()
 		b.rotation = dir.angle()
 		b.global_position = global_position
 		get_parent().call_deferred("add_child", b)
-	
-	velocity = lerp(velocity, dir.normalized() * speed, accel * delta)
-	
-	move_and_slide()
+		
+		can_shoot = false
+		await get_tree().create_timer(0.75, false).timeout
+		can_shoot = true

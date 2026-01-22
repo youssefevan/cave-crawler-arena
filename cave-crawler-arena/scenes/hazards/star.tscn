@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjiufco6hij0e"]
+
+[ext_resource type="PackedScene" uid="uid://dutl32wdlijro" path="res://scenes/hazards/enemy_bullet.tscn" id="1_6d2r8"]
+[ext_resource type="Texture2D" uid="uid://bsit6asyap62f" path="res://sprites/hazards/star.png" id="2_cshr3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cshr3"]
+radius = 3.0
+
+[node name="Star" instance=ExtResource("1_6d2r8")]
+speed = 50.0
+expiration_timer = 2.0
+
+[node name="Sprite" parent="." index="0"]
+rotation = 1.5707964
+texture = ExtResource("2_cshr3")
+
+[node name="Collider" parent="." index="1"]
+shape = SubResource("CircleShape2D_cshr3")

@@ -26,7 +26,7 @@ func _ready():
 	$RunTimer.wait_time = run_time
 	$RunTimer.start()
 	
-	await get_tree().create_timer(2.0, false).timeout
+	#await get_tree().create_timer(2.0, false).timeout
 	start_wave()
 
 func _physics_process(delta):
@@ -100,22 +100,23 @@ func spawn_wave():
 			enemies.call_deferred("add_child", enemy)
 			
 			active_enemies += 1
-			await get_tree().create_timer(0.1, false).timeout
+			await get_tree().create_timer(randf_range(0.02, 0.12), false).timeout
 		
 		# delay spawning while there are too many enemies in scene
-		while active_enemies > 400:
+		while active_enemies > 500:
 			await get_tree().create_timer(5.0, false).timeout
 		
-		await get_tree().create_timer(randf_range(0.01, 0.1)).timeout
+		await get_tree().create_timer(0.25).timeout
 	
 	check_for_enemies()
 
 func player_died():
+	OptionsManager.save_stats()
 	var tween = get_tree().create_tween()
 	tween.tween_property(Engine, "time_scale", 0.2, 1.0).set_trans(Tween.TRANS_LINEAR)
 	
 	await get_tree().create_timer(2.0, false, false, true).timeout
-	#$CanvasLayer/HUD/Info.open()
+	#$CanvasLayer/HUD/Pause.open()
 
 func enemy_died():
 	active_enemies -= 1
@@ -125,7 +126,7 @@ func enemy_died():
 		check_for_enemies()
 
 func check_for_enemies():
-	if active_enemies < wave*2 and not spawning_wave:
+	if active_enemies < wave and not spawning_wave:
 		var waiting_period = randf_range(3, 6)
 		await get_tree().create_timer(waiting_period, true).timeout
 		

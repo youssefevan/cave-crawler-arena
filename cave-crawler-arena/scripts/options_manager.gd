@@ -10,6 +10,7 @@ var enemies_killed = {
 	"bat": 0,
 	"skull": 0,
 	"miniboss1": 0,
+	"fish": 0,
 }
 
 func _ready() -> void:

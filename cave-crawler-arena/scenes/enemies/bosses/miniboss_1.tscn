@@ -60,9 +60,10 @@ shader_parameter/input_color = Vector4(1, 1, 1, 1)
 motion_mode = 0
 script = ExtResource("2_3qbsb")
 enemy_name = "miniboss1"
+speed = 35.0
 max_health = 25
-min_xp_drop = 25
-max_xp_drop = 50
+min_xp_drop = 40
+max_xp_drop = 60
 max_xp_value = 3
 max_group_size = 1
 
@@ -82,7 +83,7 @@ position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_6w5wj")
 
 [node name="Hitbox" parent="." index="3"]
-damage = 40
+damage = 30
 
 [node name="Collider" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_62sh0")

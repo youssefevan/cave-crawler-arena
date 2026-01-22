@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://doea6ciy2t5jf"]
+
+[ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/bosses/boss.tscn" id="1_7nafg"]
+[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="2_7lk3c"]
+[ext_resource type="Script" uid="uid://dv1c2u62s3u73" path="res://scripts/enemies/bosses/fish.gd" id="2_114sv"]
+[ext_resource type="Texture2D" uid="uid://cy53pu7kqglrj" path="res://sprites/enemies/fish.png" id="3_114sv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61oi1"]
+resource_local_to_scene = true
+shader = ExtResource("2_7lk3c")
+shader_parameter/active = false
+shader_parameter/input_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7nafg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7lk3c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_114sv"]
+radius = 11.0
+
+[node name="Fish" instance=ExtResource("1_7nafg")]
+script = ExtResource("2_114sv")
+enemy_name = "fish"
+max_health = 25
+min_xp_drop = 40
+max_xp_drop = 60
+max_xp_value = 3
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_61oi1")
+position = Vector2(0, 0)
+texture = ExtResource("3_114sv")
+
+[node name="Collider" parent="." index="1"]
+shape = SubResource("CircleShape2D_7nafg")
+
+[node name="Hitbox" parent="." index="2"]
+position = Vector2(0, 1)
+damage = 30
+
+[node name="Collider" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_7lk3c")
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_114sv")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

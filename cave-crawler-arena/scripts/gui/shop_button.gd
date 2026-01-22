@@ -48,10 +48,6 @@ func update(choice : String):
 			type = "item"
 			text = "splitshot"
 			icon = preload("res://sprites/items/splitshot.png")
-		"flamedash":
-			type = "item"
-			text = "flamedash [not implemented]"
-			icon = preload("res://sprites/items/flamedash.png")
 		"skull_friend":
 			type = "item"
 			text = "friend"

@@ -68,7 +68,7 @@ func _physics_process(delta):
 	var heal_aura = Global.get_item("heal_aura")
 	
 	if heal_aura > 0:
-		$HealAura/Collider.shape.radius = Global.get_item("heal_aura")
+		$HealAura/Collider.shape.radius = 20.0 + heal_aura * 20.0
 		$HealAura/Collider.disabled = false
 		enemies_in_heal_aura = $HealAura.has_overlapping_bodies()
 	else:
@@ -88,7 +88,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _draw():
-	draw_arc(Vector2.ZERO, Global.get_item("heal_aura"), 0, 360, 64, heal_aura_color, 1.0, false)
+	draw_arc(Vector2.ZERO, $HealAura/Collider.shape.radius, 0, 360, 64, heal_aura_color, 1.0, false)
 
 func handle_input():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -137,7 +137,7 @@ func attack():
 		$Weapon/Animator.stop()
 		$Weapon/Animator.play("fire")
 		can_attack = false
-		await get_tree().create_timer(Global.get_stat("firerate"), false).timeout
+		await get_tree().create_timer(Global.get_stat("firerate")).timeout
 		can_attack = true
 
 func spawn_bomb():

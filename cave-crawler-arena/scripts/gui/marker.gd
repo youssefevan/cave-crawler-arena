@@ -8,8 +8,8 @@
 
 extends Sprite2D
 
-var onscreen_offset = Vector2(0.0, -12.0)
-var screen_margin := 16.0
+var onscreen_offset = Vector2(0.0, -16.0)
+var screen_margin := 48.0
 
 var camera : Camera2D
 

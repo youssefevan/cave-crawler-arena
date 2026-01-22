@@ -5,12 +5,13 @@ var enemy_pool = {
 	preload("res://scenes/enemies/crab.tscn"): [1, 1.0],
 	preload("res://scenes/enemies/rat.tscn"): [4, 1.0],
 	preload("res://scenes/enemies/roly_poly.tscn"): [16, 1.0],
-	preload("res://scenes/enemies/turret.tscn"): [12, 1.0],
-	preload("res://scenes/enemies/bat.tscn"): [8, 1.0],
+	preload("res://scenes/enemies/turret.tscn"): [20, 1.0],
+	preload("res://scenes/enemies/bat.tscn"): [10, 1.0],
 }
 
 var mini_boss_pool = [
 	preload("res://scenes/enemies/bosses/miniboss_1.tscn"),
+	preload("res://scenes/enemies/bosses/fish.tscn"),
 ]
 
 # base value, current level
@@ -28,7 +29,6 @@ var items := {
 	"splitshot": 0,
 	"skull_friend": 0,
 	"heal_aura": 0,
-	"flamedash": 0,
 	"bomb": 0,
 }
 
@@ -74,10 +74,7 @@ func get_stat(stat : String):
 func get_item(item : String):
 	match item:
 		"heal_aura":
-			if items[item] == 0:
-				return items[item]
-			else:
-				return 20.0 + items[item] * 20.0
+			return items[item]
 		"splitshot":
 			return items[item]
 		"bomb":

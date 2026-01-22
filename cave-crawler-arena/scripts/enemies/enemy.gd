@@ -92,7 +92,11 @@ func get_hit():
 func die():
 	await spawn_coins()
 	emit_signal("died")
-	OptionsManager.enemies_killed[enemy_name] += 1
+	if OptionsManager.enemies_killed.has(enemy_name):
+		OptionsManager.enemies_killed[enemy_name] += 1
+	else:
+		OptionsManager.enemies_killed[enemy_name] = 1
+	
 	queue_free()
 
 func spawn_coins():

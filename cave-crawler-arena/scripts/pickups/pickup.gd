@@ -26,9 +26,10 @@ func _physics_process(delta):
 		vel = lerpf(vel, 0.0, decay * delta)
 		global_position += direction * vel
 	else:
-		direction = global_position.direction_to(player.global_position)
-		vel = lerpf(vel, speed, decay * delta)
-		global_position += direction * vel
+		if Global.health > 0:
+			direction = global_position.direction_to(player.global_position)
+			vel = lerpf(vel, speed, decay * delta)
+			global_position += direction * vel
 
 func despawn():
 	collected.emit()

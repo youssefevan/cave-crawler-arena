@@ -1,8 +1,8 @@
 extends Hitbox
 class_name EnemyBullet
 
-var speed = 70.0
-var expiration_timer = 2.0
+@export var speed = 70.0
+@export var expiration_timer = 2.0
 
 func _ready():
 	await get_tree().create_timer(expiration_timer, false).timeout
