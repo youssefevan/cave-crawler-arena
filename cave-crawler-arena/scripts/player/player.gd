@@ -16,6 +16,7 @@ signal dead
 
 @onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
 @onready var hurt_sfx = preload("res://audio/player_hurt.ogg")
+@export var low_hp_sfx = preload("res://audio/low_health.ogg")
 
 @onready var bomb_scene = preload("res://scenes/hazards/bomb.tscn")
 
@@ -175,6 +176,8 @@ func get_hit(damage):
 	current_shake = shake_strength
 	
 	Global.health = max(0, Global.health - int(damage))
+	if Global.health < 80:
+		AudioManager.play_sfx(low_hp_sfx)
 	
 	if Global.health <= 0:
 		dead.emit()
@@ -192,6 +195,7 @@ func hit_flash() -> void:
 		await get_tree().create_timer(0.1, false).timeout
 		$Sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
 		await get_tree().create_timer(0.11, false).timeout
+		
 	$Sprite.modulate = Color(1, 1, 1, 1)
 
 func _on_pickup_range_area_entered(area):
