@@ -24,6 +24,7 @@ crit_color = Color(1, 0.6627451, 0, 1)
 material = SubResource("ShaderMaterial_eoqba")
 position = Vector2(7, 0)
 texture = ExtResource("3_l5glv")
+hframes = 2
 
 [node name="Collider" parent="." index="1"]
 position = Vector2(7, 0)
