@@ -1,4 +1,5 @@
 extends Area2D
+class_name Bomb
 
 var timer := 2.5
 var vel := 2.0

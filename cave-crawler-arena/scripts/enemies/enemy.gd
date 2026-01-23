@@ -43,13 +43,15 @@ func face_player():
 	else:
 		$Sprite.flip_h = true
 
-func get_hit(is_crit):
+func get_hit(is_crit, dir):
 	if is_crit:
 		current_health -= 3
 	else:
 		current_health -= 1
 	
 	AudioManager.play_sfx(hurt_sfx, 1.0, 0.5)
+	
+	velocity = dir * 50.0
 	
 	$Sprite.material.set_shader_parameter("input_color", hurt_color)
 	$Sprite.material.set_shader_parameter("active", true)
@@ -58,9 +60,8 @@ func get_hit(is_crit):
 	self.set_physics_process(true)
 	$Sprite.material.set_shader_parameter("active", false)
 	
-	
 	if current_health <= 0:
-		die()
+		die(dir)
 
 #func freeze():
 	#var anim = null
@@ -92,8 +93,8 @@ func get_hit(is_crit):
 	#get_hit()
 	#catch_fire()
 
-func die():
-	await spawn_coins()
+func die(dir):
+	await spawn_coins(dir)
 	emit_signal("died")
 	if OptionsManager.enemies_killed.has(enemy_name):
 		OptionsManager.enemies_killed[enemy_name] += 1
@@ -102,25 +103,24 @@ func die():
 	
 	queue_free()
 
-func spawn_coins():
+func spawn_coins(dir):
 	for i in randi_range(min_xp_drop, max_xp_drop):
 		var c = coin.instantiate()
 		world.connect_coin(c)
 		c.global_position = global_position
 		c.spawn_type = max_xp_value
+		
+		var angle = deg_to_rad(randf_range(-40.0, 40.0))
+		dir = dir.normalized()
+		c.direction = dir.rotated(angle)
+		#c.vel = randf_range(2.5, 4.0)
 		world.pickups.call_deferred("add_child", c)
 
 func _on_hurtbox_area_entered(area):
 	if area.get_collision_layer_value(4):
-		if area.is_in_group("Player") and area is Bullet:
-			#if Global.equipped_item == "bomb":
-				#pass
-				##if area is Bullet:
-					##return
-			#elif Global.equipped_item == "fire":
-				#if area is Explosion:
-					#return
-			#elif Global.equipped_item == "freeze":
-				#if area is Explosion:
-					#return
-			get_hit(area.is_crit)
+		if area.is_in_group("Player"):
+			if area is Bullet:
+				get_hit(area.is_crit, area.dir)
+			elif area is Bomb or area is Friend:
+				get_hit(false, -global_position.direction_to(area.global_position))
+		

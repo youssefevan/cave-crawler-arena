@@ -5,16 +5,15 @@ signal collected
 
 var direction := Vector2(0, 0)
 var decay := 5.0
-var vel := 1.0
+var vel := 50.0
 
-var speed := 5.0
+var speed := 120.0
 
 var within_range = false
 var player : Player
 
 func _ready():
-	direction.x = randf_range(-1, 1)
-	direction.y = randf_range(-1, 1)
+	vel = randf_range(50.0, 70.0)
 	
 	choose_type()
 
@@ -24,12 +23,12 @@ func choose_type():
 func _physics_process(delta):
 	if player == null:
 		vel = lerpf(vel, 0.0, decay * delta)
-		global_position += direction * vel
+		global_position += direction * vel * delta
 	else:
 		if Global.health > 0:
 			direction = global_position.direction_to(player.global_position)
 			vel = lerpf(vel, speed, decay * delta)
-			global_position += direction * vel
+			global_position += direction * vel * delta
 
 func despawn():
 	collected.emit()

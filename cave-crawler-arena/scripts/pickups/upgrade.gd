@@ -4,7 +4,7 @@ class_name Upgrade
 signal upgrade_collected
 
 func _ready():
-	speed = 1.0
+	speed = 60.0
 	super._ready()
 
 func despawn():

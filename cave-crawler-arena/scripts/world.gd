@@ -163,7 +163,7 @@ func spawn_mini_boss():
 func spawn_boss():
 	for i in enemies.get_children():
 		if i is Enemy:
-			i.die()
+			i.die(Vector2(randf(), randf()).normalized())
 	
 	var spawn_pos = get_good_spot("enemy")
 	var b = boss.instantiate()

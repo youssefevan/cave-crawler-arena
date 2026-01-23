@@ -62,7 +62,7 @@ func get_stat(stat : String):
 		"firerate":
 			return stats[stat][0] - ((1.0/6.0) * stats[stat][1])
 		"pickup_range":
-			return stats[stat][0] + (8.0 * stats[stat][1])
+			return stats[stat][0] + (16.0 * stats[stat][1])
 		"regen_rate":
 			return stats[stat][0] * pow(0.8, stats[stat][1])
 		"bullet_size":
@@ -84,7 +84,7 @@ func get_item(item : String):
 			if items[item] == 0:
 				return 0
 			else:
-				return 2.5 - (items[item] * 0.5)
+				return 1.5 - (items[item] * 0.3)
 		"skull_friend":
 			if items[item] == 0:
 				return 0

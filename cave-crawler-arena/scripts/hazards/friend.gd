@@ -1,4 +1,5 @@
 extends Hitbox
+class_name Friend
 
 func _physics_process(delta):
 	$Sprite.global_rotation = 0.0
