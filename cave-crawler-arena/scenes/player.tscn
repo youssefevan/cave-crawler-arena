@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c1ewrypht14m3"]
+[gd_scene load_steps=25 format=3 uid="uid://c1ewrypht14m3"]
 
 [ext_resource type="Texture2D" uid="uid://ckmm2f1msxl40" path="res://sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ba2cmdu7bqut" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -135,7 +135,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_jej6c"]
 resource_name = "fire"
-length = 0.15
+length = 0.1
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -156,10 +156,10 @@ tracks/1/path = NodePath("Weapon/Muzzle/MuzzleFlash:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -168,36 +168,7 @@ tracks/2/path = NodePath("Weapon/Muzzle/MuzzleFlash:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_oprun"]
-resource_name = "muzzle"
-length = 0.15
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon/Muzzle/MuzzleFlash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/Muzzle/MuzzleFlash:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -206,8 +177,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oprun"]
 _data = {
 &"RESET": SubResource("Animation_f1ej7"),
-&"fire": SubResource("Animation_jej6c"),
-&"muzzle": SubResource("Animation_oprun")
+&"fire": SubResource("Animation_jej6c")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]

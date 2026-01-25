@@ -13,11 +13,7 @@ var interrupt_position
 func _ready():
 	music_player.set_bus("Music")
 	
-	#OptionsHandler.connect("volume_music_changed", volume_music_changed)
-	#volume_music_changed()
-	
-	#OptionsHandler.connect("volume_sfx_changed", volume_sfx_changed)
-	#volume_sfx_changed()
+	OptionsManager.connect("data_loaded", load_audio_data)
 
 func play_sfx(sound : AudioStream, base_pitch := 1.0, pitch_range := 0.0, parent := get_tree().current_scene):
 	var stream = AudioStreamPlayer.new()
@@ -58,12 +54,15 @@ func clear_sfx(sfx: AudioStream):
 		if i.stream == sfx:
 			i.stop()
 			i.call_deferred("queue_free")
-#
-#func volume_music_changed():
-	#var vol = (OptionsHandler.volume_music/10) * 1.33
-	#AudioServer.set_bus_volume_db(bus_index_music, linear_to_db(vol))
 
-#func volume_sfx_changed():
-	## 10 steps on slider
-	#var vol = (OptionsHandler.volume_sfx/10) * 1.33
-	#AudioServer.set_bus_volume_db(bus_index_sfx, linear_to_db(vol))
+func load_audio_data():
+	set_volume_sfx(OptionsManager.options["volume_sfx"])
+	set_volume_music(OptionsManager.options["volume_music"])
+
+func set_volume_sfx(value):
+	var vol = value - 4.0
+	AudioServer.set_bus_volume_db(bus_index_sfx, linear_to_db(vol))
+
+func set_volume_music(value):
+	var vol = value - 4.0
+	AudioServer.set_bus_volume_db(bus_index_music, linear_to_db(vol))

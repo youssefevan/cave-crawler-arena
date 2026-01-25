@@ -189,6 +189,7 @@ visible = false
 layout_mode = 1
 
 [node name="Pause" type="Control" parent="CanvasLayer/HUD"]
+process_mode = 3
 visible = false
 layout_mode = 1
 anchors_preset = 8

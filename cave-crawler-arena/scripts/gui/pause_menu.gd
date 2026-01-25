@@ -13,8 +13,7 @@ func update_info():
 	$Content/BG/Info/Stats.text = str(Global.stats)
 	$Content/BG/Info/Items.text = str(Global.items)
 
-
 func _on_quit_pressed():
+	OptionsManager.save_data()
 	get_tree().paused = false
-	OptionsManager.save_stats()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/gui/main_menu.tscn")
