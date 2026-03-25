@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://csulapwy47orq"]
+[gd_scene format=4 uid="uid://csulapwy47orq"]
 
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://bys0mel17fnnl" path="res://scripts/gui/main_menu.gd" id="2_ekxnf"]
@@ -18,7 +18,7 @@ texture = ExtResource("3_tbmy8")
 [sub_resource type="TileSet" id="TileSet_5dd4i"]
 sources/0 = SubResource("TileSetAtlasSource_jk1qb")
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=2090033297]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,16 +30,16 @@ size_flags_vertical = 3
 theme = ExtResource("1_l6cm7")
 script = ExtResource("2_ekxnf")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1623749137]
 tile_map_data = PackedByteArray("AAD//wIAAAABAAAAAAD//xAAAAABAAAAAAAAAAIAAAABAAAAAAAAAA4AAAABAAAAAAADAAgAAAABAAAAAAAEAAEAAAABAAAAAAAEAAcAAAABAAAAAAAEAAoAAAABAAAAAAAEAAsAAAABAAAAAAAEAA4AAAABAAAAAAAEABAAAAABAAAAAAAFAA0AAAABAAAAAAAFABEAAAABAAAAAAAGAAUAAAABAAAAAAAGAA0AAAABAAAAAAAHAAQAAAABAAAAAAAHAAYAAAABAAAAAAAIABEAAAABAAAAAAAKAAIAAAABAAAAAAAKAAQAAAABAAAAAAAKAAcAAAABAAAAAAAKAAwAAAABAAAAAAAKAA4AAAABAAAAAAALAP//AAABAAAAAAALAAwAAAABAAAAAAALABAAAAABAAAAAAAMAAEAAAABAAAAAAANAA4AAAABAAAAAAAOAAMAAAABAAAAAAAOAAgAAAABAAAAAAAOAA4AAAABAAAAAAAPAAQAAAABAAAAAAAPAAwAAAABAAAAAAARAP//AAABAAAAAAARAAwAAAABAAAAAAASAAEAAAABAAAAAAASAAIAAAABAAAAAAASAAUAAAABAAAAAAASAAoAAAABAAAAAAATAAUAAAABAAAAAAAUAAgAAAABAAAAAAAUAA0AAAABAAAAAAAVAAkAAAABAAAAAAAWAAQAAAABAAAAAAAXAAAAAAABAAAAAAAYAAoAAAABAAAAAAAYAA0AAAABAAAAAAAZABEAAAABAAAAAAAaAAEAAAABAAAAAAAcAAsAAAABAAAAAAAdAAUAAAABAAAAAAAdAAYAAAABAAAAAAAdAAoAAAABAAAAAAAdAA8AAAABAAAAAAAeAAYAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_5dd4i")
 
-[node name="Title" type="Sprite2D" parent="."]
+[node name="Title" type="Sprite2D" parent="." unique_id=1557448393]
 position = Vector2(240, 104)
 scale = Vector2(2, 2)
 texture = ExtResource("6_rtw2f")
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=430041523]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -54,25 +54,27 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Play" type="Button" parent="Buttons"]
+[node name="Play" type="Button" parent="Buttons" unique_id=1182156811]
 layout_mode = 2
 text = "Play"
 icon = ExtResource("3_8ln24")
 alignment = 0
 
-[node name="Options" type="Button" parent="Buttons"]
+[node name="Options" type="Button" parent="Buttons" unique_id=1163427014]
 layout_mode = 2
 text = "Options"
 icon = ExtResource("3_wu84c")
 alignment = 0
 
-[node name="Quit" type="Button" parent="Buttons"]
+[node name="Quit" type="Button" parent="Buttons" unique_id=485814846]
 layout_mode = 2
 text = "Quit"
 icon = ExtResource("4_8ln24")
 alignment = 0
 
-[node name="Cursor" parent="." instance=ExtResource("7_oa1go")]
+[node name="Cursor" parent="." unique_id=1940994810 instance=ExtResource("7_oa1go")]
+z_index = 4
 
 [connection signal="pressed" from="Buttons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Buttons/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

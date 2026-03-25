@@ -1,6 +1,8 @@
 extends Bullet
 
 func _ready():
+	dir = Vector2.RIGHT.rotated(rotation)
+	
 	speed = 70.0
 	expiration_timer = 2.0
 	$Animator.play("move")

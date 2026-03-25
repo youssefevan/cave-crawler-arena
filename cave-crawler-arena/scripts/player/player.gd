@@ -203,9 +203,14 @@ func _on_pickup_range_area_entered(area):
 		area.player = self
 
 func _on_hurtbox_area_entered(area):
+	print('test')
 	if area.get_collision_layer_value(4) and area.is_in_group("Enemy"):
+		print('test1')
 		if !invulnerable and Global.health > 0 and area is Hitbox:
+			print('test2')
 			if area.damage != null:
+				print('test3')
 				get_hit(area.damage)
 			else:
+				print('test4')
 				get_hit(20)

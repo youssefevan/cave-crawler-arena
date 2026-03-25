@@ -1,8 +1,9 @@
-extends Area2D
+extends Hitbox
 
-@export var damage := 40.0
+
 
 func _ready():
+	damage = 40.0
 	$Animator.play("spawn")
 
 func despawn():

@@ -111,7 +111,7 @@ func spawn_wave():
 	check_for_enemies()
 
 func player_died():
-	OptionsManager.save_stats()
+	OptionsManager.save_data()
 	var tween = get_tree().create_tween()
 	tween.tween_property(Engine, "time_scale", 0.2, 1.0).set_trans(Tween.TRANS_LINEAR)
 	

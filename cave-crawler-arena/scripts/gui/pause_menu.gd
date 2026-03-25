@@ -1,5 +1,7 @@
 extends Control
 
+@onready var options = preload("res://scenes/gui/options_menu.tscn")
+
 func _ready():
 	visible = false
 
@@ -17,3 +19,8 @@ func _on_quit_pressed():
 	OptionsManager.save_data()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/gui/main_menu.tscn")
+
+
+func _on_options_pressed():
+	var o = options.instantiate()
+	get_parent().add_child(o)

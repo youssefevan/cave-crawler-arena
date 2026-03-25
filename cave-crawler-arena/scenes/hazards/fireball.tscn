@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ds5tpmbj16co2"]
+[gd_scene format=3 uid="uid://ds5tpmbj16co2"]
 
 [ext_resource type="Script" uid="uid://ebffvpgciwpu" path="res://scripts/hazards/fireball.gd" id="2_d6pof"]
 [ext_resource type="Texture2D" uid="uid://dker7jajl3vks" path="res://sprites/hazards/fireball.png" id="3_pnu0j"]
@@ -45,21 +45,19 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_pnu0j"]
 radius = 6.0
 
-[node name="Fireball" type="Area2D" groups=["Enemy"]]
+[node name="Fireball" type="Area2D" unique_id=529180536 groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("2_d6pof")
 
-[node name="Animator" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ts8d6")
-}
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1936494797]
+libraries/ = SubResource("AnimationLibrary_ts8d6")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2042647249]
 texture = ExtResource("3_pnu0j")
 hframes = 3
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1457435132]
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_pnu0j")
 debug_color = Color(1, 0, 0, 0.18039216)

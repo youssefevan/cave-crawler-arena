@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cudyt114ai5r3"]
+[gd_scene format=3 uid="uid://cudyt114ai5r3"]
 
 [ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/bosses/boss.tscn" id="1_4sm0u"]
 [ext_resource type="Script" uid="uid://jlo7hxdnuvqf" path="res://scripts/enemies/bosses/miniboss_1.gd" id="2_3qbsb"]
@@ -44,7 +44,7 @@ _data = {
 &"move": SubResource("Animation_3qbsb")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7dl8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qbsb"]
 resource_local_to_scene = true
 shader = ExtResource("3_3qbsb")
 shader_parameter/active = false
@@ -56,7 +56,7 @@ shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_08yde"]
 
-[node name="Miniboss1" instance=ExtResource("1_4sm0u")]
+[node name="Miniboss1" unique_id=815769942 instance=ExtResource("1_4sm0u")]
 motion_mode = 0
 script = ExtResource("2_3qbsb")
 enemy_name = "miniboss1"
@@ -67,13 +67,11 @@ max_xp_drop = 60
 max_xp_value = 3
 max_group_size = 1
 
-[node name="Animator" type="AnimationPlayer" parent="." index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_5jysi")
-}
+[node name="Animator" type="AnimationPlayer" parent="." index="0" unique_id=475890020]
+libraries/ = SubResource("AnimationLibrary_5jysi")
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_s7dl8")
+material = SubResource("ShaderMaterial_3qbsb")
 position = Vector2(0, -1)
 texture = ExtResource("3_s7dl8")
 hframes = 4

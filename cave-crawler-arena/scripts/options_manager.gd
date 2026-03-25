@@ -18,6 +18,7 @@ var enemies_killed = {
 var options = {
 	"volume_sfx": 5.0,
 	"volume_music": 5.0,
+	"enable_fullscreen": false
 }
 
 func _ready() -> void:
@@ -58,3 +59,9 @@ func set_enemies_killed(enemy_name : String):
 func set_option(option, value):
 	options[option] = value
 	save_data()
+
+func set_fullscreen(setting):
+	if setting == true:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

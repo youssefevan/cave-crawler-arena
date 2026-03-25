@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c1ewrypht14m3"]
+[gd_scene format=3 uid="uid://c1ewrypht14m3"]
 
 [ext_resource type="Texture2D" uid="uid://ckmm2f1msxl40" path="res://sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://ba2cmdu7bqut" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -186,89 +186,85 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_y4r1p"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1812691226 groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_g2els")
 bullet = ExtResource("2_smehm")
 
-[node name="Animator" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_jej6c")
-}
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=191722383]
+libraries/ = SubResource("AnimationLibrary_jej6c")
 
-[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateManager" type="Node" parent="." unique_id=1468402545 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_qhqgy")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateManager"]
+[node name="Idle" type="Node" parent="StateManager" unique_id=1328723946]
 script = ExtResource("4_dqkch")
 
-[node name="Move" type="Node" parent="StateManager"]
+[node name="Move" type="Node" parent="StateManager" unique_id=204375666]
 script = ExtResource("5_qlg0r")
 
-[node name="Die" type="Node" parent="StateManager"]
+[node name="Die" type="Node" parent="StateManager" unique_id=120779221]
 script = ExtResource("6_ur7pv")
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=967606979]
 shape = SubResource("CircleShape2D_g2els")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1886806128]
 texture = ExtResource("1_3vyb7")
 hframes = 3
 
-[node name="AttackRange" type="Area2D" parent="."]
+[node name="AttackRange" type="Area2D" parent="." unique_id=348722441]
 visible = false
 collision_layer = 2
 collision_mask = 4
 
-[node name="Collider" type="CollisionShape2D" parent="AttackRange"]
+[node name="Collider" type="CollisionShape2D" parent="AttackRange" unique_id=21836020]
 shape = SubResource("CircleShape2D_fjrip")
 debug_color = Color(0.5019608, 0.57254905, 0.29411766, 0.21960784)
 
-[node name="PickupRange" type="Area2D" parent="."]
+[node name="PickupRange" type="Area2D" parent="." unique_id=1074349495]
 collision_layer = 2
 collision_mask = 32
 
-[node name="Collider" type="CollisionShape2D" parent="PickupRange"]
+[node name="Collider" type="CollisionShape2D" parent="PickupRange" unique_id=550131750]
 shape = SubResource("CircleShape2D_ur7pv")
 debug_color = Color(1, 1, 1, 0.14)
 
-[node name="Weapon" type="Node2D" parent="."]
+[node name="Weapon" type="Node2D" parent="." unique_id=2079950353]
 
-[node name="Animator" type="AnimationPlayer" parent="Weapon"]
+[node name="Animator" type="AnimationPlayer" parent="Weapon" unique_id=1051200654]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_oprun")
-}
+libraries/ = SubResource("AnimationLibrary_oprun")
 
-[node name="Muzzle" type="Node2D" parent="Weapon"]
+[node name="Muzzle" type="Node2D" parent="Weapon" unique_id=2140257333]
 position = Vector2(9, 0)
 
-[node name="MuzzleFlash" type="Sprite2D" parent="Weapon/Muzzle"]
+[node name="MuzzleFlash" type="Sprite2D" parent="Weapon/Muzzle" unique_id=525223775]
 position = Vector2(2, 0)
 texture = ExtResource("8_d2wvv")
 hframes = 3
 
-[node name="Sprite" type="Sprite2D" parent="Weapon"]
+[node name="Sprite" type="Sprite2D" parent="Weapon" unique_id=589967578]
 position = Vector2(7, 0)
 texture = ExtResource("7_smehm")
 
-[node name="Hurtbox" parent="." groups=["Player"] instance=ExtResource("8_smehm")]
+[node name="Hurtbox" parent="." unique_id=1863939828 groups=["Player"] instance=ExtResource("8_smehm")]
 
 [node name="Collider" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="HealAura" type="Area2D" parent="."]
+[node name="HealAura" type="Area2D" parent="." unique_id=358907272]
 collision_layer = 0
 collision_mask = 4
 
-[node name="Collider" type="CollisionShape2D" parent="HealAura"]
+[node name="Collider" type="CollisionShape2D" parent="HealAura" unique_id=605325838]
 shape = SubResource("CircleShape2D_y4r1p")
 debug_color = Color(0.46437377, 0.5760211, 0.3979822, 0.41960785)
 
-[node name="FollowRadius" type="Node2D" parent="."]
+[node name="FollowRadius" type="Node2D" parent="." unique_id=289472223]
 
-[node name="Friend" parent="FollowRadius" instance=ExtResource("10_y4r1p")]
+[node name="Friend" parent="FollowRadius" unique_id=573653461 instance=ExtResource("10_y4r1p")]
 position = Vector2(48, 0)
 
 [connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]

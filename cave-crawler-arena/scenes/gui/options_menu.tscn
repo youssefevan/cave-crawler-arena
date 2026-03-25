@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbgqrqe881bm5"]
+[gd_scene format=3 uid="uid://bbgqrqe881bm5"]
 
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="1_evjuv"]
 [ext_resource type="Script" uid="uid://brhil3sshxvfy" path="res://scripts/gui/options_menu.gd" id="2_v47hi"]
@@ -12,7 +12,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8ate"]
 bg_color = Color(0, 0, 0, 0.5882353)
 
-[node name="OptionsMenu" type="Control"]
+[node name="OptionsMenu" type="Control" unique_id=107262878]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_vertical = 2
 theme = ExtResource("1_evjuv")
 script = ExtResource("2_v47hi")
 
-[node name="BG" type="Panel" parent="."]
+[node name="BG" type="Panel" parent="." unique_id=956555689]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c8ate")
 
-[node name="Content" type="VBoxContainer" parent="."]
+[node name="Content" type="VBoxContainer" parent="." unique_id=1104119424]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,11 +44,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Options" type="Panel" parent="Content"]
+[node name="Options" type="Panel" parent="Content" unique_id=493448401]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container" type="VBoxContainer" parent="Content/Options"]
+[node name="Container" type="VBoxContainer" parent="Content/Options" unique_id=402367675]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -62,55 +62,72 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="SFX" type="HBoxContainer" parent="Content/Options/Container"]
+[node name="Fullscreen" type="HBoxContainer" parent="Content/Options/Container" unique_id=1155616542]
 layout_mode = 2
 alignment = 1
 
-[node name="Slider" type="HSlider" parent="Content/Options/Container/SFX"]
+[node name="Button" type="CheckButton" parent="Content/Options/Container/Fullscreen" unique_id=575968263]
+layout_mode = 2
+size_flags_horizontal = 3
+flat = true
+
+[node name="Label" type="Label" parent="Content/Options/Container/Fullscreen" unique_id=1548213412]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fullscreen"
+horizontal_alignment = 2
+
+[node name="SFX" type="HBoxContainer" parent="Content/Options/Container" unique_id=549678563]
+layout_mode = 2
+alignment = 1
+
+[node name="Slider" type="HSlider" parent="Content/Options/Container/SFX" unique_id=1613334604]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_icons/grabber = ExtResource("2_vokc3")
 theme_override_icons/grabber_highlight = ExtResource("3_p4jgh")
 max_value = 10.0
 
-[node name="Label" type="Label" parent="Content/Options/Container/SFX"]
+[node name="Label" type="Label" parent="Content/Options/Container/SFX" unique_id=1279495885]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX Volume"
 horizontal_alignment = 2
 
-[node name="Music" type="HBoxContainer" parent="Content/Options/Container"]
+[node name="Music" type="HBoxContainer" parent="Content/Options/Container" unique_id=351493801]
 layout_mode = 2
 alignment = 1
 
-[node name="Slider" type="HSlider" parent="Content/Options/Container/Music"]
+[node name="Slider" type="HSlider" parent="Content/Options/Container/Music" unique_id=1535965178]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_icons/grabber = ExtResource("4_vwsv3")
 theme_override_icons/grabber_highlight = ExtResource("5_v47hi")
 max_value = 10.0
 
-[node name="Label" type="Label" parent="Content/Options/Container/Music"]
+[node name="Label" type="Label" parent="Content/Options/Container/Music" unique_id=787506245]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Music Volume"
 horizontal_alignment = 2
 
-[node name="Buttons" type="HBoxContainer" parent="Content"]
+[node name="Buttons" type="HBoxContainer" parent="Content" unique_id=1560401225]
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="Content/Buttons"]
+[node name="Back" type="Button" parent="Content/Buttons" unique_id=1758253187]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back"
 icon = ExtResource("6_vwsv3")
 
-[node name="Button2" type="Button" parent="Content/Buttons"]
+[node name="Button2" type="Button" parent="Content/Buttons" unique_id=1927095742]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
 icon = ExtResource("7_v47hi")
 
+[connection signal="toggled" from="Content/Options/Container/Fullscreen/Button" to="." method="_on_button_toggled"]
 [connection signal="value_changed" from="Content/Options/Container/SFX/Slider" to="." method="_on_sfx_volume_changed"]
 [connection signal="value_changed" from="Content/Options/Container/Music/Slider" to="." method="_on_music_volume_changed"]
+[connection signal="pressed" from="Content/Buttons/Back" to="." method="_on_back_pressed"]

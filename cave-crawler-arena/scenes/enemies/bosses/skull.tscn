@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://mxleet7y6b71"]
+[gd_scene format=3 uid="uid://mxleet7y6b71"]
 
 [ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/bosses/boss.tscn" id="1_1t3j5"]
 [ext_resource type="Script" uid="uid://8n22u0ap6vkh" path="res://scripts/enemies/bosses/skull/skull.gd" id="2_v22qf"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bqe385kie21jx" path="res://scripts/enemies/bosses/skull/skull_spikes.gd" id="8_ddwp6"]
 [ext_resource type="Script" uid="uid://cacpopsliofmm" path="res://scripts/enemies/bosses/skull/skull_charge.gd" id="9_rbqb5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7susr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rqrww"]
 resource_local_to_scene = true
 shader = ExtResource("4_rqrww")
 shader_parameter/active = false
@@ -23,7 +23,7 @@ shader_parameter/input_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wuwa"]
 
-[node name="Skull" instance=ExtResource("1_1t3j5")]
+[node name="Skull" unique_id=1212440201 instance=ExtResource("1_1t3j5")]
 script = ExtResource("2_v22qf")
 enemy_name = "skull"
 speed = 50.0
@@ -31,12 +31,13 @@ max_health = 200
 min_xp_drop = 0
 max_xp_drop = 0
 
-[node name="Shadow" type="Sprite2D" parent="." index="0"]
+[node name="Shadow" type="Sprite2D" parent="." index="0" unique_id=1897141513]
 position = Vector2(0, 13.999999)
 texture = ExtResource("3_3gsvf")
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_7susr")
+material = SubResource("ShaderMaterial_rqrww")
+scale = Vector2(-1, 1)
 texture = ExtResource("4_17hur")
 hframes = 2
 
@@ -51,20 +52,20 @@ shape = SubResource("CircleShape2D_tg20o")
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_5wuwa")
 
-[node name="StateManager" type="Node" parent="." index="6" node_paths=PackedStringArray("starting_state")]
+[node name="StateManager" type="Node" parent="." index="6" unique_id=424426528 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("5_lgdni")
 starting_state = NodePath("Chase")
 
-[node name="Chase" type="Node" parent="StateManager" index="0"]
+[node name="Chase" type="Node" parent="StateManager" index="0" unique_id=189972303]
 script = ExtResource("6_7f2rg")
 
-[node name="Shoot" type="Node" parent="StateManager" index="1"]
+[node name="Shoot" type="Node" parent="StateManager" index="1" unique_id=1634073073]
 script = ExtResource("7_entxl")
 
-[node name="Spikes" type="Node" parent="StateManager" index="2"]
+[node name="Spikes" type="Node" parent="StateManager" index="2" unique_id=962945506]
 script = ExtResource("8_ddwp6")
 
-[node name="Charge" type="Node" parent="StateManager" index="3"]
+[node name="Charge" type="Node" parent="StateManager" index="3" unique_id=240785620]
 script = ExtResource("9_rbqb5")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
