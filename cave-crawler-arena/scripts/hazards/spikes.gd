@@ -3,7 +3,7 @@ extends Hitbox
 
 
 func _ready():
-	damage = 40.0
+	damage = 120.0
 	$Animator.play("spawn")
 
 func despawn():

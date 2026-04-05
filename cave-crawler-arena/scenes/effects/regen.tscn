@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cur66qx1iost5"]
+
+[ext_resource type="Texture2D" uid="uid://dxiwatjtm7tbg" path="res://sprites/effects/heal.png" id="1_w1edh"]
+[ext_resource type="Script" uid="uid://6pwk0x7y4mc8" path="res://scenes/effects/regen.gd" id="2_v08x6"]
+
+[node name="Regen" type="Sprite2D" unique_id=1764263536]
+z_index = 3
+texture = ExtResource("1_w1edh")
+script = ExtResource("2_v08x6")

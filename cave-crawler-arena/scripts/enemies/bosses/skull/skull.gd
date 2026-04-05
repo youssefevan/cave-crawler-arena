@@ -57,3 +57,21 @@ func handle_spikes():
 		can_fire = false
 		await get_tree().create_timer(spikerate, false).timeout
 		can_fire = true
+
+func get_hit(is_crit, dir):
+	if is_crit:
+		current_health -= 3
+	else:
+		current_health -= 1
+	
+	AudioManager.play_sfx(hurt_sfx, 1.0, 0.5)
+	
+	$Sprite.material.set_shader_parameter("input_color", hurt_color)
+	$Sprite.material.set_shader_parameter("active", true)
+	self.set_physics_process(false)
+	await get_tree().create_timer(0.05, false).timeout
+	self.set_physics_process(true)
+	$Sprite.material.set_shader_parameter("active", false)
+	
+	if current_health <= 0:
+		die(dir)

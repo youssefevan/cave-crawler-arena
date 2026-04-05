@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnipddijq7jdd"]
+[gd_scene format=3 uid="uid://cnipddijq7jdd"]
 
 [ext_resource type="PackedScene" uid="uid://c6pba287ajugl" path="res://scenes/hitbox.tscn" id="1_l5glv"]
 [ext_resource type="Script" uid="uid://dx184557anwsl" path="res://scripts/bullet.gd" id="2_eoqba"]
@@ -15,12 +15,12 @@ shader_parameter/input_color = Vector4(1, 1, 1, 1)
 radius = 2.0
 height = 18.0
 
-[node name="Bullet" groups=["Player"] instance=ExtResource("1_l5glv")]
+[node name="Bullet" unique_id=324943206 groups=["Player"] instance=ExtResource("1_l5glv")]
 collision_mask = 17
 script = ExtResource("2_eoqba")
 crit_color = Color(1, 0.6627451, 0, 1)
 
-[node name="Sprite" type="Sprite2D" parent="." index="0"]
+[node name="Sprite" type="Sprite2D" parent="." index="0" unique_id=669219590]
 material = SubResource("ShaderMaterial_eoqba")
 position = Vector2(7, 0)
 texture = ExtResource("3_l5glv")
@@ -30,7 +30,7 @@ position = Vector2(7, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_l5glv")
 
-[node name="HitPos" type="Node2D" parent="." index="2"]
+[node name="HitPos" type="Node2D" parent="." index="2" unique_id=1359815195]
 position = Vector2(13, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

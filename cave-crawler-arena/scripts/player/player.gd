@@ -13,6 +13,7 @@ signal dead
 @onready var die : State = $StateManager/Die
 
 @export var bullet : PackedScene
+@onready var regen_particle = preload("res://scenes/effects/regen.tscn")
 
 @onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
 @onready var hurt_sfx = preload("res://audio/player_hurt.ogg")
@@ -155,6 +156,11 @@ func spawn_bomb():
 func regen():
 	var regen_rate = Global.get_stat("regen_rate")
 	#print(regen_rate, enemies_in_heal_aura)
+	
+	var r = regen_particle.instantiate()
+	r.global_position = global_position
+	get_tree().get_root().call_deferred('add_child', r)
+	
 	await get_tree().create_timer(regen_rate, false).timeout
 	if state_manager.current_state != die:
 		if Global.health < Global.get_stat("max_health"):
