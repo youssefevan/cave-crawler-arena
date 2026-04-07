@@ -41,8 +41,11 @@ func start_wave():
 	
 	wave += 1
 	
-	if wave % 10 == 0 and $RunTimer.time_left > 30.0:
+	if wave % 7 == 0 and $RunTimer.time_left > 30.0:
 		spawn_mini_boss()
+		
+		if wave > 25:
+			spawn_mini_boss()
 	
 	await spawn_wave()
 	spawning_wave = false
@@ -112,10 +115,15 @@ func spawn_wave():
 
 func player_died():
 	OptionsManager.save_data()
-	var tween = get_tree().create_tween()
-	tween.tween_property(Engine, "time_scale", 0.2, 1.0).set_trans(Tween.TRANS_LINEAR)
 	
-	await get_tree().create_timer(2.0, false, false, true).timeout
+	
+	Engine.time_scale = 0.05
+	await get_tree().create_timer(2.0, false, false, true)
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(Engine, "time_scale", 1.0, 2.0).set_trans(Tween.TRANS_LINEAR)
+	
+	#await get_tree().create_timer(2.0, false, false, true).timeout
 	#$CanvasLayer/HUD/Pause.open()
 
 func enemy_died():

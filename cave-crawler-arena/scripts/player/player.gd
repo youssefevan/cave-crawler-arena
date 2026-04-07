@@ -146,7 +146,7 @@ func spawn_bomb():
 	if can_spawn_bomb and Global.get_item("bomb") > 0:
 		var b = bomb_scene.instantiate()
 		b.global_position = global_position
-		b.rotation = $Weapon.global_rotation
+		#b.rotation = $Weapon.global_rotation
 		get_tree().get_root().call_deferred("add_child", b)
 		
 		can_spawn_bomb = false
@@ -157,13 +157,12 @@ func regen():
 	var regen_rate = Global.get_stat("regen_rate")
 	#print(regen_rate, enemies_in_heal_aura)
 	
-	var r = regen_particle.instantiate()
-	r.global_position = global_position
-	get_tree().get_root().call_deferred('add_child', r)
-	
 	await get_tree().create_timer(regen_rate, false).timeout
 	if state_manager.current_state != die:
 		if Global.health < Global.get_stat("max_health"):
+			var r = regen_particle.instantiate()
+			r.global_position = global_position
+			get_tree().get_root().call_deferred('add_child', r)
 			if enemies_in_heal_aura:
 				Global.health += 3 * (1 + Global.get_item("heal_aura"))
 			else:
@@ -197,10 +196,10 @@ func get_hit(damage):
 
 func hit_flash() -> void:
 	while invulnerable:
-		$Sprite.modulate = Color(1.0, 0.0, 0.0, 0.2)
-		await get_tree().create_timer(0.1, false).timeout
 		$Sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
 		await get_tree().create_timer(0.11, false).timeout
+		$Sprite.modulate = Color(1.0, 0.0, 0.0, 0.2)
+		await get_tree().create_timer(0.1, false).timeout
 		
 	$Sprite.modulate = Color(1, 1, 1, 1)
 
@@ -209,14 +208,14 @@ func _on_pickup_range_area_entered(area):
 		area.player = self
 
 func _on_hurtbox_area_entered(area):
-	print('test')
+	#print('test')
 	if area.get_collision_layer_value(4) and area.is_in_group("Enemy"):
-		print('test1')
+		#print('test1')
 		if !invulnerable and Global.health > 0 and area is Hitbox:
-			print('test2')
+			#print('test2')
 			if area.damage != null:
-				print('test3')
+				#print('test3')
 				get_hit(area.damage)
 			else:
-				print('test4')
+				#print('test4')
 				get_hit(20)

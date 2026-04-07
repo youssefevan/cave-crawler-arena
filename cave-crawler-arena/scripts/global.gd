@@ -6,7 +6,7 @@ var enemy_pool = {
 	preload("res://scenes/enemies/rat.tscn"): [4, 1.0],
 	preload("res://scenes/enemies/roly_poly.tscn"): [16, 1.0],
 	preload("res://scenes/enemies/turret.tscn"): [20, 1.0],
-	preload("res://scenes/enemies/bat.tscn"): [10, 1.0],
+	preload("res://scenes/enemies/bat.tscn"): [1, 1.0],
 }
 
 var mini_boss_pool = [
@@ -20,7 +20,7 @@ var stats := {
 	"firerate": [1.5, 0],
 	"pickup_range": [8.0, 0],
 	"regen_rate": [3.0, 0],
-	"max_health": [300, 0],
+	"max_health": [250, 0],
 	"bullet_size": [1.0, 0],
 	"bullet_life": [0.2, 0],
 	"crit_chance": [0.0, 0]
@@ -84,7 +84,7 @@ func get_item(item : String):
 			if items[item] == 0:
 				return 0
 			else:
-				return 1.5 - (items[item] * 0.3)
+				return 1 - (items[item] * 0.2)
 		"skull_friend":
 			if items[item] == 0:
 				return 0

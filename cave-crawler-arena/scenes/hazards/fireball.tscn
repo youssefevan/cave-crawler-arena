@@ -20,9 +20,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_pnu0j"]
 resource_name = "move"
-length = 0.2
-loop_mode = 2
-step = 0.1
+length = 0.3
+loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -30,10 +30,10 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ts8d6"]
@@ -55,7 +55,7 @@ libraries/ = SubResource("AnimationLibrary_ts8d6")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2042647249]
 texture = ExtResource("3_pnu0j")
-hframes = 3
+hframes = 6
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=1457435132]
 rotation = 1.5707964

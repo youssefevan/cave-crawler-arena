@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2bcr4u6ed72r"]
+[gd_scene format=3 uid="uid://c2bcr4u6ed72r"]
 
 [ext_resource type="Script" uid="uid://cydeyqgnqd518" path="res://scripts/hazards/bomb.gd" id="1_i0m54"]
 [ext_resource type="Texture2D" uid="uid://d06swfrlpobg1" path="res://sprites/bomb.png" id="1_oguka"]
@@ -68,22 +68,20 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_i0m54"]
 radius = 13.038404
 
-[node name="Bomb" type="Area2D" groups=["Player"]]
+[node name="Bomb" type="Area2D" unique_id=245092813 groups=["Player"]]
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_i0m54")
 
-[node name="Animator" type="AnimationPlayer" parent="."]
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=2127003657]
 root_node = NodePath("../Sprite")
-libraries = {
-&"": SubResource("AnimationLibrary_muqgq")
-}
+libraries/ = SubResource("AnimationLibrary_muqgq")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1765759554]
 texture = ExtResource("1_oguka")
 hframes = 7
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=414773204]
 shape = SubResource("CircleShape2D_i0m54")
 disabled = true
 
