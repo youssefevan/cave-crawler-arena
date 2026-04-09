@@ -3,10 +3,10 @@ extends Node
 # packedscene, wave unlocked, spawn chance
 var enemy_pool = {
 	preload("res://scenes/enemies/crab.tscn"): [1, 1.0],
-	preload("res://scenes/enemies/rat.tscn"): [4, 1.0],
+	preload("res://scenes/enemies/rat.tscn"): [3, 1.0],
 	preload("res://scenes/enemies/roly_poly.tscn"): [16, 1.0],
 	preload("res://scenes/enemies/turret.tscn"): [20, 1.0],
-	preload("res://scenes/enemies/bat.tscn"): [1, 1.0],
+	preload("res://scenes/enemies/bat.tscn"): [8, 1.0],
 }
 
 var mini_boss_pool = [
@@ -40,6 +40,9 @@ var health = 100
 var xp = 0
 var level = 1
 
+func reset_run():
+	pass
+
 func get_xp_to_level() -> float:
 	return 20.0*level
 	#return floor(pow(10 * level, 1.1))
@@ -64,7 +67,7 @@ func get_stat(stat : String):
 		"pickup_range":
 			return stats[stat][0] + (16.0 * stats[stat][1])
 		"regen_rate":
-			return stats[stat][0] * pow(0.8, stats[stat][1])
+			return stats[stat][0] - (stats[stat][1] * 0.33)
 		"bullet_size":
 			return 1 + (stats[stat][1] * 0.3)
 		"bullet_life":

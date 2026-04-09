@@ -53,12 +53,11 @@ func get_hit(is_crit, dir):
 	
 	velocity = dir * 50.0
 	
-	$Sprite.material.set_shader_parameter("input_color", hurt_color)
-	$Sprite.material.set_shader_parameter("active", true)
+	$Sprite.self_modulate = hurt_color
 	self.set_physics_process(false)
-	await get_tree().create_timer(0.05, false).timeout
+	await get_tree().create_timer(0.075, false).timeout
 	self.set_physics_process(true)
-	$Sprite.material.set_shader_parameter("active", false)
+	$Sprite.self_modulate = Color.WHITE
 	
 	if current_health <= 0:
 		die(dir)
@@ -96,10 +95,10 @@ func get_hit(is_crit, dir):
 func die(dir):
 	await spawn_coins(dir)
 	emit_signal("died")
-	if OptionsManager.enemies_killed.has(enemy_name):
-		OptionsManager.enemies_killed[enemy_name] += 1
-	else:
-		OptionsManager.enemies_killed[enemy_name] = 1
+	#if OptionsManager.enemies_killed.has(enemy_name):
+		#OptionsManager.enemies_killed[enemy_name] += 1
+	#else:
+		#OptionsManager.enemies_killed[enemy_name] = 1
 	
 	queue_free()
 
@@ -121,6 +120,8 @@ func _on_hurtbox_area_entered(area):
 		if area.is_in_group("Player"):
 			if area is Bullet:
 				get_hit(area.is_crit, area.dir)
+			elif area is EnemyBullet:
+				get_hit(false, area.dir)
 			elif area is Bomb or area is Friend:
 				get_hit(false, -global_position.direction_to(area.global_position))
 		

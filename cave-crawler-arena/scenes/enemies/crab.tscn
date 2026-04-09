@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmh81k5mkdbbu"]
+[gd_scene format=3 uid="uid://bmh81k5mkdbbu"]
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_0s1mp"]
 [ext_resource type="Texture2D" uid="uid://ci0m0gqfu6s5q" path="res://sprites/enemies/crab.png" id="2_jpe3k"]
 [ext_resource type="Script" uid="uid://bf6e048pqwm4f" path="res://scripts/enemies/crab.gd" id="2_sqms0"]
-[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="3_teqeg"]
 
 [sub_resource type="Animation" id="Animation_teqeg"]
 length = 0.001
@@ -43,12 +42,6 @@ _data = {
 &"move": SubResource("Animation_sqms0")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwctj"]
-resource_local_to_scene = true
-shader = ExtResource("3_teqeg")
-shader_parameter/active = false
-shader_parameter/input_color = Vector4(1, 1, 1, 1)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqms0"]
 radius = 5.0
 
@@ -58,35 +51,31 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jwctj"]
 radius = 5.0
 
-[node name="Crab" instance=ExtResource("1_0s1mp")]
+[node name="Crab" unique_id=582207461 instance=ExtResource("1_0s1mp")]
 script = ExtResource("2_sqms0")
 enemy_name = "crab"
 min_group_size = 3
 max_group_size = 60
-hurt_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
 
-[node name="Animator" type="AnimationPlayer" parent="." index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_jwctj")
-}
+[node name="Animator" type="AnimationPlayer" parent="." index="0" unique_id=1337204367]
+libraries/ = SubResource("AnimationLibrary_jwctj")
 
-[node name="Sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_jwctj")
+[node name="Sprite" parent="." index="1" unique_id=89973441]
 position = Vector2(0, 0)
 texture = ExtResource("2_jpe3k")
 hframes = 3
 
-[node name="Collider" parent="." index="2"]
+[node name="Collider" parent="." index="2" unique_id=488878270]
 shape = SubResource("CircleShape2D_sqms0")
 
-[node name="Hitbox" parent="." index="3"]
+[node name="Hitbox" parent="." index="3" unique_id=484124133]
 damage = 30
 
 [node name="Collider" parent="Hitbox" index="0"]
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_teqeg")
 
-[node name="Collider" parent="Hurtbox" index="0"]
+[node name="Collider" parent="Hurtbox" parent_id_path=PackedInt32Array(1794270026) index="0"]
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_jwctj")
 

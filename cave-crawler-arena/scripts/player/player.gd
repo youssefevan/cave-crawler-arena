@@ -155,6 +155,10 @@ func spawn_bomb():
 
 func regen():
 	var regen_rate = Global.get_stat("regen_rate")
+	
+	if enemies_in_heal_aura:
+		regen_rate /= 1 + Global.get_item("heal_aura")
+	
 	#print(regen_rate, enemies_in_heal_aura)
 	
 	await get_tree().create_timer(regen_rate, false).timeout
@@ -163,10 +167,7 @@ func regen():
 			var r = regen_particle.instantiate()
 			r.global_position = global_position
 			get_tree().get_root().call_deferred('add_child', r)
-			if enemies_in_heal_aura:
-				Global.health += 3 * (1 + Global.get_item("heal_aura"))
-			else:
-				Global.health += 3
+			Global.health += 1 + Global.get_item("heal_aura")
 			Global.health = clamp(Global.health, 0, Global.get_stat("max_health"))
 		
 		regen()

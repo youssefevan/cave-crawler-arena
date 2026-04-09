@@ -13,7 +13,7 @@ var interrupt_position
 func _ready():
 	music_player.set_bus("Music")
 	
-	OptionsManager.connect("data_loaded", load_audio_data)
+	#OptionsManager.connect("data_loaded", load_audio_data)
 
 func play_sfx(sound : AudioStream, base_pitch := 1.0, pitch_range := 0.0, parent := get_tree().current_scene):
 	var stream = AudioStreamPlayer.new()

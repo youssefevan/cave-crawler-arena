@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://buqli3ldmuxdc"]
+[gd_scene format=3 uid="uid://buqli3ldmuxdc"]
 
 [ext_resource type="PackedScene" uid="uid://c82psucejhwxl" path="res://scenes/enemies/enemy.tscn" id="1_fxid1"]
 [ext_resource type="Script" uid="uid://bfv4qi40rdhw4" path="res://scripts/enemies/rat.gd" id="1_t1pi2"]
 [ext_resource type="Texture2D" uid="uid://dw0xvujivdxhg" path="res://sprites/enemies/rat.png" id="2_ohayx"]
 [ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="3_ac66d"]
-[ext_resource type="Shader" uid="uid://8rxvcqlhvbpv" path="res://resources/shaders/recolor.gdshader" id="3_fffwg"]
 [ext_resource type="Script" uid="uid://djgi4m2wp65bs" path="res://scripts/enemies/states/enemy_idle.gd" id="4_hajvu"]
 [ext_resource type="Script" uid="uid://0wryy3yypl5d" path="res://scripts/enemies/states/enemy_aggro.gd" id="5_ujef0"]
 [ext_resource type="Script" uid="uid://1doy4qylvp2m" path="res://scripts/enemies/states/enemy_lunge.gd" id="6_h50a5"]
@@ -94,12 +93,6 @@ _data = {
 &"melee": SubResource("Animation_fffwg")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ac66d"]
-resource_local_to_scene = true
-shader = ExtResource("3_fffwg")
-shader_parameter/active = false
-shader_parameter/input_color = Vector4(1, 1, 1, 1)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_rl5i1"]
 radius = 5.0
 
@@ -109,7 +102,7 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac66d"]
 radius = 5.0
 
-[node name="Rat" instance=ExtResource("1_fxid1")]
+[node name="Rat" unique_id=1958318980 instance=ExtResource("1_fxid1")]
 script = ExtResource("1_t1pi2")
 enemy_name = "rat"
 max_health = 2
@@ -119,24 +112,21 @@ max_xp_value = 2
 min_group_size = 3
 max_group_size = 50
 
-[node name="Animator" type="AnimationPlayer" parent="." index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_fffwg")
-}
+[node name="Animator" type="AnimationPlayer" parent="." index="0" unique_id=1837219099]
+libraries/ = SubResource("AnimationLibrary_fffwg")
 
-[node name="Sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_ac66d")
+[node name="Sprite" parent="." index="1" unique_id=89973441]
 position = Vector2(-1.3113022e-06, -3.9999998)
 texture = ExtResource("2_ohayx")
 hframes = 3
 vframes = 2
 frame = 3
 
-[node name="Collider" parent="." index="2"]
+[node name="Collider" parent="." index="2" unique_id=488878270]
 position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_rl5i1")
 
-[node name="Hitbox" parent="." index="3"]
+[node name="Hitbox" parent="." index="3" unique_id=484124133]
 damage = 40
 
 [node name="Collider" parent="Hitbox" index="0"]
@@ -144,28 +134,28 @@ position = Vector2(0, 0)
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_fffwg")
 
-[node name="Collider" parent="Hurtbox" index="0"]
+[node name="Collider" parent="Hurtbox" parent_id_path=PackedInt32Array(1794270026) index="0"]
 position = Vector2(0, 0)
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_ac66d")
 
-[node name="StateManager" type="Node" parent="." index="5" node_paths=PackedStringArray("starting_state")]
+[node name="StateManager" type="Node" parent="." index="5" unique_id=1666687161 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_ac66d")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateManager" index="0"]
+[node name="Idle" type="Node" parent="StateManager" index="0" unique_id=39401671]
 script = ExtResource("4_hajvu")
 
-[node name="Aggro" type="Node" parent="StateManager" index="1"]
+[node name="Aggro" type="Node" parent="StateManager" index="1" unique_id=805942827]
 script = ExtResource("5_ujef0")
 
-[node name="Lunge" type="Node" parent="StateManager" index="2"]
+[node name="Lunge" type="Node" parent="StateManager" index="2" unique_id=872741663]
 script = ExtResource("6_h50a5")
 
-[node name="Cooldown" type="Node" parent="StateManager" index="3"]
+[node name="Cooldown" type="Node" parent="StateManager" index="3" unique_id=1872576113]
 script = ExtResource("7_1spx8")
 
-[node name="Melee" type="Node" parent="StateManager" index="4"]
+[node name="Melee" type="Node" parent="StateManager" index="4" unique_id=1064472304]
 script = ExtResource("9_t1pi2")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

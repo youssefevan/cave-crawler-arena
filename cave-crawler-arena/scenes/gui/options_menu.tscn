@@ -63,6 +63,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Fullscreen" type="HBoxContainer" parent="Content/Options/Container" unique_id=1155616542]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -122,6 +123,7 @@ text = "Back"
 icon = ExtResource("6_vwsv3")
 
 [node name="Button2" type="Button" parent="Content/Buttons" unique_id=1927095742]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"

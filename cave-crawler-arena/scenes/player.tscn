@@ -266,8 +266,10 @@ debug_color = Color(0.46437377, 0.5760211, 0.3979822, 0.41960785)
 
 [node name="Friend" parent="FollowRadius" unique_id=573653461 instance=ExtResource("10_y4r1p")]
 position = Vector2(48, 0)
+collision_mask = 24
 
 [connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="FollowRadius/Friend" to="FollowRadius/Friend" method="_on_area_entered"]
 
 [editable path="Hurtbox"]

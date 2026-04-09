@@ -21,6 +21,9 @@ var active_enemies := 0
 
 func _ready():
 	Engine.time_scale = 1.0
+	
+	Global.reset_run()
+	
 	player.connect("dead", player_died)
 	
 	$RunTimer.wait_time = run_time
@@ -55,7 +58,7 @@ func spawn_wave():
 	# enemies are spawned in groups throughout the wave
 	print("--wave: ", wave, "--")
 	
-	var num_groups = randi_range(2, 3)
+	var num_groups = randi_range(2, 5)
 	
 	print("groups: ", num_groups)
 	
@@ -114,7 +117,7 @@ func spawn_wave():
 	check_for_enemies()
 
 func player_died():
-	OptionsManager.save_data()
+	#OptionsManager.save_data()
 	
 	
 	Engine.time_scale = 0.05
@@ -202,9 +205,9 @@ func get_good_spot(type : String):
 			var posx = randf_range(64, 2048-64)
 			var posy = randf_range(64, 2048-64)
 			
-			var dist_to_player = Vector2(posx, posy).distance_to(player.global_position)
+			var dist_to_player = Vector2(posx, posy).distance_squared_to(player.global_position)
 			
-			if dist_to_player > 200 and dist_to_player < 600:
+			if dist_to_player > (200*200) and dist_to_player < (600*600):
 				spawn_pos = Vector2(posx, posy)
 				good_spot = true
 		
@@ -213,9 +216,9 @@ func get_good_spot(type : String):
 			var posx = randf_range(128, 2048-128)
 			var posy = randf_range(128, 2048-128)
 			
-			var dist_to_player = Vector2(posx, posy).distance_to(player.global_position)
+			var dist_to_player = Vector2(posx, posy).distance_squared_to(player.global_position)
 			
-			if dist_to_player > 200 and dist_to_player < 600:
+			if dist_to_player > (200*200) and dist_to_player < (600*600):
 				spawn_pos = Vector2(posx, posy)
 				good_spot = true
 	else:

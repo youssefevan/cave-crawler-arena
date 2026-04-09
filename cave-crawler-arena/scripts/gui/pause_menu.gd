@@ -16,7 +16,7 @@ func update_info():
 	$Content/BG/Info/Items.text = str(Global.items)
 
 func _on_quit_pressed():
-	OptionsManager.save_data()
+	#OptionsManager.save_data()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/gui/main_menu.tscn")
 

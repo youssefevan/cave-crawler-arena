@@ -16,4 +16,4 @@ func _physics_process(delta):
 	
 	global_position.y = lerpf(global_position.y, target_pos.y, 5.0 * delta)
 	
-	modulate = lerp(modulate, Color.from_hsv(0, 0, 0, 0), 1.0 * delta)
+	modulate = lerp(modulate, Color.from_hsv(0.0, 0.0, 0.0, 0.576), 1.0 * delta)

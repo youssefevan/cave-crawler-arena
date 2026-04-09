@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dutl32wdlijro"]
+[gd_scene format=3 uid="uid://dutl32wdlijro"]
 
 [ext_resource type="PackedScene" uid="uid://c6pba287ajugl" path="res://scenes/hitbox.tscn" id="1_1a7is"]
 [ext_resource type="Script" uid="uid://b5xp4t8b33s3n" path="res://scripts/hazards/enemy_bullet.gd" id="2_ka8qk"]
@@ -7,10 +7,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ka8qk"]
 radius = 1.0
 
-[node name="Hitbox" groups=["Enemy"] instance=ExtResource("1_1a7is")]
+[node name="Hitbox" unique_id=2026336112 groups=["Enemy"] instance=ExtResource("1_1a7is")]
 script = ExtResource("2_ka8qk")
+speed = 70.0
+expiration_timer = 2.0
 
-[node name="Sprite" type="Sprite2D" parent="." index="0"]
+[node name="Sprite" type="Sprite2D" parent="." index="0" unique_id=1112071639]
 texture = ExtResource("3_ka8qk")
 
 [node name="Collider" parent="." index="1"]
