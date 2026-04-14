@@ -20,10 +20,14 @@ func _physics_process(delta):
 		dir = global_position.direction_to(player.global_position)
 	
 	if global_position.distance_to(player.global_position) > 60.0:
-		velocity = lerp(velocity, dir.normalized() * speed, accel * delta)
+		velocity = lerp(velocity, Vector2.ZERO, accel * delta)
+		if $Animator.current_animation != "Move":
+			$Animator.play("Move")
 	else:
 		velocity = lerp(velocity, dir.normalized() * speed/4.0, accel * delta)
 		shoot()
+		if $Animator.current_animation != "Attack":
+			$Animator.play("Attack")
 	
 	move_and_slide()
 
@@ -33,7 +37,7 @@ func shoot():
 		var num_bullets = 8
 		var start_angle = rotation_degrees - spread_angle_degrees / 2
 		var angle_step = spread_angle_degrees / (num_bullets - 1)
-			
+		
 		for i in range(num_bullets):
 			var b = bullet_scene.instantiate()
 			b.rotation_degrees = start_angle + angle_step * i
@@ -43,3 +47,6 @@ func shoot():
 		can_shoot = false
 		await get_tree().create_timer(0.5, false).timeout
 		can_shoot = true
+
+func gallop():
+	velocity = dir.normalized() * 100.0

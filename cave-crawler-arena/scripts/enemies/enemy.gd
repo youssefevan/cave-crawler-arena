@@ -27,6 +27,7 @@ var accel := 5.0
 #var freeze_time = 0.5
 @export var hurt_color : Color
 #@export var freeze_color : Color
+@onready var die_sfx = preload("res://audio/enemy_hit.ogg")
 
 var active = false
 var current_health := 1
@@ -93,6 +94,7 @@ func get_hit(is_crit, dir):
 	#catch_fire()
 
 func die(dir):
+	AudioManager.play_sfx(die_sfx, 0.5, 0.1)
 	await spawn_coins(dir)
 	emit_signal("died")
 	#if OptionsManager.enemies_killed.has(enemy_name):

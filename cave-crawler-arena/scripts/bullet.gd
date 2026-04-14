@@ -20,15 +20,16 @@ func _ready():
 	expiration_timer = Global.get_stat("bullet_life")
 	scale.x = Global.get_stat("bullet_size")
 	scale.y = Global.get_stat("bullet_size")
-	
-	if randf() < Global.get_stat("crit_chance"):
-		is_crit = true
-		$Sprite.material.set_shader_parameter("input_color", crit_color)
-		$Sprite.material.set_shader_parameter("active", true)
+		
 	
 	await get_tree().create_timer(expiration_timer, false).timeout
 	
 	queue_free()
+
+func set_crit():
+	is_crit = true
+	$Sprite.material.set_shader_parameter("input_color", crit_color)
+	$Sprite.material.set_shader_parameter("active", true)
 
 func _physics_process(delta):
 	global_position += dir * speed * delta

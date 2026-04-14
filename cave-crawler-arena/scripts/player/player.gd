@@ -16,8 +16,9 @@ signal dead
 @onready var regen_particle = preload("res://scenes/effects/regen.tscn")
 
 @onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
+@onready var crit_sfx = preload("res://audio/crit.ogg")
 @onready var hurt_sfx = preload("res://audio/player_hurt.ogg")
-@export var low_hp_sfx = preload("res://audio/low_health.ogg")
+@onready var low_hp_sfx = preload("res://audio/low_health.ogg")
 
 @onready var bomb_scene = preload("res://scenes/hazards/bomb.tscn")
 
@@ -126,14 +127,26 @@ func attack():
 			var angle_step = spread_angle_degrees / (num_bullets - 1)
 			
 			for i in num_bullets:
+				var crit = randf() < Global.get_stat("crit_chance")
 				var b = bullet.instantiate()
 				b.rotation_degrees = start_angle + angle_step * i
 				b.global_position = $Weapon/Muzzle.global_position
+				
+				if crit:
+					b.set_crit()
+					AudioManager.play_sfx(crit_sfx)
+				
 				get_parent().bullets.add_child(b)
 		else:
+			var crit = randf() < Global.get_stat("crit_chance")
 			var b = bullet.instantiate()
 			b.rotation = $Weapon.global_rotation
 			b.global_position = $Weapon/Muzzle.global_position
+			
+			if crit:
+				b.set_crit()
+				AudioManager.play_sfx(crit_sfx)
+			
 			get_parent().bullets.add_child(b)
 		
 		$Weapon/Animator.stop()
