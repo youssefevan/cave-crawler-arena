@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://gk7ouh35fc1e" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://c1ewrypht14m3" path="res://scenes/player.tscn" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://csocpola5mk3u" path="res://scripts/gui/health.gd" id="2_71j4m"]
+[ext_resource type="Script" uid="uid://csocpola5mk3u" path="res://scripts/gui/health_hud.gd" id="2_71j4m"]
 [ext_resource type="PackedScene" uid="uid://mxleet7y6b71" path="res://scenes/enemies/bosses/skull.tscn" id="2_dss4m"]
 [ext_resource type="Theme" uid="uid://y6xls0t6m618" path="res://resources/game_ui.tres" id="2_i7141"]
 [ext_resource type="Texture2D" uid="uid://cgodtknkmupww" path="res://sprites/tiles.png" id="2_k0juu"]
-[ext_resource type="Script" uid="uid://cdd4r5317ovjd" path="res://scripts/gui/xp.gd" id="3_qfnet"]
+[ext_resource type="Script" uid="uid://cdd4r5317ovjd" path="res://scripts/gui/top_hud.gd" id="3_qfnet"]
 [ext_resource type="Texture2D" uid="uid://dx547ycdr2jb2" path="res://sprites/gui/health_overlay_alt.png" id="5_pm21f"]
 [ext_resource type="Texture2D" uid="uid://cagwq1n1an6s0" path="res://sprites/gui/close.png" id="8_jhx03"]
 [ext_resource type="Script" uid="uid://dve8jykkb70pd" path="res://scripts/gui/pause_menu.gd" id="8_o8fc1"]
@@ -64,7 +64,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("2_i7141")
 
-[node name="XP" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=718981893]
+[node name="XP" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=718981893 node_paths=PackedStringArray("world")]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -74,6 +74,7 @@ offset_right = -12.0
 offset_bottom = 28.0
 grow_horizontal = 2
 script = ExtResource("3_qfnet")
+world = NodePath("../../..")
 
 [node name="XPBar" type="ProgressBar" parent="CanvasLayer/HUD/XP" unique_id=536451792]
 custom_minimum_size = Vector2(0, 6)
@@ -82,11 +83,13 @@ show_percentage = false
 
 [node name="Stats" type="HBoxContainer" parent="CanvasLayer/HUD/XP" unique_id=69756987]
 layout_mode = 2
+alignment = 1
 
 [node name="LVL" type="Label" parent="CanvasLayer/HUD/XP/Stats" unique_id=602081381]
 layout_mode = 2
+size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 8
-text = "LVL 1:"
+text = "LVL 1: 100/100"
 vertical_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/XP/Stats/LVL" unique_id=1642794268]
@@ -99,25 +102,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="XP" type="Label" parent="CanvasLayer/HUD/XP/Stats" unique_id=1434340751]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "100/100"
-vertical_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/XP/Stats/XP" unique_id=1452870671]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
 [node name="Timer" type="Label" parent="CanvasLayer/HUD/XP/Stats" unique_id=956122502]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 4
 text = "00:00"
 horizontal_alignment = 2
 
@@ -131,7 +118,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Health" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=2035340111]
+[node name="Wave" type="Label" parent="CanvasLayer/HUD/XP/Stats" unique_id=1790277715]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Wave: 1"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HUD/XP/Stats/Wave" unique_id=520177605]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Health" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=2035340111 node_paths=PackedStringArray("world")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -145,6 +147,7 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 script = ExtResource("2_71j4m")
+world = NodePath("../../..")
 
 [node name="Label" type="Label" parent="CanvasLayer/HUD/Health" unique_id=1253715948]
 layout_mode = 2

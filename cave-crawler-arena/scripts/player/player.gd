@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal dead
+signal player_hit
 
 @onready var sprite : Sprite2D = $Sprite
 @onready var attack_range : Area2D = $AttackRange
@@ -208,6 +209,8 @@ func get_hit(damage):
 	
 	if Global.health <= 0:
 		dead.emit()
+	
+	player_hit.emit()
 	
 	invulnerable = true
 	$Hurtbox/Collider.disabled = true

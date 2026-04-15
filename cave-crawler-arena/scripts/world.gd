@@ -21,6 +21,8 @@ var active_enemies := 0
 @export var mini_boss_wave := 7
 @export var upgrade_level := 5
 
+@onready var run_timer = %RunTimer 
+
 func _ready():
 	Engine.time_scale = 1.0
 	
@@ -34,11 +36,6 @@ func _ready():
 	#await get_tree().create_timer(2.0, false).timeout
 	start_wave()
 
-func _physics_process(delta):
-	var minutes = floori(%RunTimer.time_left/60.0)
-	var seconds = int(%RunTimer.time_left) % 60
-	$CanvasLayer/HUD/XP/Stats/Timer.text = "%02d:%02d" % [minutes, seconds]
-
 func start_wave():
 	if spawning_wave:
 		return
@@ -46,7 +43,7 @@ func start_wave():
 	
 	wave += 1
 	
-	if wave % mini_boss_wave == 0 and $RunTimer.time_left > 30.0:
+	if wave % mini_boss_wave == 0 and run_timer.time_left > 30.0:
 		spawn_mini_boss()
 		
 		if wave > 25:
