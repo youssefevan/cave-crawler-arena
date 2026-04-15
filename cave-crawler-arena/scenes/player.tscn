@@ -92,7 +92,6 @@ radius = 3.0
 radius = 88.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ur7pv"]
-radius = 8.0
 
 [sub_resource type="Animation" id="Animation_f1ej7"]
 length = 0.001
@@ -190,6 +189,7 @@ radius = 20.0
 collision_layer = 2
 script = ExtResource("1_g2els")
 bullet = ExtResource("2_smehm")
+metadata/_edit_group_ = true
 
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=191722383]
 libraries/ = SubResource("AnimationLibrary_jej6c")

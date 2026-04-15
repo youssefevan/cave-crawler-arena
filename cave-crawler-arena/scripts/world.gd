@@ -17,7 +17,7 @@ var previous_wave_sizes = []
 
 var active_enemies := 0
 
-@export var run_time := 900
+@export var run_time := 720
 
 func _ready():
 	Engine.time_scale = 1.0

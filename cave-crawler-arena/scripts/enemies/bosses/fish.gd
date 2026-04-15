@@ -24,7 +24,7 @@ func _physics_process(delta):
 		if $Animator.current_animation != "Move":
 			$Animator.play("Move")
 	else:
-		velocity = lerp(velocity, dir.normalized() * speed/4.0, accel * delta)
+		velocity = lerp(velocity, Vector2.ZERO, accel * delta)
 		shoot()
 		if $Animator.current_animation != "Attack":
 			$Animator.play("Attack")
@@ -49,4 +49,4 @@ func shoot():
 		can_shoot = true
 
 func gallop():
-	velocity = dir.normalized() * 100.0
+	velocity = dir.normalized() * speed #speed is higher due to unusual move behavior

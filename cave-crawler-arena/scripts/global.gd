@@ -4,9 +4,10 @@ extends Node
 var enemy_pool = {
 	preload("res://scenes/enemies/crab.tscn"): [1, 1.0],
 	preload("res://scenes/enemies/rat.tscn"): [3, 1.0],
-	preload("res://scenes/enemies/roly_poly.tscn"): [16, 1.0],
+	preload("res://scenes/enemies/roly_poly.tscn"): [15, 1.0],
 	preload("res://scenes/enemies/turret.tscn"): [20, 1.0],
-	preload("res://scenes/enemies/bat.tscn"): [8, 1.0],
+	preload("res://scenes/enemies/bat.tscn"): [10, 1.0],
+	preload("res://scenes/enemies/flea.tscn"): [6, 1.0],
 }
 
 var mini_boss_pool = [
@@ -18,7 +19,7 @@ var mini_boss_pool = [
 var stats := {
 	"speed": [38.0, 0],
 	"firerate": [1.5, 0],
-	"pickup_range": [8.0, 0],
+	"pickup_range": [12.0, 0],
 	"regen_rate": [3.0, 0],
 	"max_health": [250, 0],
 	"bullet_size": [1.0, 0],
@@ -65,7 +66,7 @@ func get_stat(stat : String):
 		"firerate":
 			return stats[stat][0] - ((1.0/6.0) * stats[stat][1])
 		"pickup_range":
-			return stats[stat][0] + (16.0 * stats[stat][1])
+			return stats[stat][0] + (14.0 * stats[stat][1])
 		"regen_rate":
 			return stats[stat][0] - (stats[stat][1] * 0.33)
 		"bullet_size":

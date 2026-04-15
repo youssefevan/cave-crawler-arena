@@ -43,7 +43,6 @@ sources/0 = SubResource("TileSetAtlasSource_71j4m")
 script = ExtResource("1_k0juu")
 player = NodePath("Player")
 boss = ExtResource("2_dss4m")
-run_time = 720
 
 [node name="RunTimer" type="Timer" parent="." unique_id=1675408843]
 unique_name_in_owner = true
@@ -276,7 +275,6 @@ metadata/_edit_lock_ = true
 [node name="Player" parent="." unique_id=1791090724 instance=ExtResource("1_nnsk1")]
 z_index = 1
 position = Vector2(1024, 1024)
-metadata/_edit_group_ = true
 
 [node name="Camera" type="Camera2D" parent="Player" unique_id=1682452736]
 position = Vector2(0, -4)

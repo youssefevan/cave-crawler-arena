@@ -121,7 +121,7 @@ func attack():
 		
 		if num_bullets > 1:
 			if num_bullets == 2:
-				spread_angle_degrees = 20.0
+				spread_angle_degrees = 35.0 
 			
 			var start_angle = $Weapon.rotation_degrees - spread_angle_degrees / 2
 			var angle_step = spread_angle_degrees / (num_bullets - 1)
