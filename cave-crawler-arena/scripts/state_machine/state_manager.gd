@@ -2,6 +2,7 @@ extends Node
 class_name StateManager
 
 @export var starting_state : State
+@export var print_states := false
 
 var current_state : State
 
@@ -10,6 +11,7 @@ func init(entity : CharacterBody2D):
 		state.entity = entity
 	
 	current_state = starting_state
+	current_state.enter()
 
 func change_state(new_state : State):
 	if current_state:
@@ -19,6 +21,8 @@ func change_state(new_state : State):
 		current_state = null
 	
 	current_state = new_state
+	if print_states:
+		print(current_state)
 	current_state.enter()
 
 func physics_update(delta):

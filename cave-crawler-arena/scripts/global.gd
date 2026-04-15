@@ -13,6 +13,7 @@ var enemy_pool = {
 var mini_boss_pool = [
 	preload("res://scenes/enemies/bosses/miniboss_1.tscn"),
 	preload("res://scenes/enemies/bosses/fish.tscn"),
+	preload("res://scenes/enemies/bosses/fairy.tscn"),
 ]
 
 # base value, current level

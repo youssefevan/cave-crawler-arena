@@ -4,7 +4,6 @@ class_name Enemy
 signal died
 
 @onready var coin : PackedScene = preload("res://scenes/pickups/coin.tscn")
-#@onready var fire_partices = preload("res://scenes/effects/fire.tscn")
 
 @onready var hurt_sfx = preload("res://audio/enemy_hit.ogg")
 
@@ -23,10 +22,7 @@ var accel := 5.0
 @export var min_group_size := 1
 @export var max_group_size := 5
 
-#var on_fire = false
-#var freeze_time = 0.5
-@export var hurt_color : Color
-#@export var freeze_color : Color
+@export var hurt_color := Color.RED
 @onready var die_sfx = preload("res://audio/enemy_hit.ogg")
 
 var active = false
@@ -63,44 +59,10 @@ func get_hit(is_crit, dir):
 	if current_health <= 0:
 		die(dir)
 
-#func freeze():
-	#var anim = null
-	#for i in get_children():
-		#if i is AnimationPlayer:
-			#anim = i
-	#
-	#if anim != null:
-		#anim.speed_scale = 0
-	#
-	#$Sprite.material.set_shader_parameter("input_color", freeze_color)
-	#$Sprite.material.set_shader_parameter("active", true)
-	#self.set_physics_process(false)
-	#await get_tree().create_timer(freeze_time, false).timeout
-	#self.set_physics_process(true)
-	#$Sprite.material.set_shader_parameter("active", false)
-	#
-	#if anim != null:
-		#anim.speed_scale = 1
-
-#func catch_fire():
-	#if !on_fire:
-		#on_fire = true
-		#var f = fire_partices.instantiate()
-		#call_deferred("add_child", f)
-		#f.emitting = true
-	#
-	#await get_tree().create_timer(1.0, false).timeout
-	#get_hit()
-	#catch_fire()
-
 func die(dir):
 	AudioManager.play_sfx(die_sfx, 0.5, 0.1)
 	await spawn_coins(dir)
 	emit_signal("died")
-	#if OptionsManager.enemies_killed.has(enemy_name):
-		#OptionsManager.enemies_killed[enemy_name] += 1
-	#else:
-		#OptionsManager.enemies_killed[enemy_name] = 1
 	
 	queue_free()
 

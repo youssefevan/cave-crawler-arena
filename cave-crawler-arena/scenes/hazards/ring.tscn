@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://yfphkecy4fo7"]
+
+[ext_resource type="PackedScene" uid="uid://c6pba287ajugl" path="res://scenes/hitbox.tscn" id="1_mp3xx"]
+[ext_resource type="Texture2D" uid="uid://bgjoip3d0816v" path="res://sprites/hazards/ring.png" id="2_lwc8x"]
+[ext_resource type="Script" uid="uid://hrvcjngokw6o" path="res://scripts/hazards/ring.gd" id="2_numwj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_numwj"]
+radius = 4.0
+
+[node name="Ring" unique_id=893375646 groups=["Enemy"] instance=ExtResource("1_mp3xx")]
+z_index = 1
+script = ExtResource("2_numwj")
+speed = 225.0
+expiration_timer = 2.0
+
+[node name="Sprite" type="Sprite2D" parent="." index="0" unique_id=1598230129]
+texture = ExtResource("2_lwc8x")
+
+[node name="Collider" parent="." index="1"]
+shape = SubResource("CircleShape2D_numwj")

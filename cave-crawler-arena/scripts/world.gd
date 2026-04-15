@@ -18,6 +18,8 @@ var previous_wave_sizes = []
 var active_enemies := 0
 
 @export var run_time := 720
+@export var mini_boss_wave := 7
+@export var upgrade_level := 5
 
 func _ready():
 	Engine.time_scale = 1.0
@@ -44,7 +46,7 @@ func start_wave():
 	
 	wave += 1
 	
-	if wave % 7 == 0 and $RunTimer.time_left > 30.0:
+	if wave % mini_boss_wave == 0 and $RunTimer.time_left > 30.0:
 		spawn_mini_boss()
 		
 		if wave > 25:
@@ -157,7 +159,7 @@ func coin_collected():
 		Global.xp -= Global.get_xp_to_level()
 		Global.level += 1
 		
-		if Global.level % 5 == 0:
+		if Global.level % upgrade_level == 0:
 			spawn_upgrade()
 		
 		open_shop()

@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://b3848eto1pi7c"]
+
+[ext_resource type="PackedScene" uid="uid://bvcmygojvi5b0" path="res://scenes/enemies/bosses/boss.tscn" id="1_5lrtq"]
+[ext_resource type="Texture2D" uid="uid://d04om1xc6vtid" path="res://sprites/enemies/miniboss3.png" id="2_5c1jv"]
+[ext_resource type="Script" uid="uid://c1lcdx6bcylb2" path="res://scripts/enemies/bosses/fairy/fairy.gd" id="2_wl760"]
+[ext_resource type="Script" uid="uid://dnrkji511j508" path="res://scripts/state_machine/state_manager.gd" id="4_wl760"]
+[ext_resource type="Script" uid="uid://ckag4ii6pp6mc" path="res://scripts/enemies/bosses/fairy/fairy_move.gd" id="5_w007y"]
+[ext_resource type="Script" uid="uid://jh4by40lf6u3" path="res://scripts/enemies/bosses/fairy/fairy_anticipate.gd" id="6_r0unf"]
+[ext_resource type="Script" uid="uid://c6pqlc3xk338x" path="res://scripts/enemies/bosses/fairy/fairy_attack.gd" id="7_ga751"]
+[ext_resource type="Script" uid="uid://cxjy104l8cmc5" path="res://scripts/enemies/bosses/fairy/fairy_recover.gd" id="8_ga751"]
+
+[sub_resource type="Animation" id="Animation_wl760"]
+resource_name = "Anticipate"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_7d2tm"]
+resource_name = "Attack"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_5lrtq"]
+resource_name = "Move"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.1, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_5c1jv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_w007y"]
+resource_name = "Recover"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wl760"]
+_data = {
+&"Anticipate": SubResource("Animation_wl760"),
+&"Attack": SubResource("Animation_7d2tm"),
+&"Move": SubResource("Animation_5lrtq"),
+&"RESET": SubResource("Animation_5c1jv"),
+&"Recover": SubResource("Animation_w007y")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ga751"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhtla"]
+radius = 5.0990195
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ggjf0"]
+
+[node name="Fairy" unique_id=413534794 instance=ExtResource("1_5lrtq")]
+script = ExtResource("2_wl760")
+aggro_range = 50.0
+enemy_name = "fairy"
+speed = 40.0
+max_health = 25
+min_xp_drop = 40
+max_xp_drop = 60
+max_xp_value = 3
+
+[node name="Animator" type="AnimationPlayer" parent="." index="0" unique_id=341752627]
+libraries/ = SubResource("AnimationLibrary_wl760")
+
+[node name="RingSpawn" type="Node2D" parent="." index="1" unique_id=1927486554]
+position = Vector2(0, -9)
+
+[node name="Sprite" parent="." index="2" unique_id=89973441]
+texture = ExtResource("2_5c1jv")
+hframes = 4
+vframes = 2
+
+[node name="Collider" parent="." index="3" unique_id=488878270]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_ga751")
+
+[node name="Collider" parent="Hitbox" parent_id_path=PackedInt32Array(484124133) index="0"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_nhtla")
+
+[node name="Collider" parent="Hurtbox" parent_id_path=PackedInt32Array(1794270026) index="0"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_ggjf0")
+
+[node name="StateManager" type="Node" parent="." index="7" unique_id=756338943 node_paths=PackedStringArray("starting_state")]
+script = ExtResource("4_wl760")
+starting_state = NodePath("Move")
+
+[node name="Move" type="Node" parent="StateManager" index="0" unique_id=262436752]
+script = ExtResource("5_w007y")
+metadata/_custom_type_script = "uid://wbcds8dh4ahw"
+
+[node name="Anticipate" type="Node" parent="StateManager" index="1" unique_id=1312439247]
+script = ExtResource("6_r0unf")
+metadata/_custom_type_script = "uid://wbcds8dh4ahw"
+
+[node name="Attack" type="Node" parent="StateManager" index="2" unique_id=189036978]
+script = ExtResource("7_ga751")
+metadata/_custom_type_script = "uid://wbcds8dh4ahw"
+
+[node name="Recover" type="Node" parent="StateManager" index="3" unique_id=1593653119]
+script = ExtResource("8_ga751")
+metadata/_custom_type_script = "uid://wbcds8dh4ahw"
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]
