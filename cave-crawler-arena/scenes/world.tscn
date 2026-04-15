@@ -183,9 +183,10 @@ offset_right = 28.0
 offset_bottom = 28.0
 texture = ExtResource("5_pm21f")
 
-[node name="Shop" parent="CanvasLayer/HUD" unique_id=314423908 instance=ExtResource("8_q5onr")]
+[node name="Shop" parent="CanvasLayer/HUD" unique_id=314423908 node_paths=PackedStringArray("world") instance=ExtResource("8_q5onr")]
 visible = false
 layout_mode = 1
+world = NodePath("../../..")
 
 [node name="Pause" type="Control" parent="CanvasLayer/HUD" unique_id=1590535961]
 process_mode = 3

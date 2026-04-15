@@ -1,5 +1,7 @@
 extends Panel
 
+@export var world : Node2D
+
 func _ready():
 	for i in $Items.get_children():
 		if i is ShopButton:
@@ -45,4 +47,5 @@ func randomize_choices(is_item : bool):
 
 func close():
 	get_tree().paused = false
+	world.player.check_friends()
 	visible = false

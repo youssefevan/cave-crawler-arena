@@ -189,7 +189,6 @@ radius = 20.0
 collision_layer = 2
 script = ExtResource("1_g2els")
 bullet = ExtResource("2_smehm")
-metadata/_edit_group_ = true
 
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=191722383]
 libraries/ = SubResource("AnimationLibrary_jej6c")
@@ -268,8 +267,23 @@ debug_color = Color(0.46437377, 0.5760211, 0.3979822, 0.41960785)
 position = Vector2(48, 0)
 collision_mask = 24
 
+[node name="Friend2" parent="FollowRadius" unique_id=100831542 instance=ExtResource("10_y4r1p")]
+position = Vector2(-48, 0)
+collision_mask = 24
+
+[node name="Friend3" parent="FollowRadius" unique_id=802959531 instance=ExtResource("10_y4r1p")]
+position = Vector2(0, 48)
+collision_mask = 24
+
+[node name="Friend4" parent="FollowRadius" unique_id=1517897053 instance=ExtResource("10_y4r1p")]
+position = Vector2(0, -48)
+collision_mask = 24
+
 [connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="FollowRadius/Friend" to="FollowRadius/Friend" method="_on_area_entered"]
+[connection signal="area_entered" from="FollowRadius/Friend2" to="FollowRadius/Friend2" method="_on_area_entered"]
+[connection signal="area_entered" from="FollowRadius/Friend3" to="FollowRadius/Friend3" method="_on_area_entered"]
+[connection signal="area_entered" from="FollowRadius/Friend4" to="FollowRadius/Friend4" method="_on_area_entered"]
 
 [editable path="Hurtbox"]

@@ -41,6 +41,8 @@ var can_spawn_bomb := true
 
 var enemies_in_heal_aura := false
 
+var friend_speed := 90.0
+
 var heal_aura_color := Color.TRANSPARENT
 var target_heal_aura_color := Color.TRANSPARENT
 
@@ -48,6 +50,12 @@ func _ready():
 	for i in get_children():
 		if i is Camera2D:
 			camera = i
+	
+	for i in $FollowRadius.get_children():
+		if i is Friend:
+			i.disable_friend()
+	
+	check_friends()
 	
 	Global.health = Global.get_stat("max_health")
 	state_manager.init(self)
@@ -78,7 +86,7 @@ func _physics_process(delta):
 		$HealAura/Collider.disabled = true
 		enemies_in_heal_aura = false
 	
-	$FollowRadius.rotation_degrees += Global.get_item("skull_friend") * delta
+	$FollowRadius.rotation_degrees += friend_speed * delta
 	
 	target_heal_aura_color = Color.from_hsv(0.11, 1.0, 1.0, float(enemies_in_heal_aura)/3.0)
 	heal_aura_color = lerp(heal_aura_color, target_heal_aura_color, 5.0 * delta)
@@ -216,6 +224,11 @@ func hit_flash() -> void:
 		await get_tree().create_timer(0.1, false).timeout
 		
 	$Sprite.modulate = Color(1, 1, 1, 1)
+
+func check_friends():
+	if Global.get_item("skull_friend") > 0:
+		for i in range(Global.get_item("skull_friend")):
+			$FollowRadius.get_child(i).enable_friend()
 
 func _on_pickup_range_area_entered(area):
 	if area is Pickup:
