@@ -50,11 +50,11 @@ func get_hit(is_crit, dir):
 	
 	velocity = dir * 50.0
 	
-	$Sprite.self_modulate = hurt_color
+	$Sprite.modulate = hurt_color
 	self.set_physics_process(false)
 	await get_tree().create_timer(0.075, false).timeout
 	self.set_physics_process(true)
-	$Sprite.self_modulate = Color.WHITE
+	$Sprite.modulate = Color.WHITE
 	
 	if current_health <= 0:
 		die(dir)

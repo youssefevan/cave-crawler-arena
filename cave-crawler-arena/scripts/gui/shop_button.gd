@@ -60,6 +60,10 @@ func update(choice : String):
 			type = "item"
 			text = "bomb"
 			icon = preload("res://sprites/items/bomb.png")
+		"dash":
+			type = "item"
+			text = "dash"
+			icon = preload("res://sprites/items/dash.png")
 		_:
 			text = "null"
 			icon = preload("res://sprites/items/empty.png")

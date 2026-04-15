@@ -12,6 +12,7 @@ signal player_hit
 @onready var idle : State = $StateManager/Idle
 @onready var move : State = $StateManager/Move
 @onready var die : State = $StateManager/Die
+@onready var dash : State = $StateManager/Dash
 
 @export var bullet : PackedScene
 @onready var regen_particle = preload("res://scenes/effects/regen.tscn")
@@ -22,6 +23,8 @@ signal player_hit
 @onready var low_hp_sfx = preload("res://audio/low_health.ogg")
 
 @onready var bomb_scene = preload("res://scenes/hazards/bomb.tscn")
+
+@onready var hurtbox_collider = $Hurtbox/Collider
 
 var camera : Camera2D
 var shake_strength := 3.0
@@ -37,10 +40,9 @@ var decel := 20.0
 
 var can_attack := true
 var invulnerable := false
-
 var can_spawn_bomb := true
-
 var enemies_in_heal_aura := false
+var can_dash := true
 
 var friend_speed := 90.0
 
@@ -213,25 +215,54 @@ func get_hit(damage):
 	player_hit.emit()
 	
 	invulnerable = true
-	$Hurtbox/Collider.disabled = true
+	hurtbox_collider.disabled = true
 	hit_flash()
 	await get_tree().create_timer(0.6, false).timeout
-	$Hurtbox/Collider.disabled = false
+	hurtbox_collider.disabled = false
 	invulnerable = false
 
 func hit_flash() -> void:
 	while invulnerable:
-		$Sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
-		await get_tree().create_timer(0.11, false).timeout
-		$Sprite.modulate = Color(1.0, 0.0, 0.0, 0.2)
+		sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
+		await get_tree().create_timer(0.1, false).timeout
+		sprite.modulate = Color(1.0, 0.0, 0.0, 0.2)
 		await get_tree().create_timer(0.1, false).timeout
 		
-	$Sprite.modulate = Color(1, 1, 1, 1)
+	sprite.modulate = Color(1, 1, 1, 1)
 
 func check_friends():
 	if Global.get_item("skull_friend") > 0:
 		for i in range(Global.get_item("skull_friend")):
 			$FollowRadius.get_child(i).enable_friend()
+
+func start_dash_cooldown():
+	dash_cooldown()
+	await get_tree().create_timer(5.0/Global.get_item("dash")+0.01, false).timeout
+	can_dash = true
+	
+	sprite.modulate = Color(0.0, 0.833, 1.0, 1.0)
+	await get_tree().create_timer(0.1, false).timeout
+	sprite.modulate = Color.WHITE
+	await get_tree().create_timer(0.1, false).timeout
+	sprite.modulate = Color(0.0, 0.833, 1.0, 1.0)
+	await get_tree().create_timer(0.1, false).timeout
+	sprite.modulate = Color.WHITE
+	sprite.modulate = Color(0.0, 0.833, 1.0, 1.0)
+	await get_tree().create_timer(0.1, false).timeout
+	sprite.modulate = Color.WHITE
+	await get_tree().create_timer(0.1, false).timeout
+	sprite.modulate = Color(0.0, 0.833, 1.0, 1.0)
+	await get_tree().create_timer(0.1, false).timeout
+	sprite.modulate = Color.WHITE
+
+func dash_cooldown():
+	while !can_dash:
+		sprite.modulate = Color(0.608, 0.735, 0.76, 1.0)
+		await get_tree().create_timer(0.3, false).timeout
+		sprite.modulate = Color.WHITE
+		await get_tree().create_timer(0.3, false).timeout
+		
+	sprite.modulate = Color(1, 1, 1, 1)
 
 func _on_pickup_range_area_entered(area):
 	if area is Pickup:

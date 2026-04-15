@@ -24,3 +24,7 @@ func physics_update(delta):
 	
 	if int(Global.health) <= 0:
 		return entity.die
+	
+	if Input.is_action_just_pressed("dash"):
+		if Global.get_item("dash") > 0 and entity.can_dash:
+			return entity.dash

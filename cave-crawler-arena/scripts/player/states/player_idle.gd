@@ -15,5 +15,9 @@ func physics_update(delta):
 	if entity.input != Vector2.ZERO:
 		return entity.move
 	
+	if Input.is_action_just_pressed("dash"):
+		if Global.get_item("dash") > 0 and entity.can_dash:
+			return entity.dash
+	
 	if int(Global.health) <= 0:
 		return entity.die
