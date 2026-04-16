@@ -30,6 +30,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_oprun"]
 resource_name = "dash"
+length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -41,7 +42,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [13]
 }
 
 [sub_resource type="Animation" id="Animation_d2wvv"]
@@ -54,31 +55,15 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.35, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [2]
+"values": [6, 7, 8, 9, 10, 11]
 }
 
 [sub_resource type="Animation" id="Animation_ur7pv"]
 resource_name = "idle"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_y4r1p"]
-resource_name = "move"
-length = 0.3
+length = 0.6
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -88,10 +73,28 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [1, 0]
+"values": [0, 12]
+}
+
+[sub_resource type="Animation" id="Animation_y4r1p"]
+resource_name = "move"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jej6c"]
@@ -102,6 +105,12 @@ _data = {
 &"idle": SubResource("Animation_ur7pv"),
 &"move": SubResource("Animation_y4r1p")
 }
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3v2ag"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 3
+particles_anim_loop = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 3.0
@@ -211,6 +220,17 @@ bullet = ExtResource("2_smehm")
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=191722383]
 libraries/ = SubResource("AnimationLibrary_jej6c")
 
+[node name="AfterImage" type="CPUParticles2D" parent="." unique_id=265562833]
+material = SubResource("CanvasItemMaterial_3v2ag")
+emitting = false
+texture = ExtResource("1_3vyb7")
+lifetime = 0.3
+one_shot = true
+gravity = Vector2(0, 0)
+color = Color(1, 1, 1, 0.49803922)
+anim_offset_min = 0.75
+anim_offset_max = 0.75
+
 [node name="StateManager" type="Node" parent="." unique_id=1468402545 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_qhqgy")
 starting_state = NodePath("Idle")
@@ -233,7 +253,8 @@ shape = SubResource("CircleShape2D_g2els")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1886806128]
 texture = ExtResource("1_3vyb7")
-hframes = 3
+hframes = 6
+vframes = 3
 
 [node name="AttackRange" type="Area2D" parent="." unique_id=348722441]
 visible = false

@@ -16,6 +16,7 @@ signal player_hit
 
 @export var bullet : PackedScene
 @onready var regen_particle = preload("res://scenes/effects/regen.tscn")
+@onready var after_image = $AfterImage
 
 @onready var shoot_sfx = preload("res://audio/player_shoot.ogg")
 @onready var crit_sfx = preload("res://audio/crit.ogg")

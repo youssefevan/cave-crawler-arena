@@ -5,6 +5,7 @@ var dir := Vector2.LEFT
 
 func enter():
 	super.enter()
+	$"../../AnimationPlayer".play("Shoot")
 	entity.shots = 0
 
 func physics_update(delta):

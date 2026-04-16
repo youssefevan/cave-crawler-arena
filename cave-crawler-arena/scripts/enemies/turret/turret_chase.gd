@@ -3,6 +3,7 @@ extends State
 var frame := 0
 
 func enter():
+	$"../../AnimationPlayer".play("Chase")
 	frame = 0
 
 func physics_update(delta):

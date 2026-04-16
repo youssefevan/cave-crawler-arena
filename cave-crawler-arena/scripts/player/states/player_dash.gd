@@ -7,6 +7,8 @@ func enter():
 	entity.sprite.modulate = Color(0.0, 0.833, 1.0, 1.0)
 	entity.hurtbox_collider.disabled = true
 	
+	entity.after_image.emitting = true
+	
 	var dir = entity.global_position.direction_to(entity.get_global_mouse_position())
 	
 	var strength = 150.0 + 50.0 * Global.get_item("dash")
