@@ -7,6 +7,7 @@ func _ready():
 	world.player.connect("player_hit", player_hit)
 
 func _physics_process(delta):
+	# messy messy messy
 	$HPBar.max_value = Global.get_stat("max_health")
 	$HPBar.value = Global.health
 	$Label.text = str(
@@ -19,6 +20,7 @@ func player_hit():
 		flash_health()
 
 func flash_health():
+	# messy messy messy
 	$Label.add_theme_color_override("font_color", Color.RED)
 	await get_tree().create_timer(flash_speed).timeout
 	$Label.add_theme_color_override("font_color", Color.WHITE)

@@ -7,11 +7,15 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
+		# messy messy messy
+		if $"../Shop".visible == false:
+			get_tree().paused = !get_tree().paused
+		
 		visible = !visible
-		get_tree().paused = !get_tree().paused
 		update_info()
 
 func update_info():
+	# messy messy messy
 	$Content/BG/Info/Stats.text = str(Global.stats)
 	$Content/BG/Info/Items.text = str(Global.items)
 

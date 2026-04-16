@@ -2,6 +2,10 @@ extends VBoxContainer
 
 @export var world : Node2D
 
+# messy messy messy
+# messy messy messy
+# messy messy messy
+# messy messy messy
 func _physics_process(delta):
 	$XPBar.value = Global.xp/Global.get_xp_to_level() * 100
 	

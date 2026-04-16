@@ -1,7 +1,7 @@
 extends Area2D
 class_name Bomb
 
-var vel := 0.0
+var vel := 0.5
 
 func _ready():
 	$Sprite.frame = 0
@@ -14,10 +14,10 @@ func explode():
 	$Animator.play("explode")
 
 func _physics_process(delta):
-	#var dir = Vector2.RIGHT.rotated(rotation)
-	#vel = lerpf(vel, 0.0, 3.0 * delta)
-	#global_position += dir * vel
-	#$Sprite.global_rotation = 0
+	var dir = Vector2.RIGHT.rotated(rotation)
+	vel = lerpf(vel, 0.0, 3.0 * delta)
+	global_position += dir * vel
+	$Sprite.global_rotation = 0
 	pass
 
 func _on_animator_animation_finished(anim_name):

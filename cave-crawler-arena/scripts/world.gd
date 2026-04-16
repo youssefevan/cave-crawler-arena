@@ -30,8 +30,8 @@ func _ready():
 	
 	player.connect("dead", player_died)
 	
-	$RunTimer.wait_time = run_time
-	$RunTimer.start()
+	run_timer.wait_time = run_time
+	run_timer.start()
 	
 	#await get_tree().create_timer(2.0, false).timeout
 	start_wave()
@@ -168,7 +168,7 @@ func spawn_mini_boss():
 	mini.player = player
 	
 	mini.global_position = get_good_spot("enemy")
-	%Enemies.call_deferred("add_child", mini)
+	enemies.call_deferred("add_child", mini)
 
 func spawn_boss():
 	for i in enemies.get_children():
@@ -180,7 +180,7 @@ func spawn_boss():
 	b.global_position = spawn_pos
 	b.world = self
 	b.player = player
-	%Enemies.call_deferred("add_child", b)
+	enemies.call_deferred("add_child", b)
 
 func open_shop():
 	$CanvasLayer/HUD/Shop.open(false)
