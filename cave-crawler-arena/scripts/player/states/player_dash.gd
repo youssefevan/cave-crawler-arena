@@ -9,6 +9,8 @@ func enter():
 	
 	entity.after_image.emitting = true
 	
+	AudioManager.play_sfx(entity.dash_sfx)
+	
 	var dir = entity.global_position.direction_to(entity.get_global_mouse_position())
 	
 	var strength = 150.0 + 50.0 * Global.get_item("dash")

@@ -22,6 +22,7 @@ signal player_hit
 @onready var crit_sfx = preload("res://audio/crit.ogg")
 @onready var hurt_sfx = preload("res://audio/player_hurt.ogg")
 @onready var low_hp_sfx = preload("res://audio/low_health.ogg")
+@onready var dash_sfx = preload("res://audio/dash.ogg")
 
 @onready var bomb_scene = preload("res://scenes/hazards/bomb.tscn")
 

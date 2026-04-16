@@ -3,6 +3,8 @@ class_name Bomb
 
 var vel := 0.5
 
+#@onready var explode_sfx = preload()
+
 func _ready():
 	$Sprite.frame = 0
 	$Collider.disabled = true
@@ -11,6 +13,7 @@ func _ready():
 	explode()
 
 func explode():
+	#AudioManager.play_sfx(explode_sfx, 0.5, 0.1)
 	$Animator.play("explode")
 
 func _physics_process(delta):

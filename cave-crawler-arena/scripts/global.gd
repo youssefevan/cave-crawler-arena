@@ -32,7 +32,7 @@ var items := {
 	"splitshot": 0,
 	"skull_friend": 0,
 	"heal_aura": 0,
-	"bomb": 0,
+	"bomb": 2,
 	"dash": 0,
 }
 
